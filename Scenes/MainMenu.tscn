@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvs8nqo7v0vgm"]
+[gd_scene load_steps=4 format=3 uid="uid://cvs8nqo7v0vgm"]
 
 [ext_resource type="Texture2D" uid="uid://bpxf0csf4gyib" path="res://UI/MainMenu/MainMenu Title Texture.png" id="2_0ph81"]
+[ext_resource type="Script" path="res://UI/MainMenu/ButtonNewGame.cs" id="2_8nlm3"]
+[ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Scenes/Level Test.tscn" id="3_pq7q7"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -48,6 +50,8 @@ alignment = 1
 [node name="Button New Game" type="Button" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "New Game"
+script = ExtResource("2_8nlm3")
+targetScene = ExtResource("3_pq7q7")
 
 [node name="Button Continue" type="Button" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2

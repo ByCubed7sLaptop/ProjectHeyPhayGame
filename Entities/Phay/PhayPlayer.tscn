@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk06usw83mpy3"]
+
+[ext_resource type="Script" path="res://Entities/Phay/PlayerController.cs" id="1_0nt4j"]
+[ext_resource type="Texture2D" uid="uid://qquja25ple77" path="res://Entities/Phay/Phay.png" id="2_5pgif"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xs8o3"]
+height = 38.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(-158, -34)
+script = ExtResource("1_0nt4j")
+Speed = 150.0
+
+[node name="Phay" type="Sprite2D" parent="."]
+texture = ExtResource("2_5pgif")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xs8o3")

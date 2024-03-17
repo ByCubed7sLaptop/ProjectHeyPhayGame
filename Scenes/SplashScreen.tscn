@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://chtn2e8cpt6xx"]
+
+[node name="SplashScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0

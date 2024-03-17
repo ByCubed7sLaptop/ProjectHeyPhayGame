@@ -1,5 +1,62 @@
-[gd_scene format=3 uid="uid://cvs8nqo7v0vgm"]
+[gd_scene load_steps=2 format=3 uid="uid://cvs8nqo7v0vgm"]
+
+[ext_resource type="Texture2D" uid="uid://bpxf0csf4gyib" path="res://UI/MainMenu/MainMenu Title Texture.png" id="2_0ph81"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -319.5
+offset_top = -251.0
+offset_right = 319.5
+offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_0ph81")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 28.3)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Button New Game" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="Button Continue" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Button Options" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Button Quit" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5he6b8gh5ik1"]
+
+[ext_resource type="Script" path="res://Scripts/LevelController.cs" id="1_5sauy"]
+[ext_resource type="TileSet" uid="uid://1qb03bhp7n5r" path="res://Enviroment/Forest/TileSet.tres" id="2_hm538"]
+[ext_resource type="Script" path="res://Scripts/CameraController.cs" id="3_avomq"]
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("Camera", "PlayerSpawnPosition")]
+script = ExtResource("1_5sauy")
+Camera = NodePath("Camera2D")
+PlayerSpawnPosition = NodePath("Start Location")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("3_avomq")
+
+[node name="Start Location" type="Node2D" parent="."]
+position = Vector2(-158, -153)
+
+[node name="Enviroment" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Enviroment"]
+z_index = 1
+texture_repeat = 1
+tile_set = ExtResource("2_hm538")
+format = 2
+layer_0/name = "Blocks"
+layer_1/name = "Under Layer"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Overlay"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Overlay2"
+layer_3/tile_data = PackedInt32Array()
+metadata/_edit_lock_ = true
+
+[node name="Entities" type="Node2D" parent="."]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://core6tqglot3p"]
+
+[ext_resource type="Script" path="res://Entities/Enemy/EnemyResource.cs" id="1_lhfs2"]
+
+[resource]
+script = ExtResource("1_lhfs2")
+Name = "Temp Enemy"
+Description = "A Cool Temp Enemy"
+Difficulty = 1

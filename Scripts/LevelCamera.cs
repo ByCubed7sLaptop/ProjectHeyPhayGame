@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class CameraController : Camera2D
+public partial class LevelCamera : Camera2D
 {
 	[Export] public CharacterBody2D Target;
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lj6gi13iaq3k"
-path="res://.godot/imported/box shadows.png-66b88655a6d27379bc91938feedb8bcd.ctex"
+uid="uid://bnytor1rctu56"
+path="res://.godot/imported/TileSheet Texture.png-e55f7bda48cd9c98864e1de4dd421050.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enviroment/Battle/box shadows.png"
-dest_files=["res://.godot/imported/box shadows.png-66b88655a6d27379bc91938feedb8bcd.ctex"]
+source_file="res://Level/Enviroment/TileSheet Texture.png"
+dest_files=["res://.godot/imported/TileSheet Texture.png-e55f7bda48cd9c98864e1de4dd421050.ctex"]
 
 [params]
 

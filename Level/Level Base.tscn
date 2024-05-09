@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5he6b8gh5ik1"]
 
 [ext_resource type="Script" path="res://Scripts/LevelController.cs" id="1_5sauy"]
-[ext_resource type="TileSet" uid="uid://1qb03bhp7n5r" path="res://Enviroment/Forest/TileSet.tres" id="2_hm538"]
-[ext_resource type="Script" path="res://Scripts/CameraController.cs" id="3_avomq"]
+[ext_resource type="TileSet" uid="uid://1qb03bhp7n5r" path="res://Level/Enviroment/TileSet.tres" id="2_hm538"]
+[ext_resource type="Script" path="res://Scripts/LevelCamera.cs" id="3_avomq"]
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("Camera", "PlayerSpawnPosition")]
 script = ExtResource("1_5sauy")

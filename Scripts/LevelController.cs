@@ -1,15 +1,15 @@
 using Godot;
 using System;
 
-// Controls aspects of the level, the player platforming, platforming camera behavour, ect.
+// Controls aspects of the level, the player platforming
 public partial class LevelController : Node2D
 {
 	// The current level being used
 	public static LevelController Instance { get; set; }
 
-	public PlayerController Player { get; private set; }
+	public Player Player { get; private set; }
 
-	[Export] public CameraController Camera;
+	[Export] public LevelCamera Camera;
 	[Export] public Node2D PlayerSpawnPosition;
 
 	public override void _Ready()
@@ -17,23 +17,23 @@ public partial class LevelController : Node2D
 		Instance = this;
 
 		// Create the player
-		Player = PlayerController.CreateAt(this, PlayerSpawnPosition.Position);
-		Player.OnHitEnemy += OnPlayerHitEnemy;
+		Player = Player.CreateAt(this, PlayerSpawnPosition.Position);
+		Player.OnHitEncounter += OnPlayerHitEncounter;
 
 		Camera.Target = Player;
 	} 
 
-	// Called when an Enemy hits a Player
-	public void OnPlayerHitEnemy(object o, IEnemy enemy)
-    {
-		GD.Print($"Hit Enemy: {enemy.Resource.Name}");
 
 		//GetTree().Paused = true;
+    // Called when an Enemy hits a Player
+    public void OnPlayerHitEncounter(object o, EncounterResource encounter)
+    {
+		GD.Print($"Hit Enemy: {encounter.Enemies}");
 
 		// Battle should NOT start if the player is over X amount of levels over the enemy
+		// This should be togglable
 
-
-		//GameController.Instance.StartBattleWith(enemy);
-		GameController.Instance.StartBattleWith(enemy);
+		// Tell the game controller to start the battle mode
+		GameController.Instance.StartBattleWith(encounter);
 	}
 }

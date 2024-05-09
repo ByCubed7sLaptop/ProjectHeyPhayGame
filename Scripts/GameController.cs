@@ -14,7 +14,7 @@ public partial class GameController : Node
 		Instance = this;
 	}
 
-	public void StartBattleWith(IEnemy enemy)
+	public void StartBattleWith(EncounterResource encounter)
 	{
 		// TODO:
 		// Save/Hide/Unload current scene

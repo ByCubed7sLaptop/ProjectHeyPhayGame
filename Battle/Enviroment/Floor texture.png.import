@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnytor1rctu56"
-path="res://.godot/imported/TileSheet Texture.png-90c9957144a72dd8abba9963a0f9ed9d.ctex"
+uid="uid://cyd6ow7dlaree"
+path="res://.godot/imported/Floor texture.png-0d58e90c666e56405c45c12838c4dbe4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enviroment/Forest/TileSheet Texture.png"
-dest_files=["res://.godot/imported/TileSheet Texture.png-90c9957144a72dd8abba9963a0f9ed9d.ctex"]
+source_file="res://Battle/Enviroment/Floor texture.png"
+dest_files=["res://.godot/imported/Floor texture.png-0d58e90c666e56405c45c12838c4dbe4.ctex"]
 
 [params]
 

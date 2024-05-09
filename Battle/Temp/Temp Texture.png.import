@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4x307ig7wv0"
-path="res://.godot/imported/Bush Flower Texture.png-d31d5a8e96da6af9d732630e11b15f7e.ctex"
+uid="uid://dbd1k0tdpfsqn"
+path="res://.godot/imported/Temp Texture.png-0f20772f6b3f95de2cf21cd9e48371d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enviroment/Forest/Bush Flower Texture.png"
-dest_files=["res://.godot/imported/Bush Flower Texture.png-d31d5a8e96da6af9d732630e11b15f7e.ctex"]
+source_file="res://Battle/Temp/Temp Texture.png"
+dest_files=["res://.godot/imported/Temp Texture.png-0f20772f6b3f95de2cf21cd9e48371d1.ctex"]
 
 [params]
 

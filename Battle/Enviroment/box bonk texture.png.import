@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdeowyeoqspk8"
-path="res://.godot/imported/Bush Texture.png-9ab0b1ae5d5d667247ddee68397d4eb4.ctex"
+uid="uid://b37quotf157mm"
+path="res://.godot/imported/box bonk texture.png-7578e15139754400cb28c5cd0881386a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enviroment/Forest/Bush Texture.png"
-dest_files=["res://.godot/imported/Bush Texture.png-9ab0b1ae5d5d667247ddee68397d4eb4.ctex"]
+source_file="res://Battle/Enviroment/box bonk texture.png"
+dest_files=["res://.godot/imported/box bonk texture.png-7578e15139754400cb28c5cd0881386a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b37vcdumfc8ah"
-path="res://.godot/imported/Small Folliage Texture.png-4efa6b4e5fe67aa185fe4027d41884e3.ctex"
+uid="uid://cdeowyeoqspk8"
+path="res://.godot/imported/Bush Texture.png-365cca891546edac73bd2112ebfc7916.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enviroment/Forest/Small Folliage Texture.png"
-dest_files=["res://.godot/imported/Small Folliage Texture.png-4efa6b4e5fe67aa185fe4027d41884e3.ctex"]
+source_file="res://Level/Enviroment/Bush Texture.png"
+dest_files=["res://.godot/imported/Bush Texture.png-365cca891546edac73bd2112ebfc7916.ctex"]
 
 [params]
 

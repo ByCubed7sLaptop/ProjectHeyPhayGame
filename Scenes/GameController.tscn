@@ -1,16 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://b11x8rvewxq16"]
+[gd_scene load_steps=5 format=3 uid="uid://b11x8rvewxq16"]
 
-[ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Scenes/Level Test.tscn" id="1_4kuwv"]
-[ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_o8llk"]
-[ext_resource type="PackedScene" uid="uid://b88gobkmsuk7d" path="res://Scenes/Battle.tscn" id="2_65gjn"]
+[ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_53c0d"]
+[ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="2_87usi"]
+[ext_resource type="PackedScene" uid="uid://b88gobkmsuk7d" path="res://Battle/Battle Scene.tscn" id="3_wmyri"]
 
 [node name="GameController" type="Node" node_paths=PackedStringArray("Level", "Battle")]
-script = ExtResource("1_o8llk")
+script = ExtResource("1_53c0d")
 Level = NodePath("Level")
 Battle = NodePath("Battle")
+Encounter = ExtResource("2_eyvy1")
 
-[node name="Level" parent="." instance=ExtResource("1_4kuwv")]
+[node name="Level" parent="." instance=ExtResource("2_87usi")]
 z_index = -1
 
-[node name="Battle" parent="." instance=ExtResource("2_65gjn")]
+[node name="Battle" parent="." instance=ExtResource("3_wmyri")]
+process_mode = 4
 visible = false

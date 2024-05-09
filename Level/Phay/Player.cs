@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerController : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
 	[Export] public Area2D Hitbox;
 
@@ -14,11 +14,14 @@ public partial class PlayerController : CharacterBody2D
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-	public EventHandler<IEnemy> OnHitEnemy;
+	public EventHandler<EncounterResource> OnHitEncounter;
+
 
 	public override void _Ready()
 	{
-		Hitbox.Connect(Area2D.SignalName.BodyEntered, new Callable(this, nameof(OnEnemyHitPlayer)));
+		// Disabling a CollisionObject node during a physics callback is not allowed and will cause undesired behavior.
+		// Disable with call_deferred() instead.
+		Hitbox.BodyEntered += (e) => CallDeferred(nameof(OnEnemyHitPlayer), e);
 
 		base._Ready();
 	}
@@ -57,18 +60,24 @@ public partial class PlayerController : CharacterBody2D
 
 	private void OnEnemyHitPlayer(Node2D body)
 	{
-		if (body is not IEnemy enemy) return;
+		if (body is not EncounterController encounter) return;
 
-		var handler = OnHitEnemy;
-		handler?.Invoke(this, enemy);
+		var handler = OnHitEncounter;
+		handler?.Invoke(this, encounter.Resource);
+
+		// BUG: Disabling the ProcessMode for the tree seems to freeze the body physics updates.
+		// Meaning the hitbox gets "stuck" when hitting another body.
+		// Toggling the hitboxs monitoring off and on seems to fix this problem
+		Hitbox.Monitoring = false;
+		Hitbox.Monitoring = true;
 	}
 
 
 	// Create the player and place at the given position
-	public static PlayerController CreateAt(Node parent, Vector2 position)
+	public static Player CreateAt(Node parent, Vector2 position)
     {
-		var resource = GD.Load<PackedScene>("res://Entities/Phay/PhayPlayer.tscn");
-		var player = resource.Instantiate<PlayerController>();
+		var resource = GD.Load<PackedScene>("res://Level/Phay/PhayPlayer.tscn");
+		var player = resource.Instantiate<Player>();
 		parent.AddChild(player);
 
 		player.Position = position;

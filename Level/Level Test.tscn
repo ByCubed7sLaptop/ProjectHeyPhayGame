@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bob2spgcbowqy"]
+[gd_scene load_steps=8 format=3 uid="uid://bob2spgcbowqy"]
 
-[ext_resource type="PackedScene" uid="uid://b5he6b8gh5ik1" path="res://Scenes/Level Base.tscn" id="1_iug4r"]
-[ext_resource type="Texture2D" uid="uid://vl6uqsdoym2e" path="res://Enviroment/Forest/Tree Texture.png" id="2_4w6m2"]
-[ext_resource type="Texture2D" uid="uid://wdej4uy2udlq" path="res://Enviroment/Forest/Lantern Texture.png" id="3_i6lgb"]
-[ext_resource type="Texture2D" uid="uid://dtfe2n8qwskw7" path="res://Enviroment/Forest/Bridge Texture.png" id="4_bk4hw"]
-[ext_resource type="Texture2D" uid="uid://4x307ig7wv0" path="res://Enviroment/Forest/Bush Flower Texture.png" id="6_tmpqg"]
-[ext_resource type="Texture2D" uid="uid://cdeowyeoqspk8" path="res://Enviroment/Forest/Bush Texture.png" id="7_r0iqa"]
-[ext_resource type="PackedScene" uid="uid://dkrq31wkwcacj" path="res://Entities/Enemy/enemy_temp.tscn" id="9_1da7i"]
-[ext_resource type="Resource" uid="uid://core6tqglot3p" path="res://Entities/Enemy/Basic Enemy.tres" id="11_0w56o"]
+[ext_resource type="PackedScene" uid="uid://b5he6b8gh5ik1" path="res://Level/Level Base.tscn" id="1_48r12"]
+[ext_resource type="Texture2D" uid="uid://vl6uqsdoym2e" path="res://Level/Enviroment/Tree Texture.png" id="2_kl5wn"]
+[ext_resource type="Texture2D" uid="uid://wdej4uy2udlq" path="res://Level/Enviroment/Lantern Texture.png" id="3_ibrxk"]
+[ext_resource type="Texture2D" uid="uid://dtfe2n8qwskw7" path="res://Level/Enviroment/Bridge Texture.png" id="4_l571h"]
+[ext_resource type="Texture2D" uid="uid://4x307ig7wv0" path="res://Level/Enviroment/Bush Flower Texture.png" id="5_mhnhs"]
+[ext_resource type="Texture2D" uid="uid://cdeowyeoqspk8" path="res://Level/Enviroment/Bush Texture.png" id="6_17wt3"]
+[ext_resource type="PackedScene" uid="uid://dkrq31wkwcacj" path="res://Level/Encounters/Encounter Temp.tscn" id="7_tryuo"]
 
-[node name="Level" instance=ExtResource("1_iug4r")]
+[node name="Level" instance=ExtResource("1_48r12")]
 
 [node name="TileMap" parent="Enviroment" index="0"]
 layer_0/tile_data = PackedInt32Array(-11, 3, 0, 65525, 3, 0, -10, 3, 0, 65526, 65539, 0, -9, 65539, 0, 65527, 3, 0, 65523, 3, 0, 131059, 3, 1, 65524, 65539, 0, 131060, 65539, 1, 131061, 3, 1, 131062, 65539, 1, 131063, 3, 1, 65528, 65539, 0, 131064, 65539, 1, 65529, 3, 0, 131065, 3, 1, 65530, 65539, 0, 131066, 65539, 1, 65531, 3, 0, 131067, 3, 1, 65532, 65539, 0, 131068, 65539, 1, 65533, 3, 0, 131069, 3, 1, 65534, 65539, 0, 131070, 65539, 1, 65535, 3, 0, 131071, 3, 1, 0, 65539, 0, 65536, 65539, 1, 196607, 3, 0, 262143, 3, 1, 131072, 65539, 0, 196608, 65539, 1, 196605, 3, 0, 262141, 3, 1, 196606, 65539, 0, 262142, 65539, 1, 196603, 3, 0, 262139, 3, 1, 196604, 65539, 0, 262140, 65539, 1, 196601, 3, 0, 262137, 3, 1, 196602, 65539, 0, 262138, 65539, 1, 196599, 3, 0, 262135, 65539, 0, 196600, 65539, 0, 262136, 65539, 1, 196597, 3, 0, 262133, 3, 1, 196598, 65539, 0, 262134, 3, 0, 196595, 3, 0, 262131, 3, 1, 196596, 65539, 0, 262132, 65539, 1, 65521, 3, 0, 131057, 3, 0, 65522, 65539, 0, 131058, 65539, 0, 196593, 3, 1, 196594, 65539, 1, 327670, 3, 1, 327671, 3, 0, 393207, 3, 1, 327672, 65539, 0, 393208, 65539, 1, 327673, 3, 0, 393209, 3, 1, 327674, 65539, 0, 393210, 65539, 1, 327675, 3, 0, 393211, 3, 1, 327676, 65539, 0, 393212, 65539, 1, 327677, 3, 0, 393213, 3, 1, 327678, 65539, 0, 393214, 65539, 1, 6, 3, 0, 65542, 3, 1, 7, 65539, 0, 65543, 65539, 1, 131079, 3, 0, 196615, 3, 1, 8, 65539, 0, 65544, 65539, 1, 131080, 65539, 0, 196616, 65539, 1, 262152, 3, 0, 327688, 3, 1, 9, 65539, 0, 65545, 65539, 1, 131081, 65539, 0, 196617, 65539, 1, 262153, 65539, 0, 327689, 65539, 1, 10, 3, 0, 65546, 3, 1, 131082, 3, 0, 196618, 3, 1, 262154, 3, 0, 327690, 3, 1, 65547, 65539, 1, 131083, 65539, 0, 196619, 65539, 1, 262155, 65539, 0, 327691, 3, 0, 393227, 3, 1, 65548, 3, 1, 131084, 3, 0, 196620, 3, 1, 262156, 3, 0, 327692, 65539, 0, 393228, 65539, 1, 65549, 65539, 1, 131085, 65539, 0, 196621, 65539, 1, 262157, 65539, 0, 327693, 3, 0, 393229, 3, 1, 65550, 3, 1, 131086, 3, 0, 196622, 3, 1, 262158, 3, 0, 327694, 65539, 0, 393230, 65539, 1, 65551, 3, 0, 131087, 3, 1, 196623, 65539, 1, 262159, 65539, 0, 327695, 3, 0, 393231, 3, 1, 65552, 65539, 0, 131088, 65539, 1, 196624, 3, 1, 262160, 3, 0, 327696, 65539, 0, 393232, 65539, 1, 65553, 65539, 0, 131089, 65539, 1, 196625, 65539, 1, 262161, 65539, 0, 327697, 65539, 1, 65554, 3, 1, 131090, 3, 0, 196626, 3, 1, 262162, 3, 0, 327698, 3, 1, 65555, 3, 1, 131091, 3, 0, 196627, 3, 1, 262163, 65539, 0, 327699, 65539, 1, 65556, 65539, 1, 131092, 65539, 0, 196628, 3, 0, 262164, 3, 1, 65557, 3, 1, 131093, 3, 1, 196629, 65539, 0, 262165, 65539, 1, 22, 65539, 0, 65558, 65539, 1, 131094, 65539, 1, 196630, 65539, 1, 23, 3, 0, 65559, 3, 1, 131095, 3, 0, 196631, 3, 1, 24, 65539, 0, 65560, 65539, 1, 131096, 65539, 0, 196632, 65539, 1, 65561, 3, 0, 131097, 3, 1, 196633, 3, 1, 65562, 65539, 0, 131098, 65539, 1, 196634, 65539, 1)
@@ -19,24 +18,23 @@ layer_3/tile_data = PackedInt32Array(-65547, 131077, 2, -14, 327685, 2, -12, 393
 
 [node name="TreeTexture" type="Sprite2D" parent="Enviroment" index="1"]
 position = Vector2(-83, -64)
-texture = ExtResource("2_4w6m2")
+texture = ExtResource("2_kl5wn")
 
 [node name="LanternTexture" type="Sprite2D" parent="Enviroment" index="2"]
 position = Vector2(59, 29)
-texture = ExtResource("3_i6lgb")
+texture = ExtResource("3_ibrxk")
 
 [node name="BridgeTexture" type="Sprite2D" parent="Enviroment" index="3"]
 position = Vector2(36, 18)
-texture = ExtResource("4_bk4hw")
+texture = ExtResource("4_l571h")
 
 [node name="BushFlowerTexture" type="Sprite2D" parent="Enviroment" index="4"]
 position = Vector2(-14, -11)
-texture = ExtResource("6_tmpqg")
+texture = ExtResource("5_mhnhs")
 
 [node name="BushTexture" type="Sprite2D" parent="Enviroment" index="5"]
 position = Vector2(-186, -10)
-texture = ExtResource("7_r0iqa")
+texture = ExtResource("6_17wt3")
 
-[node name="EnemyTemp" parent="Entities" index="0" instance=ExtResource("9_1da7i")]
-position = Vector2(261, 7)
-resource = ExtResource("11_0w56o")
+[node name="EnemyTemp" parent="Entities" index="0" instance=ExtResource("7_tryuo")]
+position = Vector2(213, 3)

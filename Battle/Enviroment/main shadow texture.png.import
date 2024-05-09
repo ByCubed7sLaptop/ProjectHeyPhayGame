@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b37quotf157mm"
-path="res://.godot/imported/box bonk texture.png-0b5c15d204841f4b64a995fce30d197b.ctex"
+uid="uid://bdeh2u8i1lclx"
+path="res://.godot/imported/main shadow texture.png-75cad1329fbf774511f3b684c54b4067.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enviroment/Battle/box bonk texture.png"
-dest_files=["res://.godot/imported/box bonk texture.png-0b5c15d204841f4b64a995fce30d197b.ctex"]
+source_file="res://Battle/Enviroment/main shadow texture.png"
+dest_files=["res://.godot/imported/main shadow texture.png-75cad1329fbf774511f3b684c54b4067.ctex"]
 
 [params]
 

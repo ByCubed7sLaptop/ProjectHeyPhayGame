@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ckgmqrs645vkw"
-path="res://.godot/imported/animalese.wav-fa45433ad15c35f5a685e8eef86bd969.sample"
+path="res://.godot/imported/animalese.wav-5ed3395c86ca00f46fd243483736ad26.sample"
 
 [deps]
 
-source_file="res://Entities/animalese.wav"
-dest_files=["res://.godot/imported/animalese.wav-fa45433ad15c35f5a685e8eef86bd969.sample"]
+source_file="res://Level/animalese.wav"
+dest_files=["res://.godot/imported/animalese.wav-5ed3395c86ca00f46fd243483736ad26.sample"]
 
 [params]
 

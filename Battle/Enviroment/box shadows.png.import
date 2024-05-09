@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wdej4uy2udlq"
-path="res://.godot/imported/Lantern Texture.png-c9246f7f210e6e92f6bf29f0cd2ced96.ctex"
+uid="uid://lj6gi13iaq3k"
+path="res://.godot/imported/box shadows.png-222080c4f9cd69ca1637e1f2e9735064.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enviroment/Forest/Lantern Texture.png"
-dest_files=["res://.godot/imported/Lantern Texture.png-c9246f7f210e6e92f6bf29f0cd2ced96.ctex"]
+source_file="res://Battle/Enviroment/box shadows.png"
+dest_files=["res://.godot/imported/box shadows.png-222080c4f9cd69ca1637e1f2e9735064.ctex"]
 
 [params]
 

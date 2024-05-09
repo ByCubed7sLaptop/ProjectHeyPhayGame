@@ -1,11 +1,9 @@
 using Godot;
 using System;
 
-public partial class EnemyController : CharacterBody2D, IEnemy
+public partial class EncounterMovement : CharacterBody2D
 {
-	public EnemyResource Resource => resource;
-
-	[Export] public EnemyResource resource;
+	[Export] public EncounterResource Resource { get; set; }
 	[Export] public float Speed = 30.0f;
 
 	private float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();

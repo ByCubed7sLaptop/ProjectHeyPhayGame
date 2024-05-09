@@ -13,10 +13,6 @@ public partial class AudioStreamPlayerAnimalese : AudioStreamPlayer
     private int currentLetter;
     private double playtime = 0;
 
-    public override void _Ready()
-    {
-    }
-
     public override void _Process(double delta)
     {
         base._Process(delta);

@@ -21,10 +21,24 @@ public partial class LevelController : Node2D
 		Player.OnHitEncounter += OnPlayerHitEncounter;
 
 		Camera.Target = Player;
-	} 
+	}
 
+	public void Enable()
+	{
+		// Toggle level node
+		ProcessMode = ProcessModeEnum.Inherit;
+		Show();
+		Camera.Enabled = true;
+	}
 
-		//GetTree().Paused = true;
+    public void Disable()
+	{
+		// Toggle level node
+		ProcessMode = ProcessModeEnum.Disabled;
+        Hide();
+        Camera.Enabled = false;
+    }
+
     // Called when an Enemy hits a Player
     public void OnPlayerHitEncounter(object o, EncounterResource encounter)
     {

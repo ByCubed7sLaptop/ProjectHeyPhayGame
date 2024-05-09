@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cjbxhh50hqbk"]
+
+[ext_resource type="Script" path="res://Battle/EnemyResource.cs" id="1_ds1yj"]
+[ext_resource type="Texture2D" uid="uid://dbd1k0tdpfsqn" path="res://Battle/Temp/Temp Texture.png" id="1_rmi6t"]
+
+[resource]
+script = ExtResource("1_ds1yj")
+Name = "Temp name"
+Health = 20
+Difficulty = 1
+Texture = ExtResource("1_rmi6t")

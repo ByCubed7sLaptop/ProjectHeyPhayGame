@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkrq31wkwcacj"]
+
+[ext_resource type="Script" path="res://Level/Encounters/EncounterBody.cs" id="1_7sr8b"]
+[ext_resource type="Resource" uid="uid://core6tqglot3p" path="res://Level/Encounters/Temp EncounterResource.tres" id="2_hx5ej"]
+[ext_resource type="Texture2D" uid="uid://dbd1k0tdpfsqn" path="res://Battle/Temp/Temp Texture.png" id="3_bm0ap"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bk2g0"]
+radius = 8.0
+
+[node name="EnemyTemp" type="CharacterBody2D"]
+script = ExtResource("1_7sr8b")
+Resource = ExtResource("2_hx5ej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bk2g0")
+
+[node name="EnemyTempTexture" type="Sprite2D" parent="."]
+texture = ExtResource("3_bm0ap")

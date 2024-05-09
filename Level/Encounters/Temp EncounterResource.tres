@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://core6tqglot3p"]
+
+[ext_resource type="Resource" uid="uid://cjbxhh50hqbk" path="res://Battle/Temp/Temp EnemyResource.tres" id="1_t3sk8"]
+[ext_resource type="Script" path="res://Level/Encounters/EncounterResource.cs" id="2_7d1jo"]
+
+[resource]
+script = ExtResource("2_7d1jo")
+Enemies = [ExtResource("1_t3sk8"), ExtResource("1_t3sk8"), ExtResource("1_t3sk8")]

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class EncounterMovement : CharacterBody2D
+public partial class EncounterBody : CharacterBody2D
 {
 	[Export] public EncounterResource Resource { get; set; }
 	[Export] public float Speed = 30.0f;

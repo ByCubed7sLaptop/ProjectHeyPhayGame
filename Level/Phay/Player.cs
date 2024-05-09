@@ -60,7 +60,7 @@ public partial class Player : CharacterBody2D
 
 	private void OnEnemyHitPlayer(Node2D body)
 	{
-		if (body is not EncounterController encounter) return;
+		if (body is not EncounterBody encounter) return;
 
 		var handler = OnHitEncounter;
 		handler?.Invoke(this, encounter.Resource);

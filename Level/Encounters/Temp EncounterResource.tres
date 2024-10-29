@@ -6,3 +6,4 @@
 [resource]
 script = ExtResource("2_7d1jo")
 Enemies = [ExtResource("1_t3sk8"), ExtResource("1_t3sk8"), ExtResource("1_t3sk8")]
+Count = []

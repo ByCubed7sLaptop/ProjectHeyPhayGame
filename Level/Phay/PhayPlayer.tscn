@@ -11,6 +11,7 @@ height = 40.0
 height = 38.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Hitbox")]
+disable_mode = 2
 script = ExtResource("1_0nt4j")
 Hitbox = NodePath("Area2D")
 Speed = 150.0

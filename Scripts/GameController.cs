@@ -31,13 +31,13 @@ public partial class GameController : Node
 
 		Battle.Start();
 
-		//TransferToLevel();
-        //var tween = CreateTween();
-        //tween.TweenInterval(3);
-        //tween.TweenCallback(Callable.From(() =>
-        //{
-        //    TransferToLevel();
-        //}));
+        //TransferToLevel();
+        var tween = CreateTween();
+        tween.TweenInterval(3);
+        tween.TweenCallback(Callable.From(() =>
+        {
+            TransferToLevel();
+        }));
 
     }
 

@@ -8,6 +8,7 @@
 radius = 8.0
 
 [node name="EnemyTemp" type="CharacterBody2D"]
+disable_mode = 2
 script = ExtResource("1_7sr8b")
 Resource = ExtResource("2_hx5ej")
 

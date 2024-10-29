@@ -64,12 +64,6 @@ public partial class Player : CharacterBody2D
 
 		var handler = OnHitEncounter;
 		handler?.Invoke(this, encounter.Resource);
-
-		// BUG: Disabling the ProcessMode for the tree seems to freeze the body physics updates.
-		// Meaning the hitbox gets "stuck" when hitting another body.
-		// Toggling the hitboxs monitoring off and on seems to fix this problem
-		Hitbox.Monitoring = false;
-		Hitbox.Monitoring = true;
 	}
 
 

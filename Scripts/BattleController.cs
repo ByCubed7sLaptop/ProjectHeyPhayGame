@@ -13,7 +13,25 @@ public partial class BattleController : Node2D
 
 	public List<EnemyResource> EnemyResources { get; private set; }
 
-	public void Setup()
+    public override void _Ready()
+    {
+		BattleController Battle = GetTree().CurrentScene as BattleController;
+		Battle.Setup();
+
+		foreach (var enemy in GameController.Instance.CurrentEncounter)
+			Battle.AddEnemy(enemy);
+
+		Battle.Start();
+
+		var tween = CreateTween();
+		tween.TweenInterval(3);
+		tween.TweenCallback(Callable.From(() =>
+		{
+			GameController.Instance.TransferToLevel();
+		}));
+	}
+
+    public void Setup()
     {
 		EnemyResources = new List<EnemyResource>();
 	}

@@ -5,15 +5,8 @@
 [ext_resource type="Resource" uid="uid://core6tqglot3p" path="res://Level/Encounters/Temp EncounterResource.tres" id="2_eyvy1"]
 [ext_resource type="PackedScene" uid="uid://b88gobkmsuk7d" path="res://Battle/Battle Scene.tscn" id="3_wmyri"]
 
-[node name="GameController" type="Node" node_paths=PackedStringArray("Level", "Battle")]
+[node name="GameController" type="Node"]
 script = ExtResource("1_53c0d")
-Level = NodePath("Level")
-Battle = NodePath("Battle")
+LevelPackedScene = ExtResource("2_87usi")
+BattlePackedScene = ExtResource("3_wmyri")
 Encounter = ExtResource("2_eyvy1")
-
-[node name="Level" parent="." instance=ExtResource("2_87usi")]
-z_index = -1
-
-[node name="Battle" parent="." instance=ExtResource("3_wmyri")]
-process_mode = 4
-visible = false

@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/SplashScreen.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.png"
 
+[autoload]
+
+GameController="*res://Scenes/GameController.tscn"
+
 [dotnet]
 
 project/assembly_name="ThePhayGame"

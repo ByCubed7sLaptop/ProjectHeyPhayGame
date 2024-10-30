@@ -16,6 +16,9 @@ public partial class Player : CharacterBody2D
 
 	public EventHandler<EncounterResource> OnHitEncounter;
 
+	private float RespawnPositionUpdateTimer { get; set; } = 0;
+	private Vector2 RespawnPosition { get; set; }
+
 
 	public override void _Ready()
 	{
@@ -56,9 +59,10 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
-	}
+		ProcessRespawnPosition(delta);
+    }
 
-	private void OnEnemyHitPlayer(Node2D body)
+    private void OnEnemyHitPlayer(Node2D body)
 	{
 		if (body is not EncounterBody encounter) return;
 
@@ -78,6 +82,26 @@ public partial class Player : CharacterBody2D
 
 		return player;
 	}
+
+	private void ProcessRespawnPosition(double delta)
+	{
+        RespawnPositionUpdateTimer += (float)delta;
+        if (RespawnPositionUpdateTimer > 1)
+        {
+            if (IsOnFloor())
+            {
+                RespawnPosition = Position;
+                RespawnPositionUpdateTimer = 0;
+            }
+        }
+
+		//TODO: it would be better to have like a deathbox at the bottom of a map/segment that notifies rather than set it based on Y position, should be easier to work with with larger maps
+        if (Position.Y > 200)
+        {
+            Position = RespawnPosition;
+            RespawnPositionUpdateTimer = 0;
+        }
+    }
 }
 
 

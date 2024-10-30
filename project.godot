@@ -14,6 +14,7 @@ config/name="HeyPhayGame"
 run/main_scene="res://Scenes/SplashScreen.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 

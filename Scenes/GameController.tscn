@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_53c0d"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="2_87usi"]
-[ext_resource type="Resource" uid="uid://core6tqglot3p" path="res://Level/Encounters/Temp EncounterResource.tres" id="2_eyvy1"]
 [ext_resource type="PackedScene" uid="uid://b88gobkmsuk7d" path="res://Battle/Battle Scene.tscn" id="3_wmyri"]
+[ext_resource type="Script" path="res://Scenes/DebugDrawerNode.cs" id="4_7e2ig"]
 
-[node name="GameController" type="Node"]
+[node name="GameController" type="Node" node_paths=PackedStringArray("DebugDrawerNode")]
 script = ExtResource("1_53c0d")
 LevelPackedScene = ExtResource("2_87usi")
 BattlePackedScene = ExtResource("3_wmyri")
-Encounter = ExtResource("2_eyvy1")
+DebugDrawerNode = NodePath("DebugDrawer")
+
+[node name="DebugDrawer" type="Node2D" parent="."]
+script = ExtResource("4_7e2ig")

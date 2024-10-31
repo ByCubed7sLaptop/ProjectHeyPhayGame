@@ -9,11 +9,15 @@ public partial class GameController : Node
 	[Export] public PackedScene LevelPackedScene;
 	[Export] public PackedScene BattlePackedScene;
 
+    public DebugDrawer DebugDrawer { get; set; }
+    [Export] DebugDrawerNode DebugDrawerNode { get; set; }
+
     public EncounterResource CurrentEncounter { get; set; }
 
     public override void _Ready()
 	{
 		Instance = this;
+        DebugDrawer = new DebugDrawer(DebugDrawerNode);
     }
 
     public void StartBattleWith(EncounterResource encounter)

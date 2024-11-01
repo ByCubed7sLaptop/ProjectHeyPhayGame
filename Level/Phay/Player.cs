@@ -52,6 +52,7 @@ public partial class Player : CharacterBody2D
 
 		// Clamp max speed
 		velocity.X = Mathf.Clamp(velocity.X, -Speed, Speed);
+		velocity.Y = Mathf.Min(velocity.Y, gravity * Speed);
 
 		// Accelerate and Deaccelerate
 		velocity.X = Mathf.Lerp(Velocity.X, velocity.X, 0.15f);

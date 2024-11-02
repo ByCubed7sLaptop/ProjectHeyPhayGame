@@ -10,6 +10,8 @@ public partial class Player : CharacterBody2D
 	[Export] public float Acceleration = 0.15f; // Time to max speed
 	[Export] public float JumpVelocity = 300.0f;
 
+	private Vector2 PlayerVelocity;
+
 	// Time since the last jump press to buffer
 	[Export] public const float JumpBufferTime = 0.1f;
 	private double jumpBufferCounter = 0f;
@@ -43,56 +45,73 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Velocity;
-
-		// Add the gravity
-		if (!IsOnFloor()) velocity.Y += gravity * (float)delta;
-
-		// Handle Jump
-		// Set jump buffer when jump is pressed
-		jumpBufferCounter -= delta;
-		if (Input.IsActionPressed("player_jump")) 
-			jumpBufferCounter = JumpBufferTime;
-
-		// Set coyote buffer
-		coyoteTimeCounter -= delta;
-		if (IsOnFloor())
-			coyoteTimeCounter = CoyoteTime;
-
-		bool requestJump = jumpBufferCounter > 0;
-		bool canJump = IsOnFloor() || coyoteTimeCounter > 0;
-
-		// Apply jump velocity
-		if (requestJump && canJump && !isJumping)
-        {
-			velocity.Y = -JumpVelocity;
-			isJumping = true;
-		}
-
-		// If no longer requests to jump
-		if (!requestJump && isJumping && velocity.Y < gravity)
-			velocity.Y += gravity * (float)delta;
-
-		if (IsOnFloor())
-			isJumping = false;
-
-		// Get the input direction and handle the movement/deceleration.
-		Vector2 direction = Input.GetVector("player_left", "player_right", "player_up", "player_down");
-		if (direction != Vector2.Zero)
-			velocity.X = direction.X * Speed;
-		else
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-
-		// Clamp max speed
-		velocity.X = Mathf.Clamp(velocity.X, -Speed, Speed);
-		velocity.Y = Mathf.Min(velocity.Y, gravity);
-
-		// Accelerate and Deaccelerate
-		velocity.X = Mathf.Lerp(Velocity.X, velocity.X, 0.15f);
-
-		Velocity = velocity;
-		MoveAndSlide();
+        ProcessMovementVelocity(delta);
+        MoveAndSlide();
 		ProcessRespawnPosition(delta);
+    }
+
+    private void ProcessMovementVelocity(double delta)
+    {
+        PlayerVelocity = Velocity;
+        ProcessMovementDirection();
+        ProcessJump(delta);
+        ProcessGravity(delta);
+
+        // Accelerate and Deaccelerate
+        PlayerVelocity.X = Mathf.Lerp(Velocity.X, PlayerVelocity.X, 0.15f);
+
+        // Clamp max speed
+        PlayerVelocity.X = Mathf.Clamp(PlayerVelocity.X, -Speed, Speed);
+        PlayerVelocity.Y = Mathf.Min(PlayerVelocity.Y, gravity);
+
+        Velocity = PlayerVelocity;
+    }
+
+    private void ProcessGravity(double delta)
+    {
+        if (!IsOnFloor()) PlayerVelocity.Y += gravity * (float)delta;
+    }
+
+	private void ProcessMovementDirection()
+	{
+        // Get the input direction and handle the movement/deceleration.
+        Vector2 direction = Input.GetVector("player_left", "player_right", "player_up", "player_down");
+        if (direction != Vector2.Zero)
+            PlayerVelocity.X = direction.X * Speed;
+        else
+            PlayerVelocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+
+    }
+
+	private void ProcessJump(double delta)
+	{
+        // Handle Jump
+        // Set jump buffer when jump is pressed
+        jumpBufferCounter -= delta;
+        if (Input.IsActionPressed("player_jump"))
+            jumpBufferCounter = JumpBufferTime;
+
+        // Set coyote buffer
+        coyoteTimeCounter -= delta;
+        if (IsOnFloor())
+            coyoteTimeCounter = CoyoteTime;
+
+        bool requestJump = jumpBufferCounter > 0;
+        bool canJump = IsOnFloor() || coyoteTimeCounter > 0;
+
+        // Apply jump velocity
+        if (requestJump && canJump && !isJumping)
+        {
+            PlayerVelocity.Y = -JumpVelocity;
+            isJumping = true;
+        }
+
+        // If no longer requests to jump
+        if (!requestJump && isJumping && PlayerVelocity.Y < gravity)
+            PlayerVelocity.Y += gravity * (float)delta;
+
+        if (IsOnFloor())
+            isJumping = false;
     }
 
     private void OnEnemyHitPlayer(Node2D body)

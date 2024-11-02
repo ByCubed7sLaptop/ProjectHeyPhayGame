@@ -11,12 +11,10 @@ public partial class DebugDrawerNode : Node2D
 		QueueRedraw();
 	}
 
-	public readonly List<Action<DebugDrawerNode>> drawQueue = new List<Action<DebugDrawerNode>>();
 	public override void _Draw()
     {
 		// Run each draw request
-		foreach (var drawRequest in drawQueue)
-			drawRequest(this);
-		drawQueue.Clear();
+		foreach (var draw in DebugDrawer.Data.drawQueue) draw(this);
+		DebugDrawer.Data.Clear();
 	}
 }

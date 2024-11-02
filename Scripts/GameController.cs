@@ -9,25 +9,17 @@ public partial class GameController : Node
 	[Export] public PackedScene LevelPackedScene;
 	[Export] public PackedScene BattlePackedScene;
 
-    public DebugDrawer DebugDrawer { get; set; }
-    [Export] DebugDrawerNode DebugDrawerNode { get; set; }
-
     private BattleController Battle;
     public EncounterResource CurrentEncounter { get; set; }
 
     public override void _Ready()
 	{
 		Instance = this;
-        DebugDrawer = new DebugDrawer(DebugDrawerNode);
+        DebugDrawer.Initialization();
     }
 
     public BattleController StartBattleWith(EncounterBody encounter)
     {
-        // TODO:
-        // Save/Hide/Unload current scene
-        // Load battle scene
-        // Transfer battle infomation from event to battle scene
-
         // TODO: Assumes level controller is loaded and is the main scene
 
         // Remove the level controller from the root node
@@ -39,7 +31,9 @@ public partial class GameController : Node
         Battle = BattlePackedScene.Instantiate<BattleController>();
         GetTree().Root.AddChild(Battle);
 
+        // TODO: Move to EncounterBody destroy method to add effects / ect
         Battle.OnWin += (e, o) => encounter.QueueFree();
+        
         Battle.OnWin += (e, o) => TransferToLevel();
 
         return Battle;

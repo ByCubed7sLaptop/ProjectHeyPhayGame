@@ -8,12 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://bdeh2u8i1lclx" path="res://Battle/Enviroment/main shadow texture.png" id="6_5kptu"]
 [ext_resource type="Texture2D" uid="uid://b37quotf157mm" path="res://Battle/Enviroment/box bonk texture.png" id="8_b1ggh"]
 
-[node name="Battle" type="Node2D" node_paths=PackedStringArray("Camera", "phayGeneralPosition", "enemyGeneralPosition", "phay")]
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("Camera", "phayGeneralPosition", "enemyGeneralPosition")]
 script = ExtResource("1_gc0vv")
 Camera = NodePath("Camera2D")
 phayGeneralPosition = NodePath("Phay general position")
 enemyGeneralPosition = NodePath("Enemy general position")
-phay = NodePath("Phay")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

@@ -2,14 +2,22 @@ using Godot;
 using System.Collections;
 using System.Collections.Generic;
 
-public partial class EncounterResource : Resource, IEnumerable<EnemyResource>
+public partial class EncounterResource : Resource, IEnumerable<BattlerResource>
 {
-    [Export] public Godot.Collections.Array<EnemyResource> Enemies = new();
+    [Export] public Godot.Collections.Array<BattlerResource> Enemies = new();
 
-    public IEnumerator<EnemyResource> GetEnumerator()
+    public IEnumerator<BattlerResource> GetEnumerator()
     {
         return Enemies.GetEnumerator();
     }
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    
+
+
+    public int Count => Enemies.Count;
+
+    public BattlerResource this[int i]
+    {
+        get { return Enemies[i]; }
+        set { Enemies[i] = value; }
+    }
 }

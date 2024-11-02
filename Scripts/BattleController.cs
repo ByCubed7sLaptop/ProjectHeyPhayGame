@@ -8,21 +8,16 @@ public partial class BattleController : Node2D
 	[Export] public Node2D phayGeneralPosition;
 	[Export] public Node2D enemyGeneralPosition;
 
-	[Export] public Sprite2D phay;
+	public List<Sprite2D> Party { get; private set; } = new();
 	public List<Sprite2D> enemies = new();
 
-	public List<EnemyResource> EnemyResources { get; private set; }
+	public List<PartyMemberResource> PartyResources { get; private set; }
 
 	public EventHandler OnWin;
 	public EventHandler OnLose;
 
 	public override void _Ready()
     {
-		Setup();
-
-		foreach (var enemy in GameController.Instance.CurrentEncounter)
-			AddEnemy(enemy);
-
 		Start();
 
 		// TEMP		
@@ -36,7 +31,15 @@ public partial class BattleController : Node2D
 
 	public override void _Process(double delta)
 	{
-		phay.Position = phay.Position.MoveToward(phayGeneralPosition.Position, 20 * (float)delta);
+		for (int i = 0; i < Party.Count; i++)
+		{
+			Sprite2D sprite = Party[i];
+			Vector2 targetPosition = phayGeneralPosition.Position
+				+ GetVectorInSpiral(i, Party.Count, 2, 40);
+
+			sprite.Position = sprite.Position.MoveToward(targetPosition, 120 * 4 * (float)delta);
+		}
+		//phay.Position = phay.Position.MoveToward(phayGeneralPosition.Position, 20 * (float)delta);
 
 		for (int i = 0; i < enemies.Count; i++)
 		{
@@ -48,22 +51,27 @@ public partial class BattleController : Node2D
 		}
 	}
 
-	public void Setup()
-    {
-		EnemyResources = new List<EnemyResource>();
-	}
-
-	public void AddEnemy(EnemyResource enemy)
-    {
-		EnemyResources.Add(enemy);
-	}
-
 	public void Start()
     {
+
+		// Place all the party
+		for (int i = 0; i < GameController.Instance.CurrentParty.Count; i++)
+		{
+			PartyMemberResource partyMember = GameController.Instance.CurrentParty[i];
+			Sprite2D sprite = new Sprite2D();
+
+			sprite.Name = partyMember.Name;
+			sprite.Texture = partyMember.Texture;
+			sprite.Position = phayGeneralPosition.Position + Vector2.Left * 100 + Vector2.Left * 20 * i;
+
+			AddChild(sprite);
+			Party.Add(sprite);
+		}
+
 		// Place all the enemies
-		for (int i = 0; i < EnemyResources.Count; i++)
+		for (int i = 0; i < GameController.Instance.CurrentEncounter.Count; i++)
         {
-			EnemyResource enemyResource = EnemyResources[i% EnemyResources.Count];
+			BattlerResource enemyResource = GameController.Instance.CurrentEncounter[i];
 			Sprite2D sprite = new Sprite2D();
 
 			sprite.Name = enemyResource.Name;

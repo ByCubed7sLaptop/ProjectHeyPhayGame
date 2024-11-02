@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 // Deals with the overall game, saving, loading, platforming, battles, pausing, ect.
 public partial class GameController : Node
@@ -10,6 +11,7 @@ public partial class GameController : Node
 	[Export] public PackedScene BattlePackedScene;
 
     private BattleController Battle;
+    [Export] public Godot.Collections.Array<PartyMemberResource> CurrentParty { get; set; }
     public EncounterResource CurrentEncounter { get; set; }
 
     public override void _Ready()

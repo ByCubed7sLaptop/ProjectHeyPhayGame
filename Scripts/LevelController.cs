@@ -40,14 +40,14 @@ public partial class LevelController : Node2D
     }
 
     // Called when an Enemy hits a Player
-    public void OnPlayerHitEncounter(object o, EncounterResource encounter)
+    public void OnPlayerHitEncounter(object o, EncounterBody encounterBody)
     {
-		GD.Print($"Hit Enemy: {encounter.Enemies}");
+		GD.Print($"Hit Enemy: {encounterBody.Resource.Enemies}");
 
 		// Battle should NOT start if the player is over X amount of levels over the enemy
 		// This should be togglable
 
 		// Tell the game controller to start the battle mode
-		GameController.Instance.StartBattleWith(encounter);
+		GameController.Instance.StartBattleWith(encounterBody);
 	}
 }

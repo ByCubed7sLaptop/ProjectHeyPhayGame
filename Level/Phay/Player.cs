@@ -23,7 +23,7 @@ public partial class Player : CharacterBody2D
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
-	public EventHandler<EncounterResource> OnHitEncounter;
+	public EventHandler<EncounterBody> OnHitEncounter;
 
 	private Vector2 RespawnPosition { get; set; }
 
@@ -100,7 +100,7 @@ public partial class Player : CharacterBody2D
 		if (body is not EncounterBody encounter) return;
 
 		var handler = OnHitEncounter;
-		handler?.Invoke(this, encounter.Resource);
+		handler?.Invoke(this, encounter);
 	}
 
 

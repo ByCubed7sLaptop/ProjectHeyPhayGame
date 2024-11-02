@@ -21,7 +21,7 @@ public partial class GameController : Node
         DebugDrawer = new DebugDrawer(DebugDrawerNode);
     }
 
-    public BattleController StartBattleWith(EncounterResource encounter)
+    public BattleController StartBattleWith(EncounterBody encounter)
     {
         // TODO:
         // Save/Hide/Unload current scene
@@ -35,12 +35,12 @@ public partial class GameController : Node
         GetTree().Root.RemoveChild(LevelController.Instance);
 
         // Set up the battle scene
-        CurrentEncounter = encounter;
+        CurrentEncounter = encounter.Resource;
         Battle = BattlePackedScene.Instantiate<BattleController>();
         GetTree().Root.AddChild(Battle);
 
+        Battle.OnWin += (e, o) => encounter.QueueFree();
         Battle.OnWin += (e, o) => TransferToLevel();
-
 
         return Battle;
     }

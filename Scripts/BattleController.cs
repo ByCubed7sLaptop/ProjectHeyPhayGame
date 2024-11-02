@@ -13,25 +13,42 @@ public partial class BattleController : Node2D
 
 	public List<EnemyResource> EnemyResources { get; private set; }
 
-    public override void _Ready()
+	public EventHandler OnWin;
+	public EventHandler OnLose;
+
+	public override void _Ready()
     {
-		BattleController Battle = GetTree().CurrentScene as BattleController;
-		Battle.Setup();
+		Setup();
 
 		foreach (var enemy in GameController.Instance.CurrentEncounter)
-			Battle.AddEnemy(enemy);
+			AddEnemy(enemy);
 
-		Battle.Start();
+		Start();
 
+		// TEMP		
 		var tween = CreateTween();
 		tween.TweenInterval(3);
 		tween.TweenCallback(Callable.From(() =>
 		{
-			GameController.Instance.TransferToLevel();
+			Win();
 		}));
 	}
 
-    public void Setup()
+	public override void _Process(double delta)
+	{
+		phay.Position = phay.Position.MoveToward(phayGeneralPosition.Position, 20 * (float)delta);
+
+		for (int i = 0; i < enemies.Count; i++)
+		{
+			Sprite2D sprite = enemies[i];
+			Vector2 targetPosition = enemyGeneralPosition.Position
+				+ GetVectorInSpiral(i, enemies.Count, 2, 40);
+
+			sprite.Position = sprite.Position.MoveToward(targetPosition, 120 * 4 * (float)delta);
+		}
+	}
+
+	public void Setup()
     {
 		EnemyResources = new List<EnemyResource>();
 	}
@@ -64,36 +81,12 @@ public partial class BattleController : Node2D
 		// Play animations
     }
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
 
-		phay.Position = phay.Position.MoveToward(phayGeneralPosition.Position, 20 * (float)delta);
 
-		for (int i = 0; i < enemies.Count; i++)
-		{
-			Sprite2D sprite = enemies[i];
-			Vector2 targetPosition = enemyGeneralPosition.Position 
-				+ GetVectorInSpiral(i, enemies.Count, 2, 40);
-
-			sprite.Position = sprite.Position.MoveToward(targetPosition, 120 * 4 * (float)delta);
-		}
-	}
-
-	public void Enable()
+	private void Win()
 	{
-		// Toggle level node
-		ProcessMode = ProcessModeEnum.Inherit;
-		Show();
-		Camera.Enabled = true;
-	}
-
-	public void Disable()
-	{
-		// Toggle level node
-		ProcessMode = ProcessModeEnum.Disabled;
-		Hide();
-		Camera.Enabled = false;
+		var handler = OnWin;
+		OnWin?.Invoke(this, EventArgs.Empty);
 	}
 
 
@@ -101,10 +94,7 @@ public partial class BattleController : Node2D
 
 
 
-
-
-
-    private static Vector2 GetVectorInSpiral(float i, float max, float angleMulti = 2, float distance = 20)
+	private static Vector2 GetVectorInSpiral(float i, float max, float angleMulti = 2, float distance = 20)
     {
 		float amount = MathF.Sqrt(i / (float)max) ;
 		float angle = amount * MathF.PI * angleMulti;

@@ -11,7 +11,6 @@ public partial class GameController : Node
 	[Export] public PackedScene BattlePackedScene;
 
     private BattleController Battle;
-    [Export] public Godot.Collections.Array<PartyMemberResource> CurrentParty { get; set; }
     public EncounterResource CurrentEncounter { get; set; }
 
     public override void _Ready()

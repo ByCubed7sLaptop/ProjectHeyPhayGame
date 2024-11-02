@@ -8,10 +8,8 @@ public partial class BattleController : Node2D
 	[Export] public Node2D phayGeneralPosition;
 	[Export] public Node2D enemyGeneralPosition;
 
-	public List<Sprite2D> Party { get; private set; } = new();
-	public List<Sprite2D> enemies = new();
-
-	public List<PartyMemberResource> PartyResources { get; private set; }
+	public List<Sprite2D> PartySprites { get; private set; } = new();
+	public List<Sprite2D> EnemySprites { get; private set; } = new();
 
 	public EventHandler OnWin;
 	public EventHandler OnLose;
@@ -31,21 +29,21 @@ public partial class BattleController : Node2D
 
 	public override void _Process(double delta)
 	{
-		for (int i = 0; i < Party.Count; i++)
+		for (int i = 0; i < PartySprites.Count; i++)
 		{
-			Sprite2D sprite = Party[i];
+			Sprite2D sprite = PartySprites[i];
 			Vector2 targetPosition = phayGeneralPosition.Position
-				+ GetVectorInSpiral(i, Party.Count, 2, 40);
+				+ GetVectorInSpiral(i, PartySprites.Count, 2, 40);
 
 			sprite.Position = sprite.Position.MoveToward(targetPosition, 120 * 4 * (float)delta);
 		}
 		//phay.Position = phay.Position.MoveToward(phayGeneralPosition.Position, 20 * (float)delta);
 
-		for (int i = 0; i < enemies.Count; i++)
+		for (int i = 0; i < EnemySprites.Count; i++)
 		{
-			Sprite2D sprite = enemies[i];
+			Sprite2D sprite = EnemySprites[i];
 			Vector2 targetPosition = enemyGeneralPosition.Position
-				+ GetVectorInSpiral(i, enemies.Count, 2, 40);
+				+ GetVectorInSpiral(i, EnemySprites.Count, 2, 40);
 
 			sprite.Position = sprite.Position.MoveToward(targetPosition, 120 * 4 * (float)delta);
 		}
@@ -53,35 +51,26 @@ public partial class BattleController : Node2D
 
 	public void Start()
     {
-
 		// Place all the party
-		for (int i = 0; i < GameController.Instance.CurrentParty.Count; i++)
+		for (int i = 0; i < Party.Count; i++)
 		{
-			PartyMemberResource partyMember = GameController.Instance.CurrentParty[i];
-			Sprite2D sprite = new Sprite2D();
-
-			sprite.Name = partyMember.Name;
-			sprite.Texture = partyMember.Texture;
+			var partyMember = Party.Get(i);
+			Sprite2D sprite = partyMember.GenerateBattler() as Sprite2D;
 			sprite.Position = phayGeneralPosition.Position + Vector2.Left * 100 + Vector2.Left * 20 * i;
 
 			AddChild(sprite);
-			Party.Add(sprite);
+			PartySprites.Add(sprite);
 		}
 
 		// Place all the enemies
 		for (int i = 0; i < GameController.Instance.CurrentEncounter.Count; i++)
         {
 			BattlerResource enemyResource = GameController.Instance.CurrentEncounter[i];
-			Sprite2D sprite = new Sprite2D();
-
-			sprite.Name = enemyResource.Name;
-			sprite.Texture = enemyResource.Texture;
+			Sprite2D sprite = enemyResource.GenerateBattler() as Sprite2D;
 			sprite.Position = enemyGeneralPosition.Position + Vector2.Right*100 + Vector2.Right * 20 * i;
 
-			GD.Print(sprite.Position);
-
 			AddChild(sprite);
-			enemies.Add(sprite);
+			EnemySprites.Add(sprite);
         }
 
 		// Decide who goes first

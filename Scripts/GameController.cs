@@ -12,6 +12,7 @@ public partial class GameController : Node
     public DebugDrawer DebugDrawer { get; set; }
     [Export] DebugDrawerNode DebugDrawerNode { get; set; }
 
+    private BattleController Battle;
     public EncounterResource CurrentEncounter { get; set; }
 
     public override void _Ready()
@@ -20,20 +21,34 @@ public partial class GameController : Node
         DebugDrawer = new DebugDrawer(DebugDrawerNode);
     }
 
-    public void StartBattleWith(EncounterResource encounter)
+    public BattleController StartBattleWith(EncounterResource encounter)
     {
         // TODO:
         // Save/Hide/Unload current scene
         // Load battle scene
         // Transfer battle infomation from event to battle scene
+
+        // TODO: Assumes level controller is loaded and is the main scene
+
+        // Remove the level controller from the root node
+        // This keeps it in memory but stops processing
+        GetTree().Root.RemoveChild(LevelController.Instance);
+
+        // Set up the battle scene
         CurrentEncounter = encounter;
-        GetTree().ChangeSceneToPacked(BattlePackedScene);
+        Battle = BattlePackedScene.Instantiate<BattleController>();
+        GetTree().Root.AddChild(Battle);
+
+        Battle.OnWin += (e, o) => TransferToLevel();
+
+
+        return Battle;
     }
 
     public void TransferToLevel()
     {
-        GetTree().ChangeSceneToPacked(LevelPackedScene);
-        //Level.Enable();
-        //Battle.Disable();
+        // TODO: Assumes we're on the battle scene
+        GetTree().Root.RemoveChild(Battle);
+        GetTree().Root.AddChild(LevelController.Instance);
     }
 }

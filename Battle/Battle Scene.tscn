@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b88gobkmsuk7d"]
+[gd_scene load_steps=7 format=3 uid="uid://b88gobkmsuk7d"]
 
 [ext_resource type="Script" path="res://Scripts/BattleController.cs" id="1_gc0vv"]
 [ext_resource type="Texture2D" uid="uid://cmh8i3f7ldb1a" path="res://Battle/Enviroment/Sky texture.png" id="2_kv2go"]
 [ext_resource type="Texture2D" uid="uid://cyd6ow7dlaree" path="res://Battle/Enviroment/Floor texture.png" id="3_0tjwg"]
 [ext_resource type="Texture2D" uid="uid://lj6gi13iaq3k" path="res://Battle/Enviroment/box shadows.png" id="4_7gq6o"]
-[ext_resource type="Texture2D" uid="uid://qquja25ple77" path="res://Level/Phay/Phay.png" id="5_lssih"]
 [ext_resource type="Texture2D" uid="uid://bdeh2u8i1lclx" path="res://Battle/Enviroment/main shadow texture.png" id="6_5kptu"]
 [ext_resource type="Texture2D" uid="uid://b37quotf157mm" path="res://Battle/Enviroment/box bonk texture.png" id="8_b1ggh"]
 
@@ -36,10 +35,6 @@ texture = ExtResource("6_5kptu")
 modulate = Color(1, 1, 1, 0.556863)
 position = Vector2(55, 40)
 texture = ExtResource("6_5kptu")
-
-[node name="Phay" type="Sprite2D" parent="."]
-position = Vector2(-59, -108)
-texture = ExtResource("5_lssih")
 
 [node name="Boxes" type="Node2D" parent="."]
 

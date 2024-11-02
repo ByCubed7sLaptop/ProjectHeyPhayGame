@@ -2,16 +2,11 @@
 
 public partial class BattlerResource : Resource
 {
-    [Export] public string Name;
+    [Export] public string DisplayName;
     [Export] public StatsResource Stats { get; set; }
     [Export] public Texture2D Texture;
 
-    public BattlerResource()
-    {
-        // Duplicate the stats resource so that changes
-        // arent shared to other resources
-        Stats = Stats.Duplicate() as StatsResource;
-    }
+   
 
     public void Damage(int value)
     {
@@ -26,7 +21,7 @@ public partial class BattlerResource : Resource
     {
         // TODO: This should probably generate from a packed scene
         Sprite2D sprite = new Sprite2D();
-        sprite.Name = Name;
+        sprite.Name = DisplayName;
         sprite.Texture = Texture;
 
         return sprite;

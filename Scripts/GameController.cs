@@ -27,8 +27,10 @@ public partial class GameController : Node
         // This keeps it in memory but stops processing
         GetTree().Root.RemoveChild(LevelController.Instance);
 
+        // Deep copy the encounter data
+        CurrentEncounter = encounter.Resource.Duplicate(true) as EncounterResource;
+        
         // Set up the battle scene
-        CurrentEncounter = encounter.Resource;
         Battle = BattlePackedScene.Instantiate<BattleController>();
         GetTree().Root.AddChild(Battle);
 

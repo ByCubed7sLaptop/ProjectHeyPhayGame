@@ -38,9 +38,3 @@ texture = ExtResource("6_17wt3")
 
 [node name="EnemyTemp" parent="Entities" index="0" instance=ExtResource("7_tryuo")]
 position = Vector2(213, 3)
-
-[node name="EnemyTemp2" parent="Entities" index="1" instance=ExtResource("7_tryuo")]
-position = Vector2(239, 3)
-
-[node name="EnemyTemp3" parent="Entities" index="2" instance=ExtResource("7_tryuo")]
-position = Vector2(262, 3)

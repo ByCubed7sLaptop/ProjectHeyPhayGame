@@ -8,7 +8,6 @@ public partial class Player : CharacterBody2D
 	[ExportCategory("Movement")]
 	[Export] public float Speed = 100.0f; // Max speed
 	[Export] public float Acceleration = 0.15f; // Time to max speed
-
 	[Export] public float JumpVelocity = 300.0f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -24,11 +23,15 @@ public partial class Player : CharacterBody2D
 		// Disabling a CollisionObject node during a physics callback is not allowed and will cause undesired behavior.
 		// Disable with call_deferred() instead.
 		Hitbox.BodyEntered += (e) => CallDeferred(nameof(OnEnemyHitPlayer), e);
-
-		base._Ready();
 	}
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Process(double delta)
+    {
+		if (OS.IsDebugBuild())
+			DebugDrawer.DrawCircle(RespawnPosition, 3, Colors.Red);
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
 

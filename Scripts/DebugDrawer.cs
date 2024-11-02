@@ -12,9 +12,9 @@ public partial class DebugDrawer
 		DrawingNode = drawingNode;
 	}
 
-	public void DrawCircle(Vector2 position, float raduis, Color color)
+	static public void DrawCircle(Vector2 position, float raduis, Color color)
     {
-		DrawingNode.drawQueue.Add((node) => {
+		Instance.DrawingNode.drawQueue.Add((node) => {
 			node.DrawCircle(position, raduis, color);
 		});
 	}

@@ -1,12 +1,11 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://lw8hu80csg1"]
 
-[ext_resource type="Resource" uid="uid://cfa77mftbffyu" path="res://Battle/Phay Base Stats.tres" id="1_uk21n"]
+[ext_resource type="Resource" uid="uid://cfa77mftbffyu" path="res://Battle/Party/Phay Base Stats.tres" id="1_uk21n"]
 [ext_resource type="Texture2D" uid="uid://qquja25ple77" path="res://Level/Phay/Phay.png" id="2_8bw8j"]
-[ext_resource type="Script" path="res://Battle/PartyMemberResource.cs" id="3_0rh3e"]
+[ext_resource type="Script" path="res://Battle/Party/PartyMemberResource.cs" id="3_0rh3e"]
 
 [resource]
 script = ExtResource("3_0rh3e")
-Name = "Phay"
+DisplayName = "Phay"
 Stats = ExtResource("1_uk21n")
-Difficulty = 1
 Texture = ExtResource("2_8bw8j")

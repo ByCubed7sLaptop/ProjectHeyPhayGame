@@ -3,14 +3,16 @@ using System;
 
 public partial class StatsResource : Resource
 {
-    [Export] public int Health;
-    [Export] public int Cutie; // qt points / Special points
-    [Export] public int Power; // Attack power
-    [Export] public int Defence;
-    [Export] public int Speed;
+    [Export] public int Health { get; set; } = 12; // Health
+    [Export] public int HealthMax { get; set; } = 12;
+    [Export] public int Cutie { get; set; } = 10; // QT points / Special points
+    [Export] public int CutieMax { get; set; } = 10;
+    [Export] public int Power { get; set; } = 2; // Attack power
+    [Export] public int Defence { get; set; } = 3;
+    [Export] public int Speed { get; set; } = 1;
     //[Export] public int Friendship;
-    [Export] public int Luck;
-    [Export] public int Exp; // Experience
+    [Export] public int Luck { get; set; } = 2;
+    [Export] public int Exp { get; set; } = 0; // Experience
 
     // Decides the amount of exp required to move to the next level
     // 3 would be mean the first level requires 7 xp, then 16 xp, 27, 40, ect.

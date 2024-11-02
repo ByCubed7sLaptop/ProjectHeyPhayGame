@@ -4,10 +4,12 @@
 
 [resource]
 script = ExtResource("1_pf5ia")
-Health = 20
-Cutie = 0
-Power = 0
-Defence = 0
-Speed = 0
-Luck = 0
+Health = 12
+HealthMax = 12
+Cutie = 10
+CutieMax = 10
+Power = 2
+Defence = 3
+Speed = 1
+Luck = 2
 Exp = 0

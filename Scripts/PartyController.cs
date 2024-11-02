@@ -38,6 +38,20 @@ public static class Party
         return PartyController.Instance[index];
     }
 
-    static public IEnumerator<PartyMemberResource> Members 
-        => PartyController.Instance.GetEnumerator();
+    static public IEnumerable<PartyMemberResource> Members 
+        => PartyController.Instance;
+
+    static public void DamageRandomMember(int value, Random random = null)
+    {
+        if (random is null)
+            random = new Random();
+        var member = Get(random.Next(Count));
+        member.Damage(value);
+    }
+
+    static public void DamageAllMembers(int value)
+    {
+        foreach (var member in Members)
+            member.Damage(value);
+    }
 }

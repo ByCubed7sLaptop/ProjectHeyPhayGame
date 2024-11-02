@@ -6,8 +6,7 @@
 
 [resource]
 script = ExtResource("3_0rh3e")
-Stats = ExtResource("1_uk21n")
 Name = "Phay"
-Health = 20
+Stats = ExtResource("1_uk21n")
 Difficulty = 1
 Texture = ExtResource("2_8bw8j")

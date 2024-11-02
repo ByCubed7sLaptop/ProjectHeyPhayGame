@@ -17,4 +17,4 @@ script = ExtResource("4_7e2ig")
 
 [node name="PartyController" type="Node" parent="."]
 script = ExtResource("6_7sow6")
-CurrentParty = Array[Resource]([ExtResource("4_r61ni"), ExtResource("4_r61ni")])
+CurrentParty = Array[Resource]([ExtResource("4_r61ni")])

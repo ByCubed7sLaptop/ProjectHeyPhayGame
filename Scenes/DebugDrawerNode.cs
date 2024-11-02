@@ -7,7 +7,7 @@ public partial class DebugDrawerNode : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		DebugDrawer.Instance.DrawCircle(Vector2.Zero, 30, Colors.RebeccaPurple);
+		//DebugDrawer.DrawCircle(Vector2.Zero, 30, Colors.RebeccaPurple);
 		QueueRedraw();
 	}
 

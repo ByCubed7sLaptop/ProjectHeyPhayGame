@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b37quotf157mm"
-path="res://.godot/imported/box bonk texture.png-7578e15139754400cb28c5cd0881386a.ctex"
+uid="uid://d0p8qy0eb4f42"
+path="res://.godot/imported/box item texture.png-f35ee51df0402aab237bc0cc6ed25881.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Battle/Enviroment/box bonk texture.png"
-dest_files=["res://.godot/imported/box bonk texture.png-7578e15139754400cb28c5cd0881386a.ctex"]
+source_file="res://UI/BattleScene/box item texture.png"
+dest_files=["res://.godot/imported/box item texture.png-f35ee51df0402aab237bc0cc6ed25881.ctex"]
 
 [params]
 

@@ -41,6 +41,11 @@ public static class Party
     static public IEnumerable<PartyMemberResource> Members 
         => PartyController.Instance;
 
+    static public bool Contains(PartyMemberResource partyMemberResource)
+    {
+        return PartyController.Instance.CurrentParty.Contains(partyMemberResource);
+    }
+
     static public void DamageRandomMember(int value, Random random = null)
     {
         if (random is null)

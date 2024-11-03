@@ -11,8 +11,7 @@ public partial class GameController : Node
 	[Export] public PackedScene BattlePackedScene;
 
     private BattleController Battle;
-    public EncounterResource CurrentEncounter { get; set; }
-
+    
     public override void _Ready()
 	{
 		Instance = this;
@@ -28,10 +27,10 @@ public partial class GameController : Node
         GetTree().Root.RemoveChild(LevelController.Instance);
 
         // Deep copy the encounter data
-        CurrentEncounter = encounter.Resource.Duplicate(true) as EncounterResource;
         
         // Set up the battle scene
         Battle = BattlePackedScene.Instantiate<BattleController>();
+        Battle.currentEncounter = encounter.Resource.Duplicate(true) as EncounterResource;
         GetTree().Root.AddChild(Battle);
 
         // TODO: Move to EncounterBody destroy method to add effects / ect

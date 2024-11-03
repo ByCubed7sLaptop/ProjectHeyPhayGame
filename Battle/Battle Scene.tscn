@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b88gobkmsuk7d"]
+[gd_scene load_steps=11 format=3 uid="uid://b88gobkmsuk7d"]
 
 [ext_resource type="Script" path="res://Scripts/BattleController.cs" id="1_gc0vv"]
 [ext_resource type="Texture2D" uid="uid://cmh8i3f7ldb1a" path="res://Battle/Enviroment/Sky texture.png" id="2_kv2go"]
 [ext_resource type="Texture2D" uid="uid://cyd6ow7dlaree" path="res://Battle/Enviroment/Floor texture.png" id="3_0tjwg"]
 [ext_resource type="Texture2D" uid="uid://lj6gi13iaq3k" path="res://Battle/Enviroment/box shadows.png" id="4_7gq6o"]
+[ext_resource type="Texture2D" uid="uid://b37quotf157mm" path="res://UI/BattleScene/box bonk texture.png" id="5_vbkg0"]
 [ext_resource type="Texture2D" uid="uid://bdeh2u8i1lclx" path="res://Battle/Enviroment/main shadow texture.png" id="6_5kptu"]
-[ext_resource type="Texture2D" uid="uid://b37quotf157mm" path="res://Battle/Enviroment/box bonk texture.png" id="8_b1ggh"]
+[ext_resource type="Script" path="res://UI/BattleScene/CircularMenu.cs" id="7_qfa6m"]
+[ext_resource type="Texture2D" uid="uid://cf8clic62hqn7" path="res://UI/BattleScene/box outline texture.png" id="8_8sja4"]
+[ext_resource type="Texture2D" uid="uid://d0p8qy0eb4f42" path="res://UI/BattleScene/box item texture.png" id="8_g1ps2"]
+[ext_resource type="Texture2D" uid="uid://xd6djvntffeq" path="res://UI/BattleScene/box special texture.png" id="9_o53lw"]
 
 [node name="Battle" type="Node2D" node_paths=PackedStringArray("Camera", "phayGeneralPosition", "enemyGeneralPosition")]
 script = ExtResource("1_gc0vv")
@@ -14,53 +18,55 @@ phayGeneralPosition = NodePath("Phay general position")
 enemyGeneralPosition = NodePath("Enemy general position")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(144, 81)
 zoom = Vector2(4, 4)
 
 [node name="SkyTexture" type="Sprite2D" parent="."]
+position = Vector2(144, 81)
 texture = ExtResource("2_kv2go")
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="FloorTexture" type="Sprite2D" parent="."]
+position = Vector2(144, 81)
 texture = ExtResource("3_0tjwg")
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="Phay MainShadowTexture" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.454902)
-position = Vector2(-54, 40)
+position = Vector2(90, 121)
 texture = ExtResource("6_5kptu")
 
 [node name="Enemy MainShadowTexture" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.556863)
-position = Vector2(55, 40)
+position = Vector2(199, 121)
 texture = ExtResource("6_5kptu")
 
 [node name="Boxes" type="Node2D" parent="."]
+visible = false
 
 [node name="BoxBonkTexture4" type="Sprite2D" parent="Boxes"]
 position = Vector2(-45, -30)
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("8_b1ggh")
+texture = ExtResource("5_vbkg0")
 
 [node name="BoxBonkTexture5" type="Sprite2D" parent="Boxes"]
 position = Vector2(-27, -20)
 scale = Vector2(0.95, 0.95)
-texture = ExtResource("8_b1ggh")
+texture = ExtResource("5_vbkg0")
 
 [node name="BoxBonkTexture3" type="Sprite2D" parent="Boxes"]
 position = Vector2(-66, -29)
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("8_b1ggh")
+texture = ExtResource("5_vbkg0")
 
 [node name="BoxBonkTexture2" type="Sprite2D" parent="Boxes"]
 position = Vector2(-79, -18)
 scale = Vector2(0.95, 0.95)
-texture = ExtResource("8_b1ggh")
+texture = ExtResource("5_vbkg0")
 
 [node name="BoxBonkTexture" type="Sprite2D" parent="Boxes"]
 position = Vector2(-53, -12)
-texture = ExtResource("8_b1ggh")
+texture = ExtResource("5_vbkg0")
 
 [node name="BoxShadows" type="Sprite2D" parent="Boxes"]
 modulate = Color(1, 1, 1, 0.466667)
@@ -68,7 +74,76 @@ position = Vector2(-58, 30)
 texture = ExtResource("4_7gq6o")
 
 [node name="Phay general position" type="Node2D" parent="."]
-position = Vector2(-53, 21)
+position = Vector2(91, 102)
 
 [node name="Enemy general position" type="Node2D" parent="."]
-position = Vector2(64, 23)
+position = Vector2(208, 104)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 82.0
+offset_top = 55.0
+offset_right = 82.0
+offset_bottom = 55.0
+script = ExtResource("7_qfa6m")
+radius = 20.0
+angleOffset = 180.0
+positionScale = Vector2(1, 0.5)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 0
+offset_left = -42.0
+offset_top = -30.0
+offset_right = 458.0
+offset_bottom = 70.0
+scale = Vector2(0.2, 0.2)
+
+[node name="Label" type="Label" parent="Control/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Action"
+horizontal_alignment = 1
+
+[node name="Icons" type="Control" parent="Control"]
+anchors_preset = 0
+
+[node name="Attack" type="TextureButton" parent="Control/Icons"]
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 18.0
+texture_normal = ExtResource("5_vbkg0")
+stretch_mode = 4
+
+[node name="Item" type="TextureButton" parent="Control/Icons"]
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 18.0
+texture_normal = ExtResource("8_g1ps2")
+stretch_mode = 4
+
+[node name="Special" type="TextureButton" parent="Control/Icons"]
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 18.0
+texture_normal = ExtResource("9_o53lw")
+stretch_mode = 4
+
+[node name="Guard" type="TextureButton" parent="Control/Icons"]
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 18.0
+texture_normal = ExtResource("5_vbkg0")
+stretch_mode = 4
+
+[node name="Run" type="TextureButton" parent="Control/Icons"]
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 18.0
+texture_normal = ExtResource("5_vbkg0")
+stretch_mode = 4
+
+[node name="SelectionHighlight" type="Sprite2D" parent="Control"]
+texture = ExtResource("8_8sja4")
+centered = false

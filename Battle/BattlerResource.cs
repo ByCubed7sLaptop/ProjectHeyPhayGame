@@ -14,6 +14,11 @@ public partial class BattlerResource : Resource
         Stats.Health = Mathf.Clamp(Stats.Health, 0, Stats.HealthMax);
     }
 
+    public bool IsDead()
+    {
+        return Stats.Health == 0;
+    }
+
     /// <summary>
     /// Create the node to spawn in current battler
     /// </summary>

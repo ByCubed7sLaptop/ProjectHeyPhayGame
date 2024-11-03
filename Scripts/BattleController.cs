@@ -23,7 +23,7 @@ public partial class BattleController : Node2D
 		tween.TweenInterval(3);
 		tween.TweenCallback(Callable.From(() =>
 		{
-			Win();
+			//Win();
 		}));
 	}
 
@@ -78,6 +78,28 @@ public partial class BattleController : Node2D
 		// Play animations
     }
 
+
+
+	public void PlayerAction(string actionName)
+	{
+		GD.Print(actionName);
+
+		if (actionName == "Attack")
+        {
+			GameController.Instance.CurrentEncounter[0].Damage(100);
+		}
+
+		if (GameController.Instance.CurrentEncounter[0].IsDead())
+        {
+			GameController.Instance.CurrentEncounter.Enemies.RemoveAt(0);
+			EnemySprites[0].QueueFree();
+			EnemySprites.RemoveAt(0);
+
+		}
+
+		if (GameController.Instance.CurrentEncounter.Count == 0)
+			Win();
+    }
 
 
 	private void Win()

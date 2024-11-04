@@ -62,12 +62,16 @@ public partial class BattleController : Node2D
 		}
 	}
 
-	public override void _Process(double delta)
+    public override void _Process(double delta)
     {
+		// Move the sprites to their targetted location
         MoveParty(delta);
         MoveEnemies(delta);
 	}
 
+	/// <summary>
+	/// Place down the party's sprites
+	/// </summary>
 	private void PlaceParty()
 	{
 		for (int i = 0; i < Party.Count; i++)
@@ -81,6 +85,10 @@ public partial class BattleController : Node2D
 		}
 	}
 
+
+	/// <summary>
+	/// Place down the enemy's sprites
+	/// </summary>
 	private void PlaceEnemies()
     {
         for (int i = 0; i < currentEncounter.Count; i++)
@@ -94,6 +102,9 @@ public partial class BattleController : Node2D
         }
 	}
 
+	/// <summary>
+	/// Move the party's sprite to their target location
+	/// </summary>
 	private void MoveParty(double delta)
 	{
 		for (int i = 0; i < PartySprites.Count; i++)
@@ -106,6 +117,10 @@ public partial class BattleController : Node2D
 		}
 	}
 
+
+	/// <summary>
+	/// Move the enemy's sprite to their target location
+	/// </summary>
 	private void MoveEnemies(double delta)
 	{
 		for (int i = 0; i < EnemySprites.Count; i++)
@@ -121,10 +136,23 @@ public partial class BattleController : Node2D
 
 
 	// Idealy should be its own Attack class, so that statues effects, ect can be implemented easier
-	public void Attack(BattlerResource attacker, BattlerResource defender, int amount)
+
+	/// <summary>
+	/// Tells the current turn owner to attack the given defender
+	/// </summary>
+	public void Attack(BattlerResource defender)
     {
+		BattlerResource attacker = GetTurn();
+
+		// TODO: Create attack amount equation
+		// TODO: Implement crits
+		int amount = attacker.Stats.Power;
+
 		defender.Damage(amount);
-		
+
+		GD.Print($"{attacker.DisplayName} attacks {defender.DisplayName}");
+		GD.Print($"and deals {amount} damage ({defender.Stats.Health} left)");
+
 		if (defender.IsDead())
 		{
 			if (currentEncounter.Enemies.Contains(defender))
@@ -133,16 +161,21 @@ public partial class BattleController : Node2D
 				currentEncounter.Enemies.RemoveAt(index);
 				EnemySprites[index].QueueFree();
 				EnemySprites.RemoveAt(index);
+				GD.Print($"and died");
 			}
 			
 			else if (Party.Contains(defender as PartyMemberResource)) {
 				// TODO: Logic of party member fainting
-            }
+				GD.Print($"and fainted");
+			}
 		}
 
 		// No more enemies left
 		if (currentEncounter.Count == 0)
+        {
+			GD.Print("Player won!");
 			Win();
+        }
 	}
 
 
@@ -159,28 +192,28 @@ public partial class BattleController : Node2D
     }
 
 
-	public void PlayerAction(string actionName)
-	{
-		GD.Print(actionName);
+	//public void PlayerAction(string actionName)
+	//{
+	//	GD.Print(actionName);
 
-		// Can only be called on players turn
+	//	// Can only be called on players turn
 
-		if (actionName == "Attack")
-        {
-			Attack(turnOrder[turn], currentEncounter.Enemies[0], turnOrder[turn].Stats.Power);
-		}
+	//	if (actionName == "Attack")
+	//       {
+	//		Attack(turnOrder[turn], currentEncounter.Enemies[0], turnOrder[turn].Stats.Power);
+	//	}
 
-		if (currentEncounter[0].IsDead())
-        {
-			currentEncounter.Enemies.RemoveAt(0);
-			EnemySprites[0].QueueFree();
-			EnemySprites.RemoveAt(0);
+	//	if (currentEncounter[0].IsDead())
+	//       {
+	//		currentEncounter.Enemies.RemoveAt(0);
+	//		EnemySprites[0].QueueFree();
+	//		EnemySprites.RemoveAt(0);
 
-		}
+	//	}
 
-		if (currentEncounter.Count == 0)
-			Win();
-    }
+	//	if (currentEncounter.Count == 0)
+	//		Win();
+	//   }
 
 
 	private void Win()

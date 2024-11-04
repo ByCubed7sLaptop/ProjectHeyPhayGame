@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b88gobkmsuk7d"]
+[gd_scene load_steps=13 format=3 uid="uid://b88gobkmsuk7d"]
 
 [ext_resource type="Script" path="res://Scripts/BattleController.cs" id="1_gc0vv"]
 [ext_resource type="Texture2D" uid="uid://cmh8i3f7ldb1a" path="res://Battle/Enviroment/Sky texture.png" id="2_kv2go"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cf8clic62hqn7" path="res://UI/BattleScene/box outline texture.png" id="8_8sja4"]
 [ext_resource type="Texture2D" uid="uid://d0p8qy0eb4f42" path="res://UI/BattleScene/box item texture.png" id="8_g1ps2"]
 [ext_resource type="Texture2D" uid="uid://xd6djvntffeq" path="res://UI/BattleScene/box special texture.png" id="9_o53lw"]
+[ext_resource type="Texture2D" uid="uid://c3t774sxq3oac" path="res://UI/BattleScene/box guard texture.png" id="10_853v2"]
+[ext_resource type="Texture2D" uid="uid://ciscem7vait6v" path="res://UI/BattleScene/box run texture.png" id="11_b1vtc"]
 
 [node name="Battle" type="Node2D" node_paths=PackedStringArray("Camera", "phayGeneralPosition", "enemyGeneralPosition")]
 script = ExtResource("1_gc0vv")
@@ -79,6 +81,8 @@ position = Vector2(91, 102)
 [node name="Enemy general position" type="Node2D" parent="."]
 position = Vector2(208, 104)
 
+[node name="Area2D" type="Area2D" parent="Enemy general position"]
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -118,30 +122,34 @@ stretch_mode = 4
 
 [node name="Item" type="TextureButton" parent="Control/Icons"]
 layout_mode = 0
-offset_right = 18.0
+offset_left = 19.0
+offset_right = 37.0
 offset_bottom = 18.0
 texture_normal = ExtResource("8_g1ps2")
 stretch_mode = 4
 
 [node name="Special" type="TextureButton" parent="Control/Icons"]
 layout_mode = 0
-offset_right = 18.0
+offset_left = 38.0
+offset_right = 56.0
 offset_bottom = 18.0
 texture_normal = ExtResource("9_o53lw")
 stretch_mode = 4
 
 [node name="Guard" type="TextureButton" parent="Control/Icons"]
 layout_mode = 0
-offset_right = 18.0
+offset_left = 57.0
+offset_right = 75.0
 offset_bottom = 18.0
-texture_normal = ExtResource("5_vbkg0")
+texture_normal = ExtResource("10_853v2")
 stretch_mode = 4
 
 [node name="Run" type="TextureButton" parent="Control/Icons"]
 layout_mode = 0
-offset_right = 18.0
+offset_left = 76.0
+offset_right = 94.0
 offset_bottom = 18.0
-texture_normal = ExtResource("5_vbkg0")
+texture_normal = ExtResource("11_b1vtc")
 stretch_mode = 4
 
 [node name="SelectionHighlight" type="Sprite2D" parent="Control"]

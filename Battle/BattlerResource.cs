@@ -6,8 +6,6 @@ public partial class BattlerResource : Resource
     [Export] public StatsResource Stats { get; set; }
     [Export] public Texture2D Texture;
 
-   
-
     public void Damage(int value)
     {
         Stats.Health -= value;

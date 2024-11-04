@@ -81,9 +81,12 @@ public partial class CircularMenu : Control
     private void ActivateSelection()
     {
         // Tell the battle controller the actio you've chosen
-        //BattleController battle = GetTree().CurrentScene as BattleController;
-        BattleController battle = GetTree().Root.GetNode<BattleController>("Battle");
-        battle.PlayerAction(menuIcons[currentSelectionIndex].Name);
+        string action = menuIcons[currentSelectionIndex].Name;
 
+        if (action == "Attack")
+        {
+            // TODO: Request to pick an enemy to attack
+            GameController.Battle.Attack( GameController.Battle.currentEncounter.GetRandom() );
+        }
     }
 }

@@ -16,20 +16,50 @@ public partial class BattleController : Node2D
 
 	public EncounterResource currentEncounter;
 
-	public List<BattlerResource> turnOrder = new();
-	public int turn = 0;
+	public enum TurnOrderStart
+    {
+		PlayerGoesFirst,
+		EnemyGoesFirst,
+		Random
+    }
+
+	public TurnOrderStart turnOrderStart = TurnOrderStart.PlayerGoesFirst;
+	private List<BattlerResource> turnOrder = new();
+	private int turn = 0;
 
 	public override void _Ready()
+    {
+        SetupTurnOrder();
+		
+        PlaceParty();
+        PlaceEnemies();
+
+        // Play animations
+    }
+
+    private void SetupTurnOrder()
 	{
-		// Place all the party
-		PlaceParty();
-		PlaceEnemies();
-
 		// Decide who goes first
-		turnOrder.AddRange(Party.Members);
-		turnOrder.AddRange(currentEncounter);
+		if (turnOrderStart is TurnOrderStart.PlayerGoesFirst)
+        {
+            turnOrder.AddRange(Party.Members);
+            turnOrder.AddRange(currentEncounter);
+        }
+		else if (turnOrderStart is TurnOrderStart.EnemyGoesFirst)
+		{
+			turnOrder.AddRange(currentEncounter);
+			turnOrder.AddRange(Party.Members);
+		}
+		else // Randomize
+        {
+			turnOrder.AddRange(currentEncounter);
+			turnOrder.AddRange(Party.Members);
 
-		// Play animations
+			// Shuffle
+			// TODO: Random should be passed to
+			Random random = new Random();
+			turnOrder.Sort((a, b) => random.Next());
+		}
 	}
 
 	public override void _Process(double delta)
@@ -123,6 +153,10 @@ public partial class BattleController : Node2D
     }
 
 
+	public BattlerResource GetTurn()
+    {
+		return turnOrder[turn % turnOrder.Count];
+    }
 
 
 	public void PlayerAction(string actionName)

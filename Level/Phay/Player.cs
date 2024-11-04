@@ -34,7 +34,8 @@ public partial class Player : CharacterBody2D
 	{
 		// Disabling a CollisionObject node during a physics callback is not allowed and will cause undesired behavior.
 		// Disable with call_deferred() instead.
-		Hitbox.BodyEntered += (e) => CallDeferred(nameof(OnEnemyHitPlayer), e);
+		Hitbox.BodyEntered += (e) => CallDeferred(nameof(OnBodyEntered), e);
+        Hitbox.AreaEntered += (e) => CallDeferred(nameof(OnAreaEntered), e);
 	}
 
     public override void _Process(double delta)
@@ -47,7 +48,7 @@ public partial class Player : CharacterBody2D
 	{
         ProcessMovementVelocity(delta);
         MoveAndSlide();
-		ProcessRespawnPosition(delta);
+		ProcessRespawnPosition();
     }
 
     private void ProcessMovementVelocity(double delta)
@@ -114,13 +115,35 @@ public partial class Player : CharacterBody2D
             isJumping = false;
     }
 
-    private void OnEnemyHitPlayer(Node2D body)
-	{
-		if (body is not EncounterBody encounter) return;
+    public void OnBodyEntered(Node2D body)
+    {
+        if (body is EncounterBody encounter) OnEnemyHitPlayer(encounter);
+    }
 
+    public void OnAreaEntered(Node2D area)
+    {
+        if (area is DeathPlane) OnTouchDeathPlane();
+        if (area is Spike) OnTouchStageHazard();
+    }
+
+    private void OnEnemyHitPlayer(EncounterBody encounter)
+	{
 		var handler = OnHitEncounter;
 		handler?.Invoke(this, encounter);
 	}
+
+    private void OnTouchDeathPlane()
+    {
+        Party.DamageAllMembers(1);
+        Position = RespawnPosition;
+    }
+
+    private void OnTouchStageHazard()
+    {
+        Party.DamageRandomMember(1);
+        //Get knocked back
+        //Become invulnerable for a while
+    }
 
 
 	// Create the player and place at the given position
@@ -135,17 +158,11 @@ public partial class Player : CharacterBody2D
 		return player;
 	}
 
-	private void ProcessRespawnPosition(double delta)
+	private void ProcessRespawnPosition()
 	{
         if (IsOnFloor() && IsValidRespawnLocation())
         {
             RespawnPosition = Position;
-        }
-
-		//TODO: it would be better to have like a deathbox at the bottom of a map/segment that notifies rather than set it based on Y position, should be easier to work with with larger maps
-        if (Position.Y > 200)
-        {
-            Position = RespawnPosition;
         }
     }
 

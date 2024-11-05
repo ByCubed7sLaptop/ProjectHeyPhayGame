@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxf8ybafr23ox"]
+
+[ext_resource type="Texture2D" uid="uid://df5d3smmgp7h0" path="res://Level/Interactables/Lever/LeverA.png" id="1_fq780"]
+[ext_resource type="Script" path="res://Level/Interactables/Lever/Lever.cs" id="1_ps6fe"]
+[ext_resource type="Texture2D" uid="uid://chtug2bitjwgq" path="res://Level/Interactables/Lever/LeverB.png" id="3_2lmbl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3akn"]
+size = Vector2(70, 72)
+
+[node name="Lever" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_ps6fe")
+InteractionLabel = "Flip!"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f3akn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fq780")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("3_2lmbl")

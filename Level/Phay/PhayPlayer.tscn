@@ -10,10 +10,11 @@ height = 40.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xs8o3"]
 height = 38.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Hitbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Hitbox", "InteractableHitbox")]
 disable_mode = 2
 script = ExtResource("1_0nt4j")
 Hitbox = NodePath("Area2D")
+InteractableHitbox = NodePath("Interaction Components/InteractionArea")
 Speed = 150.0
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -26,3 +27,23 @@ texture = ExtResource("2_5pgif")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_xs8o3")
+
+[node name="Interaction Components" type="Node2D" parent="."]
+
+[node name="InteractionArea" type="Area2D" parent="Interaction Components"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction Components/InteractionArea"]
+shape = SubResource("CapsuleShape2D_m00ep")
+
+[node name="InteractLabel" type="Label" parent="Interaction Components"]
+offset_left = -61.0
+offset_top = -49.0
+offset_right = 61.0
+offset_bottom = -26.0
+size_flags_horizontal = 4
+text = "InteractDebug"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,11 +1,14 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class Player : CharacterBody2D
 {
 	[Export] public Area2D Hitbox;
+    [Export] public Area2D InteractableHitbox;
 
-	[ExportCategory("Movement")]
+    [ExportCategory("Movement")]
 	[Export] public float Speed = 100.0f; // Max speed
 	[Export] public float Acceleration = 0.15f; // Time to max speed
 	[Export] public float JumpVelocity = 300.0f;
@@ -29,14 +32,22 @@ public partial class Player : CharacterBody2D
 
 	private Vector2 RespawnPosition { get; set; }
 
+    private List<Lever> Interactables = new List<Lever>();
+    private Label InteractLabel { get; set; }
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		// Disabling a CollisionObject node during a physics callback is not allowed and will cause undesired behavior.
 		// Disable with call_deferred() instead.
 		Hitbox.BodyEntered += (e) => CallDeferred(nameof(OnBodyEntered), e);
         Hitbox.AreaEntered += (e) => CallDeferred(nameof(OnAreaEntered), e);
-	}
+
+        InteractableHitbox.AreaEntered += (e) => CallDeferred(nameof(InteractableHitboxAreaEntered), e);
+        InteractableHitbox.AreaExited += (e) => CallDeferred(nameof(InteractableHitboxAreaExited), e);
+
+        InteractLabel = GetNode($"Interaction Components/InteractLabel") as Label;
+        UpdateInteractions();
+    }
 
     public override void _Process(double delta)
     {
@@ -49,6 +60,7 @@ public partial class Player : CharacterBody2D
         ProcessMovementVelocity(delta);
         MoveAndSlide();
 		ProcessRespawnPosition();
+        ProcessInteract();
     }
 
     private void ProcessMovementVelocity(double delta)
@@ -115,6 +127,14 @@ public partial class Player : CharacterBody2D
             isJumping = false;
     }
 
+    public void ProcessInteract()
+    {
+        if (Input.IsActionJustPressed("player_interact"))
+        {
+            OnInteract();
+        }
+    }
+
     public void OnBodyEntered(Node2D body)
     {
         if (body is EncounterBody encounter) OnEnemyHitPlayer(encounter);
@@ -173,6 +193,37 @@ public partial class Player : CharacterBody2D
         var result = spaceState.IntersectRay(query);
 
 		return result.Count > 0;
+    }
+
+    public void InteractableHitboxAreaEntered(Lever interactable)
+    {
+        Interactables.Insert(0, interactable);
+        UpdateInteractions();
+    }
+
+    public void InteractableHitboxAreaExited(Lever interactable)
+    {
+        Interactables.Remove(interactable);
+        UpdateInteractions();
+    }
+
+    public void UpdateInteractions()
+    {
+        if (Interactables.Count > 0)
+        {
+            InteractLabel.Text = Interactables.First().InteractionLabel;
+        } else
+        {
+            InteractLabel.Text = string.Empty;
+        }
+    }
+
+    public void OnInteract()
+    {
+        if(Interactables.Count > 0)
+        {
+            Interactables.First().Interact();
+        }
     }
 }
 

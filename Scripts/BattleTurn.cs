@@ -50,6 +50,11 @@ public class BattleTurn
 		return order[turn % order.Count];
 	}
 
+	public void Remove(BattlerResource battler)
+    {
+		order.Remove(battler);
+    }
+
 	public void End()
 	{
 		turn++;

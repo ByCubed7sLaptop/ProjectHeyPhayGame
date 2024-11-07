@@ -7,9 +7,11 @@ public partial class BattleController : Node2D
 	[Export] public Camera2D Camera;
 	[Export] public Node2D phayGeneralPosition;
 	[Export] public Node2D enemyGeneralPosition;
+	[Export] public CircularMenu CircularMenu { get; set; }
 
 	public List<Sprite2D> PartySprites { get; private set; } = new();
 	public List<Sprite2D> EnemySprites { get; private set; } = new();
+	public Dictionary<BattlerResource, Sprite2D> AllSprites { get; private set; } = new();
 
 	public EventHandler OnWin;
 	public EventHandler OnLose;
@@ -39,16 +41,25 @@ public partial class BattleController : Node2D
 		GD.Print(Turn.Count);
 
 		// Check enemy wellbeing
+		List<BattlerResource> enemiesToRemove = new ();
 		foreach (var enemy in currentEncounter.Enemies)
 		{ 
 			if (enemy.IsDead())
 			{
-				int index = currentEncounter.Enemies.IndexOf(enemy);
-				currentEncounter.Enemies.RemoveAt(index);
-				EnemySprites[index].QueueFree();
-				EnemySprites.RemoveAt(index);
+				enemiesToRemove.Add(enemy);
 				GD.Print($"and died");
 			}
+		}
+		foreach (var enemy in enemiesToRemove)
+		{
+			int index = currentEncounter.Enemies.IndexOf(enemy);
+			currentEncounter.Enemies.RemoveAt(index);
+			AllSprites.Remove(enemy);
+			EnemySprites[index].QueueFree();
+			EnemySprites.RemoveAt(index);
+
+			// Remove from turn order
+			Turn.Remove(enemy);
 		}
 
 		// Check party wellbeing
@@ -58,6 +69,9 @@ public partial class BattleController : Node2D
 			{
 				// TODO: Logic of party member fainting
 				GD.Print($"and fainted");
+
+				// Remove from turn order
+				//Turn.Remove(member);
 			}
         }
 
@@ -101,6 +115,7 @@ public partial class BattleController : Node2D
 
 			AddChild(sprite);
 			PartySprites.Add(sprite);
+			AllSprites[partyMember] = sprite;
 		}
 	}
 
@@ -118,7 +133,9 @@ public partial class BattleController : Node2D
 
             AddChild(sprite);
             EnemySprites.Add(sprite);
-        }
+			AllSprites[enemyResource] = sprite;
+
+		}
 	}
 
 	/// <summary>

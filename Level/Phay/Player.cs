@@ -32,7 +32,7 @@ public partial class Player : CharacterBody2D
 
 	private Vector2 RespawnPosition { get; set; }
 
-    private List<Lever> Interactables = new List<Lever>();
+    private List<EntityInteractionHitbox> Interactables = new List<EntityInteractionHitbox>();
     private Label InteractLabel { get; set; }
 
     public override void _Ready()
@@ -42,8 +42,8 @@ public partial class Player : CharacterBody2D
 		Hitbox.BodyEntered += (e) => CallDeferred(nameof(OnBodyEntered), e);
         Hitbox.AreaEntered += (e) => CallDeferred(nameof(OnAreaEntered), e);
 
-        InteractableHitbox.AreaEntered += (e) => CallDeferred(nameof(InteractableHitboxAreaEntered), e);
-        InteractableHitbox.AreaExited += (e) => CallDeferred(nameof(InteractableHitboxAreaExited), e);
+        InteractableHitbox.AreaEntered += (e) => CallDeferred(nameof(InteractableHitboxAreaEntered), e.GetNode("InteractionHitbox") as EntityInteractionHitbox);
+        InteractableHitbox.AreaExited += (e) => CallDeferred(nameof(InteractableHitboxAreaExited), e.GetNode("InteractionHitbox") as EntityInteractionHitbox);
 
         InteractLabel = GetNode($"Interaction Components/InteractLabel") as Label;
         UpdateInteractions();
@@ -195,13 +195,13 @@ public partial class Player : CharacterBody2D
 		return result.Count > 0;
     }
 
-    public void InteractableHitboxAreaEntered(Lever interactable)
+    public void InteractableHitboxAreaEntered(EntityInteractionHitbox interactable)
     {
         Interactables.Insert(0, interactable);
         UpdateInteractions();
     }
 
-    public void InteractableHitboxAreaExited(Lever interactable)
+    public void InteractableHitboxAreaExited(EntityInteractionHitbox interactable)
     {
         Interactables.Remove(interactable);
         UpdateInteractions();
@@ -211,8 +211,9 @@ public partial class Player : CharacterBody2D
     {
         if (Interactables.Count > 0)
         {
-            InteractLabel.Text = Interactables.First().InteractionLabel;
-        } else
+            InteractLabel.Text = Interactables.First().InteractionLabelText;
+        } 
+        else
         {
             InteractLabel.Text = string.Empty;
         }
@@ -220,7 +221,7 @@ public partial class Player : CharacterBody2D
 
     public void OnInteract()
     {
-        if(Interactables.Count > 0)
+        if (Interactables.Count > 0)
         {
             Interactables.First().Interact();
         }

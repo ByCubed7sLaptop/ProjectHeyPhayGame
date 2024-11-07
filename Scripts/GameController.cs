@@ -28,8 +28,6 @@ public partial class GameController : Node
         // This keeps it in memory but stops processing
         GetTree().Root.RemoveChild(LevelController.Instance);
 
-        // Deep copy the encounter data
-        
         // Set up the battle scene
         battle = BattlePackedScene.Instantiate<BattleController>();
 
@@ -52,4 +50,12 @@ public partial class GameController : Node
         GetTree().Root.RemoveChild(battle);
         GetTree().Root.AddChild(LevelController.Instance);
     }
+}
+
+
+// Quick access Utitlity class
+static public class Game
+{
+    public static GameController Controller => GameController.Instance;
+    public static BattleController Battle => GameController.Battle;
 }

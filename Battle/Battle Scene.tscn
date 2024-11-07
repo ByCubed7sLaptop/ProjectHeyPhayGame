@@ -13,11 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://c3t774sxq3oac" path="res://UI/BattleScene/box guard texture.png" id="10_853v2"]
 [ext_resource type="Texture2D" uid="uid://ciscem7vait6v" path="res://UI/BattleScene/box run texture.png" id="11_b1vtc"]
 
-[node name="Battle" type="Node2D" node_paths=PackedStringArray("Camera", "phayGeneralPosition", "enemyGeneralPosition")]
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("Camera", "phayGeneralPosition", "enemyGeneralPosition", "CircularMenu")]
 script = ExtResource("1_gc0vv")
 Camera = NodePath("Camera2D")
 phayGeneralPosition = NodePath("Phay general position")
 enemyGeneralPosition = NodePath("Enemy general position")
+CircularMenu = NodePath("Control")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(144, 81)
@@ -92,6 +93,7 @@ script = ExtResource("7_qfa6m")
 radius = 20.0
 angleOffset = 180.0
 positionScale = Vector2(1, 0.5)
+positionOffset = Vector2(-10, -50)
 
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 custom_minimum_size = Vector2(500, 0)

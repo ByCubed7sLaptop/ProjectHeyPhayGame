@@ -22,6 +22,7 @@ public partial class CircularMenu : Control
     public override void _Ready()
     {
         // Get child nodes
+        // TODO: Change to expoted references
         icons = GetNode<Control>("Icons");
         selectionHighlight = GetNode<Sprite2D>("SelectionHighlight");
         label = GetNode<Label>("CenterContainer/Label");
@@ -32,9 +33,16 @@ public partial class CircularMenu : Control
             menuIcons.Add(icon);
         }
 
-        ArrangeIconsInCircle();
+        Hide();
+    }
 
+    public void Target(Node2D newTarget)
+    {
+        target = newTarget;
+
+        ArrangeIconsInCircle();
         UpdateSelectionHighlight();
+        Show();
     }
 
     private void ArrangeIconsInCircle()
@@ -63,6 +71,8 @@ public partial class CircularMenu : Control
 
     public override void _Process(double delta)
     {
+
+        Position = target.Position + positionOffset;
         // Update logic for input
         if (Input.IsActionJustPressed("ui_right"))
         {
@@ -91,7 +101,11 @@ public partial class CircularMenu : Control
         if (action == "Attack")
         {
             // TODO: Request to pick an enemy to attack
-            Game.Battle.Attack(Party.RandomMember(), Game.Battle.currentEncounter.GetRandom() );
+
+            Game.Battle.Attack(Game.Battle.Turn.GetBattler(), Game.Battle.currentEncounter.GetRandom());
+            Hide();
+
+            Game.Battle.Turn.End();
         }
     }
 }

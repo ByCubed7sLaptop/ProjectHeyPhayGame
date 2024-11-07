@@ -17,13 +17,8 @@ public partial class PartyMemberResource : BattlerResource
 
         // For now, just attack a random party member
 
-        Game.Battle.Attack(this, Game.Battle.currentEncounter.GetRandom());
 
-        Tween tween = Game.Controller.CreateTween();
-        tween.TweenInterval(0.5);
-        tween.TweenCallback(Callable.From(() =>
-            Game.Battle.Turn.End()
-        ));
+        Game.Battle.CircularMenu.Target(Game.Battle.AllSprites[this]);
     }
 
 

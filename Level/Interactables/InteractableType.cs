@@ -1,4 +1,4 @@
-﻿namespace ThePhayGame.Level.Interactables.Lever
+﻿namespace ThePhayGame.Level.Interactables
 {
     public enum InteractableType
     {

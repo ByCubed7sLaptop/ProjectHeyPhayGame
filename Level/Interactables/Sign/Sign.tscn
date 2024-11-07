@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqubsh2fba1vr"]
+[gd_scene load_steps=5 format=3 uid="uid://dqubsh2fba1vr"]
 
+[ext_resource type="Script" path="res://Level/Interactables/Sign/Sign.cs" id="1_fgsqu"]
 [ext_resource type="Script" path="res://Level/Interactables/EntityInteractionHitbox.cs" id="1_mher2"]
 [ext_resource type="Texture2D" uid="uid://wrbwxhl0wk57" path="res://Level/Interactables/Sign/Sign.png" id="2_ns2ti"]
 
@@ -10,12 +11,13 @@ size = Vector2(80, 66)
 collision_layer = 4
 collision_mask = 0
 monitoring = false
+script = ExtResource("1_fgsqu")
+Message = "To jump, press [Jump]!"
 
 [node name="InteractionHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_36b8k")
 script = ExtResource("1_mher2")
-InteractionLabel = "Read"
-InteractionMessage = "To Jump, press [Jump]!"
+InteractionLabelText = "Read"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ns2ti")

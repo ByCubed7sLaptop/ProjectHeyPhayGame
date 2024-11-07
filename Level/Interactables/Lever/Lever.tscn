@@ -17,7 +17,7 @@ script = ExtResource("1_ps6fe")
 [node name="InteractionHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f3akn")
 script = ExtResource("2_50boq")
-InteractionLabel = "Flip"
+InteractionLabelText = "Flip"
 InteractableType = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

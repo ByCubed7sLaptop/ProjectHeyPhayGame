@@ -81,8 +81,6 @@ position = Vector2(91, 102)
 [node name="Enemy general position" type="Node2D" parent="."]
 position = Vector2(208, 104)
 
-[node name="Area2D" type="Area2D" parent="Enemy general position"]
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0

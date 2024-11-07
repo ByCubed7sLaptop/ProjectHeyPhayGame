@@ -5,6 +5,7 @@ public partial class BattlerResource : Resource
     [Export] public string DisplayName;
     [Export] public StatsResource Stats { get; set; }
     [Export] public Texture2D Texture;
+    [Export] public Godot.Collections.Array<Resource> Actions;
 
     public void Damage(int value)
     {
@@ -28,5 +29,34 @@ public partial class BattlerResource : Resource
         sprite.Texture = Texture;
 
         return sprite;
+    }
+
+    /// <summary>
+    /// Called when the battle starts
+    /// </summary>
+    public virtual void OnBattleStart()
+    {
+
+    }
+
+    /// <summary>
+    /// When it's this object turn to make a move.
+    /// Use Game.Battle.Turn.End() to end the turn
+    /// </summary>
+    public virtual void OnBattleTurnStart()
+    {
+        // Pick between our actions
+
+        // Play the animation, run the attack ect.
+
+        // For now, just attack a random party member
+
+        Game.Battle.Attack(this, Party.RandomMember());
+
+        Tween tween = Game.Controller.CreateTween();
+        tween.TweenInterval(0.5);
+        tween.TweenCallback(Callable.From(() =>
+            Game.Battle.Turn.End()
+        ));
     }
 }

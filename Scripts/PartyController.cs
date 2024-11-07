@@ -46,6 +46,13 @@ public static class Party
         return PartyController.Instance.CurrentParty.Contains(partyMemberResource);
     }
 
+    static public PartyMemberResource RandomMember(Random random = null)
+    {
+        if (random is null)
+            random = new Random();
+        return Get(random.Next(Count));
+    }
+
     static public void DamageRandomMember(int value, Random random = null)
     {
         if (random is null)

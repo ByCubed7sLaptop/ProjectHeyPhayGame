@@ -14,6 +14,10 @@ public partial class CircularMenu : Control
     [Export] public float radius = 10.0f; // Radius of the circle layout
     [Export] public float angleOffset = 0.0f; // Initial offset angle
     [Export] public Vector2 positionScale = Vector2.One;
+    [Export] public Vector2 positionOffset = Vector2.Zero;
+
+    [Export] public Node2D target;
+    public BattlerResource targetBattler;
 
     public override void _Ready()
     {
@@ -83,10 +87,11 @@ public partial class CircularMenu : Control
         // Tell the battle controller the actio you've chosen
         string action = menuIcons[currentSelectionIndex].Name;
 
+        // TODO: This should tell the UI element to pick an enemy to then attack
         if (action == "Attack")
         {
             // TODO: Request to pick an enemy to attack
-            GameController.Battle.Attack( GameController.Battle.currentEncounter.GetRandom() );
+            Game.Battle.Attack(Party.RandomMember(), Game.Battle.currentEncounter.GetRandom() );
         }
     }
 }

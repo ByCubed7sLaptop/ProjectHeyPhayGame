@@ -16,53 +16,72 @@ public partial class BattleController : Node2D
 
 	public EncounterResource currentEncounter;
 
-	public enum TurnOrderStart
-    {
-		PlayerGoesFirst,
-		EnemyGoesFirst,
-		Random
-    }
-
-	public TurnOrderStart turnOrderStart = TurnOrderStart.PlayerGoesFirst;
-	private List<BattlerResource> turnOrder = new();
-	private int turn = 0;
+	[Export] public BattleTurn.StartOrder turnOrderStart = BattleTurn.StartOrder.PlayerGoesFirst;
+	public BattleTurn Turn { get; private set; } = new BattleTurn();
 
 	public override void _Ready()
     {
-        SetupTurnOrder();
-		
-        PlaceParty();
+		Turn.startOrder = turnOrderStart;
+		Turn.Setup(Party.Members, currentEncounter);
+
+		PlaceParty();
         PlaceEnemies();
 
-        // Play animations
-    }
+		Turn.OnNextTurn += Turn_OnNextTurn;
+		Turn.GetBattler().OnBattleTurnStart();
 
-    private void SetupTurnOrder()
+		// Play animations
+
+	}
+
+	public void Turn_OnNextTurn(object e, EventArgs args)
 	{
-		// Decide who goes first
-		if (turnOrderStart is TurnOrderStart.PlayerGoesFirst)
-        {
-            turnOrder.AddRange(Party.Members);
-            turnOrder.AddRange(currentEncounter);
-        }
-		else if (turnOrderStart is TurnOrderStart.EnemyGoesFirst)
-		{
-			turnOrder.AddRange(currentEncounter);
-			turnOrder.AddRange(Party.Members);
-		}
-		else // Randomize
-        {
-			turnOrder.AddRange(currentEncounter);
-			turnOrder.AddRange(Party.Members);
+		GD.Print(Turn.Count);
 
-			// Shuffle
-			// TODO: Random should be passed to
-			Random random = new Random();
-			turnOrder.Sort((a, b) => random.Next());
+		// Check enemy wellbeing
+		foreach (var enemy in currentEncounter.Enemies)
+		{ 
+			if (enemy.IsDead())
+			{
+				int index = currentEncounter.Enemies.IndexOf(enemy);
+				currentEncounter.Enemies.RemoveAt(index);
+				EnemySprites[index].QueueFree();
+				EnemySprites.RemoveAt(index);
+				GD.Print($"and died");
+			}
+		}
+
+		// Check party wellbeing
+		foreach (var member in Party.Members)
+        {
+			if (member.IsDead())
+			{
+				// TODO: Logic of party member fainting
+				GD.Print($"and fainted");
+			}
+        }
+
+		// No more enemies left
+		if (currentEncounter.Count == 0)
+		{
+			GD.Print("Player won!");
+
+			// Win after 2 seconds
+			Tween tween = CreateTween();
+			tween.TweenInterval(2);
+			tween.TweenCallback(Callable.From(() =>
+				Win()
+			));
+		}
+		else
+        {
+			// Tell the battler to do their turn
+			Turn.GetBattler().OnBattleTurnStart();
 		}
 	}
 
-    public override void _Process(double delta)
+
+	public override void _Process(double delta)
     {
 		// Move the sprites to their targetted location
         MoveParty(delta);
@@ -133,17 +152,13 @@ public partial class BattleController : Node2D
 		}
 	}
 
-
-
 	// Idealy should be its own Attack class, so that statues effects, ect can be implemented easier
 
 	/// <summary>
 	/// Tells the current turn owner to attack the given defender
 	/// </summary>
-	public void Attack(BattlerResource defender)
-    {
-		BattlerResource attacker = GetTurn();
-
+	public void Attack(BattlerResource attacker, BattlerResource defender)
+	{
 		// TODO: Create attack amount equation
 		// TODO: Implement crits
 		int amount = attacker.Stats.Power;
@@ -152,79 +167,21 @@ public partial class BattleController : Node2D
 
 		GD.Print($"{attacker.DisplayName} attacks {defender.DisplayName}");
 		GD.Print($"and deals {amount} damage ({defender.Stats.Health} left)");
-
-		if (defender.IsDead())
-		{
-			if (currentEncounter.Enemies.Contains(defender))
-            {
-				int index = currentEncounter.Enemies.IndexOf(defender);
-				currentEncounter.Enemies.RemoveAt(index);
-				EnemySprites[index].QueueFree();
-				EnemySprites.RemoveAt(index);
-				GD.Print($"and died");
-			}
-			
-			else if (Party.Contains(defender as PartyMemberResource)) {
-				// TODO: Logic of party member fainting
-				GD.Print($"and fainted");
-			}
-		}
-
-		// No more enemies left
-		if (currentEncounter.Count == 0)
-        {
-			GD.Print("Player won!");
-			Win();
-        }
 	}
-
-
-	// Move to the next turn
-	public void NextTurn()
-    {
-
-    }
-
-
-	public BattlerResource GetTurn()
-    {
-		return turnOrder[turn % turnOrder.Count];
-    }
-
-
-	//public void PlayerAction(string actionName)
-	//{
-	//	GD.Print(actionName);
-
-	//	// Can only be called on players turn
-
-	//	if (actionName == "Attack")
-	//       {
-	//		Attack(turnOrder[turn], currentEncounter.Enemies[0], turnOrder[turn].Stats.Power);
-	//	}
-
-	//	if (currentEncounter[0].IsDead())
-	//       {
-	//		currentEncounter.Enemies.RemoveAt(0);
-	//		EnemySprites[0].QueueFree();
-	//		EnemySprites.RemoveAt(0);
-
-	//	}
-
-	//	if (currentEncounter.Count == 0)
-	//		Win();
-	//   }
 
 
 	private void Win()
 	{
 		var handler = OnWin;
-		OnWin?.Invoke(this, EventArgs.Empty);
+		handler?.Invoke(this, EventArgs.Empty);
 	}
 
 
-
-
+	private void Lose()
+	{
+		var handler = OnLose;
+		handler?.Invoke(this, EventArgs.Empty);
+	}
 
 
 	private static Vector2 GetVectorInSpiral(float i, float max, float angleMulti = 2, float distance = 20)

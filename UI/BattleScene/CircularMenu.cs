@@ -14,10 +14,15 @@ public partial class CircularMenu : Control
     [Export] public float radius = 10.0f; // Radius of the circle layout
     [Export] public float angleOffset = 0.0f; // Initial offset angle
     [Export] public Vector2 positionScale = Vector2.One;
+    [Export] public Vector2 positionOffset = Vector2.Zero;
+
+    [Export] public Node2D target;
+    public BattlerResource targetBattler;
 
     public override void _Ready()
     {
         // Get child nodes
+        // TODO: Change to expoted references
         icons = GetNode<Control>("Icons");
         selectionHighlight = GetNode<Sprite2D>("SelectionHighlight");
         label = GetNode<Label>("CenterContainer/Label");
@@ -28,9 +33,16 @@ public partial class CircularMenu : Control
             menuIcons.Add(icon);
         }
 
-        ArrangeIconsInCircle();
+        Hide();
+    }
 
+    public void Target(Node2D newTarget)
+    {
+        target = newTarget;
+
+        ArrangeIconsInCircle();
         UpdateSelectionHighlight();
+        Show();
     }
 
     private void ArrangeIconsInCircle()
@@ -59,6 +71,8 @@ public partial class CircularMenu : Control
 
     public override void _Process(double delta)
     {
+
+        Position = target.Position + positionOffset;
         // Update logic for input
         if (Input.IsActionJustPressed("ui_right"))
         {
@@ -81,9 +95,17 @@ public partial class CircularMenu : Control
     private void ActivateSelection()
     {
         // Tell the battle controller the actio you've chosen
-        //BattleController battle = GetTree().CurrentScene as BattleController;
-        BattleController battle = GetTree().Root.GetNode<BattleController>("Battle");
-        battle.PlayerAction(menuIcons[currentSelectionIndex].Name);
+        string action = menuIcons[currentSelectionIndex].Name;
 
+        // TODO: This should tell the UI element to pick an enemy to then attack
+        if (action == "Attack")
+        {
+            // TODO: Request to pick an enemy to attack
+
+            Game.Battle.Attack(Game.Battle.Turn.GetBattler(), Game.Battle.currentEncounter.GetRandom());
+            Hide();
+
+            Game.Battle.Turn.End();
+        }
     }
 }

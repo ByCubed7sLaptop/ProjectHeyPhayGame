@@ -5,13 +5,14 @@ using System.Collections.Generic;
 // Deals with the overall game, saving, loading, platforming, battles, pausing, ect.
 public partial class GameController : Node
 {
-	public static GameController Instance { get; set; }
+    static public GameController Instance { get; set; }
+    static public BattleController Battle => Instance.battle;
 
 	[Export] public PackedScene LevelPackedScene;
 	[Export] public PackedScene BattlePackedScene;
 
-    private BattleController Battle;
-    public EncounterResource CurrentEncounter { get; set; }
+    public BattleController battle;
+
 
     public override void _Ready()
 	{
@@ -27,25 +28,34 @@ public partial class GameController : Node
         // This keeps it in memory but stops processing
         GetTree().Root.RemoveChild(LevelController.Instance);
 
-        // Deep copy the encounter data
-        CurrentEncounter = encounter.Resource.Duplicate(true) as EncounterResource;
-        
         // Set up the battle scene
-        Battle = BattlePackedScene.Instantiate<BattleController>();
-        GetTree().Root.AddChild(Battle);
+        battle = BattlePackedScene.Instantiate<BattleController>();
+
+        //battle.currentEncounter = encounter.Resource.Duplicate(true) as EncounterResource;
+        battle.currentEncounter = encounter.Resource.Duplicate(true) as EncounterResource;
+
+        GetTree().Root.AddChild(battle); 
 
         // TODO: Move to EncounterBody destroy method to add effects / ect
-        Battle.OnWin += (e, o) => encounter.QueueFree();
+        battle.OnWin += (e, o) => encounter.QueueFree();
         
-        Battle.OnWin += (e, o) => TransferToLevel();
+        battle.OnWin += (e, o) => TransferToLevel();
 
-        return Battle;
+        return battle;
     }
 
     public void TransferToLevel()
     {
         // TODO: Assumes we're on the battle scene
-        GetTree().Root.RemoveChild(Battle);
+        GetTree().Root.RemoveChild(battle);
         GetTree().Root.AddChild(LevelController.Instance);
     }
+}
+
+
+// Quick access Utitlity class
+static public class Game
+{
+    public static GameController Controller => GameController.Instance;
+    public static BattleController Battle => GameController.Battle;
 }

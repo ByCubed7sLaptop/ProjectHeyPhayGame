@@ -9,3 +9,4 @@ script = ExtResource("1_gxcs4")
 DisplayName = "Temp"
 Stats = ExtResource("1_xqe65")
 Texture = ExtResource("1_sudrg")
+Actions = null

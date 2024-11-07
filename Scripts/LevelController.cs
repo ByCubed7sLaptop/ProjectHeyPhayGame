@@ -48,6 +48,6 @@ public partial class LevelController : Node2D
 		// This should be togglable
 
 		// Tell the game controller to start the battle mode
-		GameController.Instance.StartBattleWith(encounterBody);
+		Game.Controller.StartBattleWith(encounterBody);
 	}
 }

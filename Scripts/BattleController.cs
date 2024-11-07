@@ -7,27 +7,141 @@ public partial class BattleController : Node2D
 	[Export] public Camera2D Camera;
 	[Export] public Node2D phayGeneralPosition;
 	[Export] public Node2D enemyGeneralPosition;
+	[Export] public CircularMenu CircularMenu { get; set; }
 
 	public List<Sprite2D> PartySprites { get; private set; } = new();
 	public List<Sprite2D> EnemySprites { get; private set; } = new();
+	public Dictionary<BattlerResource, Sprite2D> AllSprites { get; private set; } = new();
 
 	public EventHandler OnWin;
 	public EventHandler OnLose;
 
+	public EncounterResource currentEncounter;
+
+	[Export] public BattleTurn.StartOrder turnOrderStart = BattleTurn.StartOrder.PlayerGoesFirst;
+	public BattleTurn Turn { get; private set; } = new BattleTurn();
+
 	public override void _Ready()
     {
-		Start();
+		Turn.startOrder = turnOrderStart;
+		Turn.Setup(Party.Members, currentEncounter);
 
-		// TEMP		
-		var tween = CreateTween();
-		tween.TweenInterval(3);
-		tween.TweenCallback(Callable.From(() =>
-		{
-			//Win();
-		}));
+		PlaceParty();
+        PlaceEnemies();
+
+		Turn.OnNextTurn += Turn_OnNextTurn;
+		Turn.GetBattler().OnBattleTurnStart();
+
+		// Play animations
+
 	}
 
+	public void Turn_OnNextTurn(object e, EventArgs args)
+	{
+		GD.Print(Turn.Count);
+
+		// Check enemy wellbeing
+		List<BattlerResource> enemiesToRemove = new ();
+		foreach (var enemy in currentEncounter.Enemies)
+		{ 
+			if (enemy.IsDead())
+			{
+				enemiesToRemove.Add(enemy);
+				GD.Print($"and died");
+			}
+		}
+		foreach (var enemy in enemiesToRemove)
+		{
+			int index = currentEncounter.Enemies.IndexOf(enemy);
+			currentEncounter.Enemies.RemoveAt(index);
+			AllSprites.Remove(enemy);
+			EnemySprites[index].QueueFree();
+			EnemySprites.RemoveAt(index);
+
+			// Remove from turn order
+			Turn.Remove(enemy);
+		}
+
+		// Check party wellbeing
+		foreach (var member in Party.Members)
+        {
+			if (member.IsDead())
+			{
+				// TODO: Logic of party member fainting
+				GD.Print($"and fainted");
+
+				// Remove from turn order
+				//Turn.Remove(member);
+			}
+        }
+
+		// No more enemies left
+		if (currentEncounter.Count == 0)
+		{
+			GD.Print("Player won!");
+
+			// Win after 2 seconds
+			Tween tween = CreateTween();
+			tween.TweenInterval(2);
+			tween.TweenCallback(Callable.From(() =>
+				Win()
+			));
+		}
+		else
+        {
+			// Tell the battler to do their turn
+			Turn.GetBattler().OnBattleTurnStart();
+		}
+	}
+
+
 	public override void _Process(double delta)
+    {
+		// Move the sprites to their targetted location
+        MoveParty(delta);
+        MoveEnemies(delta);
+	}
+
+	/// <summary>
+	/// Place down the party's sprites
+	/// </summary>
+	private void PlaceParty()
+	{
+		for (int i = 0; i < Party.Count; i++)
+		{
+			var partyMember = Party.Get(i);
+			Sprite2D sprite = partyMember.GenerateBattler() as Sprite2D;
+			sprite.Position = phayGeneralPosition.Position + Vector2.Left * 100 + Vector2.Left * 20 * i;
+
+			AddChild(sprite);
+			PartySprites.Add(sprite);
+			AllSprites[partyMember] = sprite;
+		}
+	}
+
+
+	/// <summary>
+	/// Place down the enemy's sprites
+	/// </summary>
+	private void PlaceEnemies()
+    {
+        for (int i = 0; i < currentEncounter.Count; i++)
+        {
+            BattlerResource enemyResource = currentEncounter[i];
+            Sprite2D sprite = enemyResource.GenerateBattler() as Sprite2D;
+            sprite.Position = enemyGeneralPosition.Position + Vector2.Right * 100 + Vector2.Right * 20 * i;
+
+            AddChild(sprite);
+            EnemySprites.Add(sprite);
+			AllSprites[enemyResource] = sprite;
+
+		}
+	}
+
+	/// <summary>
+	/// Move the party's sprite to their target location
+	/// </summary>
+	private void MoveParty(double delta)
 	{
 		for (int i = 0; i < PartySprites.Count; i++)
 		{
@@ -37,8 +151,14 @@ public partial class BattleController : Node2D
 
 			sprite.Position = sprite.Position.MoveToward(targetPosition, 120 * 4 * (float)delta);
 		}
-		//phay.Position = phay.Position.MoveToward(phayGeneralPosition.Position, 20 * (float)delta);
+	}
 
+
+	/// <summary>
+	/// Move the enemy's sprite to their target location
+	/// </summary>
+	private void MoveEnemies(double delta)
+	{
 		for (int i = 0; i < EnemySprites.Count; i++)
 		{
 			Sprite2D sprite = EnemySprites[i];
@@ -49,68 +169,36 @@ public partial class BattleController : Node2D
 		}
 	}
 
-	public void Start()
-    {
-		// Place all the party
-		for (int i = 0; i < Party.Count; i++)
-		{
-			var partyMember = Party.Get(i);
-			Sprite2D sprite = partyMember.GenerateBattler() as Sprite2D;
-			sprite.Position = phayGeneralPosition.Position + Vector2.Left * 100 + Vector2.Left * 20 * i;
+	// Idealy should be its own Attack class, so that statues effects, ect can be implemented easier
 
-			AddChild(sprite);
-			PartySprites.Add(sprite);
-		}
-
-		// Place all the enemies
-		for (int i = 0; i < GameController.Instance.CurrentEncounter.Count; i++)
-        {
-			BattlerResource enemyResource = GameController.Instance.CurrentEncounter[i];
-			Sprite2D sprite = enemyResource.GenerateBattler() as Sprite2D;
-			sprite.Position = enemyGeneralPosition.Position + Vector2.Right*100 + Vector2.Right * 20 * i;
-
-			AddChild(sprite);
-			EnemySprites.Add(sprite);
-        }
-
-		// Decide who goes first
-
-		// Play animations
-    }
-
-
-
-	public void PlayerAction(string actionName)
+	/// <summary>
+	/// Tells the current turn owner to attack the given defender
+	/// </summary>
+	public void Attack(BattlerResource attacker, BattlerResource defender)
 	{
-		GD.Print(actionName);
+		// TODO: Create attack amount equation
+		// TODO: Implement crits
+		int amount = attacker.Stats.Power;
 
-		if (actionName == "Attack")
-        {
-			GameController.Instance.CurrentEncounter[0].Damage(100);
-		}
+		defender.Damage(amount);
 
-		if (GameController.Instance.CurrentEncounter[0].IsDead())
-        {
-			GameController.Instance.CurrentEncounter.Enemies.RemoveAt(0);
-			EnemySprites[0].QueueFree();
-			EnemySprites.RemoveAt(0);
-
-		}
-
-		if (GameController.Instance.CurrentEncounter.Count == 0)
-			Win();
-    }
+		GD.Print($"{attacker.DisplayName} attacks {defender.DisplayName}");
+		GD.Print($"and deals {amount} damage ({defender.Stats.Health} left)");
+	}
 
 
 	private void Win()
 	{
 		var handler = OnWin;
-		OnWin?.Invoke(this, EventArgs.Empty);
+		handler?.Invoke(this, EventArgs.Empty);
 	}
 
 
-
-
+	private void Lose()
+	{
+		var handler = OnLose;
+		handler?.Invoke(this, EventArgs.Empty);
+	}
 
 
 	private static Vector2 GetVectorInSpiral(float i, float max, float angleMulti = 2, float distance = 20)

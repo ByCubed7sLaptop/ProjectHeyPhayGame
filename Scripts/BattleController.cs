@@ -8,6 +8,8 @@ public partial class BattleController : Node2D
 	[Export] public Node2D phayGeneralPosition;
 	[Export] public Node2D enemyGeneralPosition;
 	[Export] public CircularMenu CircularMenu { get; set; }
+	[Export] public HealthCollectionMonitor PartyHealthMonitor { get; set; }
+	[Export] public HealthCollectionMonitor EnemyHealthMonitor { get; set; }
 
 	public List<Sprite2D> PartySprites { get; private set; } = new();
 	public List<Sprite2D> EnemySprites { get; private set; } = new();
@@ -28,6 +30,16 @@ public partial class BattleController : Node2D
 
 		PlaceParty();
         PlaceEnemies();
+
+		// Monitor the health
+		foreach (var member in Party.Members)
+			PartyHealthMonitor.Monitor(member);
+
+		foreach (var enemy in currentEncounter.Enemies)
+			EnemyHealthMonitor.Monitor(enemy);
+
+
+
 
 		Turn.OnNextTurn += Turn_OnNextTurn;
 		Turn.GetBattler().OnBattleTurnStart();

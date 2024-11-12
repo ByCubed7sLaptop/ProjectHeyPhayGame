@@ -261,4 +261,10 @@ public partial class BattleController : Node2D
 
 		return vector;
 	}
+
+    private static BattlerResource RequestChooseTarget()
+    {
+		// TODO: Request the UI to let the player choose a target
+		return Game.Battle.Turn.GetBattler();
+    }
 }

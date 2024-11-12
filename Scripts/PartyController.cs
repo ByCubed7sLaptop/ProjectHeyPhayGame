@@ -79,4 +79,10 @@ public static class Party
         foreach (var member in Members)
             member.Stats.Health = member.Stats.HealthMax;
     }
+
+    static public void HealAllMembers(int value)
+    {
+        foreach (var member in Members)
+            member.Damage(-value);
+    }
 }

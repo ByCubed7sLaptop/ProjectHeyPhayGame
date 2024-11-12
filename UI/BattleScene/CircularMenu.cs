@@ -29,9 +29,7 @@ public partial class CircularMenu : Control
 
         // Initialize icons in the circular layout
         foreach (TextureButton icon in icons.GetChildren())
-        {
             menuIcons.Add(icon);
-        }
 
         Hide();
     }
@@ -71,7 +69,6 @@ public partial class CircularMenu : Control
 
     public override void _Process(double delta)
     {
-
         Position = target.Position + positionOffset;
         // Update logic for input
         if (Input.IsActionJustPressed("ui_right"))

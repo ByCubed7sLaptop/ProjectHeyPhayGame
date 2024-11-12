@@ -48,15 +48,13 @@ public static class Party
 
     static public PartyMemberResource RandomMember(Random random = null)
     {
-        if (random is null)
-            random = new Random();
+        random ??= new Random();
         return Get(random.Next(Count));
     }
 
     static public void DamageRandomMember(int value, Random random = null)
     {
-        if (random is null)
-            random = new Random();
+        random ??= new Random();
         var member = Get(random.Next(Count));
         member.Damage(value);
     }
@@ -65,5 +63,20 @@ public static class Party
     {
         foreach (var member in Members)
             member.Damage(value);
+    }
+
+    static public bool IsDead()
+    {
+        foreach (var member in Members)
+            if (member.Stats.Health > 0)
+                return false;
+
+        return true;
+    }
+
+    static public void FullHeal()
+    {
+        foreach (var member in Members)
+            member.Stats.Health = member.Stats.HealthMax;
     }
 }

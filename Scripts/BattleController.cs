@@ -87,6 +87,19 @@ public partial class BattleController : Node2D
 			}
         }
 
+		// TODO: What happens if both the party and enemy dies?
+		if (Party.IsDead())
+		{
+            GD.Print("Player lost!");
+
+            // Win after 2 seconds
+            Tween tween = CreateTween();
+            tween.TweenInterval(2);
+            tween.TweenCallback(Callable.From(() =>
+                Lose()
+            ));
+        }
+
 		// No more enemies left
 		if (currentEncounter.Count == 0)
 		{
@@ -204,7 +217,6 @@ public partial class BattleController : Node2D
 		var handler = OnWin;
 		handler?.Invoke(this, EventArgs.Empty);
 	}
-
 
 	private void Lose()
 	{

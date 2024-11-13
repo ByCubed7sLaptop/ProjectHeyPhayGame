@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b6v1ap38dmcnx"
+path="res://.godot/imported/another weird power uppo.wav-6c7f9681cf0de965eaf9b9d512a66963.sample"
+
+[deps]
+
+source_file="res://Audio/Buffs and Power ups¿/another weird power uppo.wav"
+dest_files=["res://.godot/imported/another weird power uppo.wav-6c7f9681cf0de965eaf9b9d512a66963.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

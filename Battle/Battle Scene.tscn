@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b88gobkmsuk7d"]
+[gd_scene load_steps=14 format=3 uid="uid://b88gobkmsuk7d"]
 
 [ext_resource type="Script" path="res://Scripts/BattleController.cs" id="1_gc0vv"]
 [ext_resource type="Texture2D" uid="uid://cmh8i3f7ldb1a" path="res://Battle/Enviroment/Sky texture.png" id="2_kv2go"]
@@ -12,13 +12,16 @@
 [ext_resource type="Texture2D" uid="uid://xd6djvntffeq" path="res://UI/BattleScene/box special texture.png" id="9_o53lw"]
 [ext_resource type="Texture2D" uid="uid://c3t774sxq3oac" path="res://UI/BattleScene/box guard texture.png" id="10_853v2"]
 [ext_resource type="Texture2D" uid="uid://ciscem7vait6v" path="res://UI/BattleScene/box run texture.png" id="11_b1vtc"]
+[ext_resource type="Script" path="res://UI/BattleScene/HealthCollectionMonitor.cs" id="13_vioa4"]
 
-[node name="Battle" type="Node2D" node_paths=PackedStringArray("Camera", "phayGeneralPosition", "enemyGeneralPosition", "CircularMenu")]
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("Camera", "phayGeneralPosition", "enemyGeneralPosition", "CircularMenu", "PartyHealthMonitor", "EnemyHealthMonitor")]
 script = ExtResource("1_gc0vv")
 Camera = NodePath("Camera2D")
 phayGeneralPosition = NodePath("Phay general position")
 enemyGeneralPosition = NodePath("Enemy general position")
 CircularMenu = NodePath("Control")
+PartyHealthMonitor = NodePath("Party Health")
+EnemyHealthMonitor = NodePath("Enemy Health")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(144, 81)
@@ -155,3 +158,51 @@ stretch_mode = 4
 [node name="SelectionHighlight" type="Sprite2D" parent="Control"]
 texture = ExtResource("8_8sja4")
 centered = false
+
+[node name="Party Health" type="Control" parent="." node_paths=PackedStringArray("Container")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 110.0
+offset_right = 230.0
+offset_bottom = 263.0
+scale = Vector2(0.3, 0.3)
+script = ExtResource("13_vioa4")
+Container = NodePath("VBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Party Health"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="Enemy Health" type="Control" parent="." node_paths=PackedStringArray("Container")]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 216.0
+offset_top = 110.0
+offset_right = 443.0
+offset_bottom = 263.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+script = ExtResource("13_vioa4")
+Container = NodePath("VBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Enemy Health"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+metadata/_edit_lock_ = true

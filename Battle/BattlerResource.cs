@@ -1,11 +1,12 @@
 ﻿using Godot;
+using System;
 
 public partial class BattlerResource : Resource
 {
     [Export] public string DisplayName;
     [Export] public StatsResource Stats { get; set; }
     [Export] public Texture2D Texture;
-    [Export] public Godot.Collections.Array<Resource> Actions;
+    [Export] public Godot.Collections.Array<BattleActionResource> Actions;
 
     public void Damage(int value)
     {
@@ -32,14 +33,6 @@ public partial class BattlerResource : Resource
     }
 
     /// <summary>
-    /// Called when the battle starts
-    /// </summary>
-    public virtual void OnBattleStart()
-    {
-
-    }
-
-    /// <summary>
     /// When it's this object turn to make a move.
     /// Use Game.Battle.Turn.End() to end the turn
     /// </summary>
@@ -51,12 +44,30 @@ public partial class BattlerResource : Resource
 
         // For now, just attack a random party member
 
-        Game.Battle.Attack(this, Party.RandomMember());
+        if (Actions is null)
+        {
+            GD.PushWarning($"{DisplayName} actions is null! Ending turn.");
+            Game.Battle.Turn.End();
+            return;
+        }
 
-        Tween tween = Game.Controller.CreateTween();
-        tween.TweenInterval(0.5);
-        tween.TweenCallback(Callable.From(() =>
-            Game.Battle.Turn.End()
-        ));
+        if (Actions.Count == 0)
+        {
+            GD.PushWarning($"{DisplayName} actions are empty! Ending turn.");
+            Game.Battle.Turn.End();
+            return;
+        }
+
+        Random random = new();
+        BattleActionResource action = Actions[random.Next(Actions.Count)];
+        action.Run();
+
+        //Game.Battle.Attack(this, Party.RandomMember());
+
+        //Tween tween = Game.Controller.CreateTween();
+        //tween.TweenInterval(0.5);
+        //tween.TweenCallback(Callable.From(() =>
+        //    Game.Battle.Turn.End()
+        //));
     }
 }

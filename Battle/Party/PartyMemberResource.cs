@@ -11,14 +11,12 @@ public partial class PartyMemberResource : BattlerResource
 
     public override void OnBattleTurnStart()
     {
-        // Pick between our actions
+        // Request the cicular menu to ask the player for an action to play
 
-        // Play the animation, run the attack ect.
-
-        // For now, just attack a random party member
-
-
-        Game.Battle.CircularMenu.Target(Game.Battle.AllSprites[this]);
+        // TODO: Give the circular menu a list of the actions
+        // TODO: Actions should have the option to add an icon
+        // CircularMenu will run the action
+        Game.Battle.CircularMenu.Target(Game.Battle.AllSprites[this], this);
     }
 
 

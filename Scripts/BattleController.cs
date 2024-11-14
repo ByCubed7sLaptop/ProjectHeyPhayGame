@@ -8,6 +8,8 @@ public partial class BattleController : Node2D
 	[Export] public Node2D phayGeneralPosition;
 	[Export] public Node2D enemyGeneralPosition;
 	[Export] public CircularMenu CircularMenu { get; set; }
+	[Export] public HealthCollectionMonitor PartyHealthMonitor { get; set; }
+	[Export] public HealthCollectionMonitor EnemyHealthMonitor { get; set; }
 
 	public List<Sprite2D> PartySprites { get; private set; } = new();
 	public List<Sprite2D> EnemySprites { get; private set; } = new();
@@ -20,14 +22,23 @@ public partial class BattleController : Node2D
 
 	[Export] public BattleTurn.StartOrder turnOrderStart = BattleTurn.StartOrder.PlayerGoesFirst;
 	public BattleTurn Turn { get; private set; } = new BattleTurn();
+    public EncounterResource Encounter => currentEncounter;
 
-	public override void _Ready()
+    public override void _Ready()
     {
 		Turn.startOrder = turnOrderStart;
 		Turn.Setup(Party.Members, currentEncounter);
 
 		PlaceParty();
         PlaceEnemies();
+
+		// Monitor the health
+		foreach (var member in Party.Members)
+			PartyHealthMonitor.Monitor(member);
+
+		foreach (var enemy in currentEncounter.Enemies)
+			EnemyHealthMonitor.Monitor(enemy);
+
 
 		Turn.OnNextTurn += Turn_OnNextTurn;
 		Turn.GetBattler().OnBattleTurnStart();
@@ -38,8 +49,6 @@ public partial class BattleController : Node2D
 
 	public void Turn_OnNextTurn(object e, EventArgs args)
 	{
-		GD.Print(Turn.Count);
-
 		// Check enemy wellbeing
 		List<BattlerResource> enemiesToRemove = new ();
 		foreach (var enemy in currentEncounter.Enemies)
@@ -73,6 +82,19 @@ public partial class BattleController : Node2D
 				// Remove from turn order
 				//Turn.Remove(member);
 			}
+        }
+
+		// TODO: What happens if both the party and enemy dies?
+		if (Party.IsDead())
+		{
+            GD.Print("Player lost!");
+
+            // Win after 2 seconds
+            Tween tween = CreateTween();
+            tween.TweenInterval(2);
+            tween.TweenCallback(Callable.From(() =>
+                Lose()
+            ));
         }
 
 		// No more enemies left
@@ -182,17 +204,73 @@ public partial class BattleController : Node2D
 
 		defender.Damage(amount);
 
-		GD.Print($"{attacker.DisplayName} attacks {defender.DisplayName}");
-		GD.Print($"and deals {amount} damage ({defender.Stats.Health} left)");
-	}
+		GD.Print($"{attacker.DisplayName} attacks {defender.DisplayName} and deals {amount} damage ({defender.Stats.Health} left)");
+    }
+
+	/// <summary>
+	/// Can be called on either turn
+	/// </summary>
+    public void RequestChooseTarget(Action<BattlerResource> callback)
+    {
+        if (Game.Battle.Turn.IsPartysTurn())
+		{
+            // Request the ui targeter and the player to target an enemy
+            // TODO: Request the UI to let the player choose a target instead
+            BattlerResource resource = Game.Battle.RandomOpponent();
+            callback(resource);
+        }
+
+        else
+		{
+			BattlerResource resource = Game.Battle.RandomOpponent();
+            // On choose target, call the callback method
+            callback(resource);
+        }
+    }
 
 
-	private void Win()
+    public IEnumerator<BattlerResource> Enemies
+    {
+        get
+        {
+            foreach (var enemy in currentEncounter.Enemies)
+                yield return enemy;
+        }
+    }
+
+
+    public IEnumerator<BattlerResource> Opponents
+    {
+        get
+        {
+			if (Turn.IsPartysTurn())
+				foreach (var enemy in currentEncounter.Enemies)
+					yield return enemy;
+            else
+                foreach (var member in Party.Members)
+                    yield return member;
+        }
+    }
+
+
+    public BattlerResource RandomOpponent(Random random = null)
+    {
+		if (Turn.IsPartysTurn())
+			return currentEncounter.GetRandom(random);
+		
+		// Is enemies turn, return member
+		return Party.RandomMember(random);
+    }
+
+
+
+
+
+    private void Win()
 	{
 		var handler = OnWin;
 		handler?.Invoke(this, EventArgs.Empty);
 	}
-
 
 	private void Lose()
 	{

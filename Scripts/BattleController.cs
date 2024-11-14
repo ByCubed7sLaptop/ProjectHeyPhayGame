@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class BattleController : Node2D
 {
@@ -8,6 +9,7 @@ public partial class BattleController : Node2D
 	[Export] public Node2D phayGeneralPosition;
 	[Export] public Node2D enemyGeneralPosition;
 	[Export] public CircularMenu CircularMenu { get; set; }
+	[Export] public TargetSelector TargetSelector { get; set; }
 	[Export] public HealthCollectionMonitor PartyHealthMonitor { get; set; }
 	[Export] public HealthCollectionMonitor EnemyHealthMonitor { get; set; }
 
@@ -98,7 +100,7 @@ public partial class BattleController : Node2D
         }
 
 		// No more enemies left
-		if (currentEncounter.Count == 0)
+		else if (currentEncounter.Count == 0)
 		{
 			GD.Print("Player won!");
 
@@ -207,17 +209,29 @@ public partial class BattleController : Node2D
 		GD.Print($"{attacker.DisplayName} attacks {defender.DisplayName} and deals {amount} damage ({defender.Stats.Health} left)");
     }
 
-	/// <summary>
-	/// Can be called on either turn
-	/// </summary>
+    // hate this hate this hate this hate this
+    private Action<BattlerResource> tempCallback;
+    /// <summary>
+    /// Can be called on either turn
+    /// </summary>
     public void RequestChooseTarget(Action<BattlerResource> callback)
     {
         if (Game.Battle.Turn.IsPartysTurn())
 		{
             // Request the ui targeter and the player to target an enemy
             // TODO: Request the UI to let the player choose a target instead
-            BattlerResource resource = Game.Battle.RandomOpponent();
-            callback(resource);
+            //BattlerResource resource = Game.Battle.RandomOpponent();
+            //callback(resource);
+            TargetSelector.Show();
+
+            TargetSelector.Clear();
+            foreach (var sprite in EnemySprites)
+                TargetSelector.Target(sprite);
+			TargetSelector.Highlight();
+
+            // ew ew ewewewewweww aaa
+            tempCallback = callback;
+            TargetSelector.OnTargetSelected += TargetSelector_OnTargetSelected;
         }
 
         else
@@ -226,6 +240,14 @@ public partial class BattleController : Node2D
             // On choose target, call the callback method
             callback(resource);
         }
+    }
+
+	private void TargetSelector_OnTargetSelected(object o, TargetSelector.TargetElement element)
+	{
+        BattlerResource resource = Game.Battle.Encounter[element.Index];
+        TargetSelector.Hide();
+        tempCallback(resource);
+        TargetSelector.OnTargetSelected -= TargetSelector_OnTargetSelected;
     }
 
 

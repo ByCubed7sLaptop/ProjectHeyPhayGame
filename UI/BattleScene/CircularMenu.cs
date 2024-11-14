@@ -70,6 +70,9 @@ public partial class CircularMenu : Control
 
     public override void _Process(double delta)
     {
+        if (!Visible)
+            return;
+
         Position = target.Position + positionOffset;
         // Update logic for input
         if (Input.IsActionJustPressed("ui_right"))

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ctxqcw52r1r6d"
+path="res://.godot/imported/Battle Menu Select.wav-da2180b74d436fc3769bf152ac54d4cc.sample"
+
+[deps]
+
+source_file="res://Audio/battle/Battle Menu (like selecting za block actions overhead¿)/Battle Menu Select.wav"
+dest_files=["res://.godot/imported/Battle Menu Select.wav-da2180b74d436fc3769bf152ac54d4cc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

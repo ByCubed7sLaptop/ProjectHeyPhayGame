@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dibwa7fvistul"
+path="res://.godot/imported/Monster Hunter 4 cooking on the spit (remix dis for cooking music) (Phays favorite tune from a game).mp3-075428fbe04520fc48253179e9e17568.mp3str"
+
+[deps]
+
+source_file="res://Docs/(for references)--ZzZ--Monster Hunter SFX/Monster Hunter 4 cooking on the spit (remix dis for cooking music) (Phays favorite tune from a game).mp3"
+dest_files=["res://.godot/imported/Monster Hunter 4 cooking on the spit (remix dis for cooking music) (Phays favorite tune from a game).mp3-075428fbe04520fc48253179e9e17568.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://br8uqop2ey445"
+path="res://.godot/imported/Some Item related Monster Hunter Sound Effects.mp3-4ac17b7f34981ad731839229337d1547.mp3str"
+
+[deps]
+
+source_file="res://Docs/(for references)--ZzZ--Monster Hunter SFX/Some Item related Monster Hunter Sound Effects.mp3"
+dest_files=["res://.godot/imported/Some Item related Monster Hunter Sound Effects.mp3-4ac17b7f34981ad731839229337d1547.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

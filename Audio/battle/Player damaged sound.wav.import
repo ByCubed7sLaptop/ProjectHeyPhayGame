@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://43st8jsipr82"
+path="res://.godot/imported/Player damaged sound.wav-2b3fb0ce12ce6d8458d71dc24f8cd27e.sample"
+
+[deps]
+
+source_file="res://Audio/battle/Player damaged sound.wav"
+dest_files=["res://.godot/imported/Player damaged sound.wav-2b3fb0ce12ce6d8458d71dc24f8cd27e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

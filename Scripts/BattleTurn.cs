@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Incharge of keeping record of turn orders.
@@ -48,9 +49,14 @@ public class BattleTurn
 	public BattlerResource GetBattler()
 	{
 		return order[turn % order.Count];
-	}
+    }
 
-	public void Remove(BattlerResource battler)
+    public bool IsPartysTurn()
+    {
+        return Party.Members.Contains(GetBattler());
+    }
+
+    public void Remove(BattlerResource battler)
     {
 		order.Remove(battler);
     }

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cl2m5kjravd7s"]
+
+[ext_resource type="Script" path="res://Battle/Actions/AttackBattleAction.cs" id="1_bf6pp"]
+
+[resource]
+script = ExtResource("1_bf6pp")
+DisplayName = "Attack!"
+Weight = 1

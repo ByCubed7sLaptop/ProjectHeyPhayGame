@@ -3,7 +3,7 @@ using System;
 
 public partial class BattleActionResource : Resource
 {
-    [Export] public string DisplayName { get; set; } = "Battle Action";
+    [Export] public string DisplayName { get; set; } = "Battle Action Display Name";
     
     /// <summary>
     /// Chance for it to be picked when picking randomly
@@ -15,6 +15,7 @@ public partial class BattleActionResource : Resource
     /// </summary>
     public virtual void Run()
     {
-
+        // End the turn
+        Game.Battle.Turn.End();
     }
 }

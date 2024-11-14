@@ -1,12 +1,14 @@
 using Godot;
 using System;
 
-public abstract partial class AttackBattleAction : BattleActionResource
+public partial class AttackBattleAction : BattleActionResource
 {
-    [Export] public new string DisplayName => "Attack";
-
-    public override void Run() => 
-        ActionAttackBasic(Game.Battle.Turn.GetBattler(), Game.Battle.RequestChooseTarget());
+    public override void Run()
+    {
+        Game.Battle.RequestChooseTarget((target) =>
+            ActionAttackBasic(Game.Battle.Turn.GetBattler(), target)
+        );
+    }
 
     static public Tween ActionAttackBasic(BattlerResource attack, BattlerResource defender)
     {
@@ -16,9 +18,10 @@ public abstract partial class AttackBattleAction : BattleActionResource
         //tween.TweenCallback()
 
         // Do attack damage
-        tween.TweenCallback(Callable.From(() =>
-            Game.Battle.Attack(attack, defender))
-        );
+        tween.TweenCallback(Callable.From(() => {
+            Game.Battle.Attack(attack, defender);
+            Game.Battle.Turn.End();
+        }));
 
         // This allows us to add actions to do after the attack has finished
         return tween;

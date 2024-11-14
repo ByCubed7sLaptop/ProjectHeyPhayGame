@@ -34,9 +34,10 @@ public partial class CircularMenu : Control
         Hide();
     }
 
-    public void Target(Node2D newTarget)
+    public void Target(Node2D newTarget, BattlerResource newTargetBattler)
     {
         target = newTarget;
+        targetBattler = newTargetBattler;
 
         ArrangeIconsInCircle();
         UpdateSelectionHighlight();
@@ -91,18 +92,24 @@ public partial class CircularMenu : Control
 
     private void ActivateSelection()
     {
+        // TODO: get the action associated with the selection
+        Hide();
+        targetBattler.Actions[currentSelectionIndex].Run();
+        
+
         // Tell the battle controller the actio you've chosen
-        string action = menuIcons[currentSelectionIndex].Name;
+        //string action = menuIcons[currentSelectionIndex].Name;
 
-        // TODO: This should tell the UI element to pick an enemy to then attack
-        if (action == "Attack")
-        {
-            // TODO: Request to pick an enemy to attack
+        //// TODO: This should tell the UI element to pick an enemy to then attack
+        //if (action == "Attack")
+        //{
+        //    // TODO: Request to pick an enemy to attack
 
-            Game.Battle.Attack(Game.Battle.Turn.GetBattler(), Game.Battle.currentEncounter.GetRandom());
-            Hide();
+        //    Game.Battle.Attack(Game.Battle.Turn.GetBattler(), Game.Battle.currentEncounter.GetRandom());
+        //    Hide();
 
-            Game.Battle.Turn.End();
-        }
+        //    Game.Battle.Turn.End();
+        //}
+
     }
 }

@@ -8,6 +8,14 @@ public partial class TargetSelector : Control
     public event EventHandler<TargetElement> OnTargetSelected;
     private int currentTargetIndex = 0;
 
+    public void Setup(IEnumerable<Node2D> targets)
+    {
+        Clear();
+        foreach (var node in targets)
+            Target(node);
+        Highlight();
+    }
+
     public void Target(Node2D target)
     {
         targetNodes.Add(target);

@@ -209,8 +209,6 @@ public partial class BattleController : Node2D
 		GD.Print($"{attacker.DisplayName} attacks {defender.DisplayName} and deals {amount} damage ({defender.Stats.Health} left)");
     }
 
-    // hate this hate this hate this hate this
-    private Action<BattlerResource> tempCallback;
     /// <summary>
     /// Can be called on either turn
     /// </summary>
@@ -219,18 +217,18 @@ public partial class BattleController : Node2D
         if (Game.Battle.Turn.IsPartysTurn())
 		{
             // Request the ui targeter and the player to target an enemy
-            // TODO: Request the UI to let the player choose a target instead
-            //BattlerResource resource = Game.Battle.RandomOpponent();
-            //callback(resource);
+            TargetSelector.Setup(EnemySprites);
             TargetSelector.Show();
 
-            TargetSelector.Clear();
-            foreach (var sprite in EnemySprites)
-                TargetSelector.Target(sprite);
-			TargetSelector.Highlight();
+            // Subscribe temporarily using a lambda to handle callback and clean up automatically
+            void TargetSelector_OnTargetSelected(object o, TargetSelector.TargetElement element)
+            {
+                TargetSelector.OnTargetSelected -= TargetSelector_OnTargetSelected;
+                BattlerResource resource = Game.Battle.Encounter[element.Index];
+                TargetSelector.Hide();
+                callback(resource);
+            }
 
-            // ew ew ewewewewweww aaa
-            tempCallback = callback;
             TargetSelector.OnTargetSelected += TargetSelector_OnTargetSelected;
         }
 
@@ -240,14 +238,6 @@ public partial class BattleController : Node2D
             // On choose target, call the callback method
             callback(resource);
         }
-    }
-
-	private void TargetSelector_OnTargetSelected(object o, TargetSelector.TargetElement element)
-	{
-        BattlerResource resource = Game.Battle.Encounter[element.Index];
-        TargetSelector.Hide();
-        tempCallback(resource);
-        TargetSelector.OnTargetSelected -= TargetSelector_OnTargetSelected;
     }
 
 

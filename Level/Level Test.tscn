@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bob2spgcbowqy"]
+[gd_scene load_steps=13 format=3 uid="uid://bob2spgcbowqy"]
 
 [ext_resource type="PackedScene" uid="uid://b5he6b8gh5ik1" path="res://Level/Level Base.tscn" id="1_48r12"]
 [ext_resource type="Texture2D" uid="uid://vl6uqsdoym2e" path="res://Level/Enviroment/Tree Texture.png" id="2_kl5wn"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bk2mtq55tjfsm" path="res://Level/Spike/Spike.tscn" id="9_vfbor"]
 [ext_resource type="PackedScene" uid="uid://dxf8ybafr23ox" path="res://Level/Interactables/Lever/Lever.tscn" id="10_hvrrj"]
 [ext_resource type="PackedScene" uid="uid://dqubsh2fba1vr" path="res://Level/Interactables/Sign/Sign.tscn" id="11_32ah1"]
+[ext_resource type="PackedScene" uid="uid://cqsejobjamhkt" path="res://UI/StageScreen/PlayerHealthbar/PlayerHealthbar.tscn" id="12_xh1fy"]
 
 [node name="Level" instance=ExtResource("1_48r12")]
 
@@ -43,30 +44,38 @@ texture = ExtResource("6_17wt3")
 [node name="EnemyTemp" parent="Entities" index="0" instance=ExtResource("7_tryuo")]
 position = Vector2(213, 3)
 
-[node name="DeathPlane" parent="." index="4" instance=ExtResource("8_jaidf")]
+[node name="DeathPlane" parent="Entities" index="1" instance=ExtResource("8_jaidf")]
 position = Vector2(-317, 57)
 scale = Vector2(10.97, 1)
 
-[node name="DeathPlane2" parent="." index="5" instance=ExtResource("8_jaidf")]
+[node name="DeathPlane2" parent="Entities" index="2" instance=ExtResource("8_jaidf")]
 position = Vector2(483, 73)
 scale = Vector2(14.565, 1)
 
-[node name="Spike" parent="." index="6" instance=ExtResource("9_vfbor")]
+[node name="Spike" parent="Entities" index="3" instance=ExtResource("9_vfbor")]
 position = Vector2(81, 144)
 scale = Vector2(0.5, 0.5)
 
-[node name="Spike2" parent="." index="7" instance=ExtResource("9_vfbor")]
+[node name="Spike2" parent="Entities" index="4" instance=ExtResource("9_vfbor")]
 position = Vector2(32, 144)
 scale = Vector2(0.5, 0.5)
 
-[node name="Spike3" parent="." index="8" instance=ExtResource("9_vfbor")]
+[node name="Spike3" parent="Entities" index="5" instance=ExtResource("9_vfbor")]
 position = Vector2(57, 144)
 scale = Vector2(0.5, 0.5)
 
-[node name="Lever" parent="." index="9" instance=ExtResource("10_hvrrj")]
+[node name="Lever" parent="Entities" index="6" instance=ExtResource("10_hvrrj")]
 position = Vector2(124, -8)
 scale = Vector2(0.25, 0.25)
 
-[node name="Sign" parent="." index="10" instance=ExtResource("11_32ah1")]
+[node name="Sign" parent="Entities" index="7" instance=ExtResource("11_32ah1")]
 position = Vector2(1, -8)
 scale = Vector2(0.25, 0.25)
+
+[node name="UI" type="CanvasLayer" parent="." index="4"]
+follow_viewport_enabled = true
+
+[node name="PlayerHealthbar" parent="UI" index="0" instance=ExtResource("12_xh1fy")]
+top_level = true
+position = Vector2(-185, -112)
+scale = Vector2(0.1, 0.1)

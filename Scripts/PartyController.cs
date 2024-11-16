@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class PartyController : Node, IEnumerable<PartyMemberResource>
 {
@@ -84,5 +85,17 @@ public static class Party
     {
         foreach (var member in Members)
             member.Damage(-value);
+    }
+
+    static public int GetLeaderHP()
+    {
+        var leader = Members.FirstOrDefault();
+        return leader.Stats.Health;
+    }
+
+    static public int GetLeaderMaxHP()
+    {
+        var leader = Members.FirstOrDefault();
+        return leader.Stats.HealthMax;
     }
 }

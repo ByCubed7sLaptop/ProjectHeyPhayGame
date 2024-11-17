@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://hog7keqygwis"]
+
+[ext_resource type="PackedScene" uid="uid://cqsejobjamhkt" path="res://UI/HUD/PlayerHealthbar/PlayerHealthbar.tscn" id="1_du0q5"]
+
+[node name="Hud" type="CanvasLayer"]
+
+[node name="PlayerHealthbar" parent="." instance=ExtResource("1_du0q5")]
+position = Vector2(161, 67)
+scale = Vector2(0.33, 0.33)

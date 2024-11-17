@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cqsejobjamhkt"]
 
-[ext_resource type="Script" path="res://UI/StageScreen/PlayerHealthbar/PlayerHealthbar.cs" id="1_taeaw"]
-[ext_resource type="Texture2D" uid="uid://2j7loagco7la" path="res://UI/StageScreen/PlayerHealthbar/phay_ui_healthbar.png" id="2_r83cs"]
+[ext_resource type="Script" path="res://UI/HUD/PlayerHealthbar/PlayerHealthbar.cs" id="1_taeaw"]
+[ext_resource type="Texture2D" uid="uid://2j7loagco7la" path="res://UI/HUD/PlayerHealthbar/phay_ui_healthbar.png" id="2_r83cs"]
 
 [node name="PlayerHealthbar" type="Node2D" node_paths=PackedStringArray("HpDisplay")]
 script = ExtResource("1_taeaw")

@@ -3,11 +3,24 @@
 [ext_resource type="Script" path="res://UI/HUD/PlayerHealthbar/PlayerHealthbar.cs" id="1_taeaw"]
 [ext_resource type="Texture2D" uid="uid://2j7loagco7la" path="res://UI/HUD/PlayerHealthbar/phay_ui_healthbar.png" id="2_r83cs"]
 
-[node name="PlayerHealthbar" type="Node2D" node_paths=PackedStringArray("HpDisplay")]
+[node name="PlayerHealthbar" type="Control" node_paths=PackedStringArray("HpDisplay")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 161.0
+offset_top = 67.0
+offset_right = 161.0
+offset_bottom = 67.0
+scale = Vector2(0.33, 0.33)
 script = ExtResource("1_taeaw")
 HpDisplay = NodePath("Label")
+metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="TextureRect" parent="."]
+texture_filter = 2
+offset_left = -433.333
+offset_top = -151.515
+offset_right = 441.667
+offset_bottom = 146.485
 texture = ExtResource("2_r83cs")
 
 [node name="Label" type="Label" parent="."]

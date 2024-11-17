@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqsejobjamhkt"]
+
+[ext_resource type="Script" path="res://UI/HUD/PlayerHealthbar/PlayerHealthbar.cs" id="1_taeaw"]
+[ext_resource type="Texture2D" uid="uid://2j7loagco7la" path="res://UI/HUD/PlayerHealthbar/phay_ui_healthbar.png" id="2_r83cs"]
+
+[node name="PlayerHealthbar" type="Node2D" node_paths=PackedStringArray("HpDisplay")]
+script = ExtResource("1_taeaw")
+HpDisplay = NodePath("Label")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r83cs")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -174.0
+offset_top = -29.0
+offset_right = 264.0
+offset_bottom = 78.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 76
+text = "c.Hp / m.Hp"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

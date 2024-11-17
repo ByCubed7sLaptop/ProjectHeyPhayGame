@@ -10,6 +10,7 @@ public partial class GameController : Node
 
 	[Export] public PackedScene LevelPackedScene;
 	[Export] public PackedScene BattlePackedScene;
+	[Export] public PackedScene LevelHudPackedScene;
 
     public BattleController battle;
 
@@ -62,4 +63,6 @@ static public class Game
 {
     public static GameController Controller => GameController.Instance;
     public static BattleController Battle => GameController.Battle;
+    public static LevelController Level => LevelController.Instance;
+    public static CanvasLayer HUD => Level.HUD;
 }

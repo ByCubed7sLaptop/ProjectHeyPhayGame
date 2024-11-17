@@ -8,8 +8,9 @@ public partial class LevelController : Node2D
 	public static LevelController Instance { get; set; }
 
 	public Player Player { get; private set; }
+	public CanvasLayer HUD { get; private set; }
 
-	[Export] public LevelCamera Camera;
+    [Export] public LevelCamera Camera;
 	[Export] public Node2D PlayerSpawnPosition;
 
 	public override void _Ready()
@@ -21,7 +22,12 @@ public partial class LevelController : Node2D
 		Player.OnHitEncounter += OnPlayerHitEncounter;
 
 		Camera.Target = Player;
-	}
+
+        // Load level HUD
+        HUD = Game.Controller.LevelHudPackedScene.Instantiate<CanvasLayer>();
+        AddChild(HUD);
+
+    }
 
 	public void Enable()
 	{

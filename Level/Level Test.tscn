@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bob2spgcbowqy"]
+[gd_scene load_steps=12 format=3 uid="uid://bob2spgcbowqy"]
 
 [ext_resource type="PackedScene" uid="uid://b5he6b8gh5ik1" path="res://Level/Level Base.tscn" id="1_48r12"]
 [ext_resource type="Texture2D" uid="uid://vl6uqsdoym2e" path="res://Level/Enviroment/Tree Texture.png" id="2_kl5wn"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bk2mtq55tjfsm" path="res://Level/Spike/Spike.tscn" id="9_vfbor"]
 [ext_resource type="PackedScene" uid="uid://dxf8ybafr23ox" path="res://Level/Interactables/Lever/Lever.tscn" id="10_hvrrj"]
 [ext_resource type="PackedScene" uid="uid://dqubsh2fba1vr" path="res://Level/Interactables/Sign/Sign.tscn" id="11_32ah1"]
-[ext_resource type="PackedScene" uid="uid://hog7keqygwis" path="res://UI/HUD/HUD.tscn" id="12_murik"]
 
 [node name="Level" instance=ExtResource("1_48r12")]
 
@@ -71,5 +70,3 @@ scale = Vector2(0.25, 0.25)
 [node name="Sign" parent="Entities" index="7" instance=ExtResource("11_32ah1")]
 position = Vector2(1, -8)
 scale = Vector2(0.25, 0.25)
-
-[node name="Hud" parent="." index="4" instance=ExtResource("12_murik")]

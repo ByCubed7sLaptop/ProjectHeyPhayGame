@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b11x8rvewxq16"]
+[gd_scene load_steps=9 format=3 uid="uid://b11x8rvewxq16"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_53c0d"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="2_87usi"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/DebugDrawerNode.cs" id="4_7e2ig"]
 [ext_resource type="PackedScene" uid="uid://hog7keqygwis" path="res://UI/HUD/HUD.tscn" id="4_jjs40"]
 [ext_resource type="Resource" uid="uid://lw8hu80csg1" path="res://Battle/Party/Phay PartyMemberResource.tres" id="4_r61ni"]
+[ext_resource type="PackedScene" uid="uid://dk06usw83mpy3" path="res://Level/Phay/PhayPlayer.tscn" id="5_in20t"]
 [ext_resource type="Script" path="res://Scripts/PartyController.cs" id="6_7sow6"]
 
 [node name="GameController" type="Node"]
@@ -13,6 +14,7 @@ script = ExtResource("1_53c0d")
 LevelPackedScene = ExtResource("2_87usi")
 BattlePackedScene = ExtResource("3_wmyri")
 LevelHudPackedScene = ExtResource("4_jjs40")
+PlayerPackedScene = ExtResource("5_in20t")
 
 [node name="DebugDrawer" type="Node2D" parent="."]
 script = ExtResource("4_7e2ig")

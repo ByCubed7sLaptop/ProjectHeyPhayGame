@@ -11,6 +11,7 @@ public partial class GameController : Node
 	[Export] public PackedScene LevelPackedScene;
 	[Export] public PackedScene BattlePackedScene;
 	[Export] public PackedScene LevelHudPackedScene;
+	[Export] public PackedScene PlayerPackedScene;
 
     public BattleController battle;
 

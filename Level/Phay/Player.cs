@@ -169,8 +169,8 @@ public partial class Player : CharacterBody2D
 	// Create the player and place at the given position
 	public static Player CreateAt(Node parent, Vector2 position)
     {
-		var resource = GD.Load<PackedScene>("res://Level/Phay/PhayPlayer.tscn");
-		var player = resource.Instantiate<Player>();
+        // TODO: Should be Game.PackedScenes.Player?
+		var player = Game.Controller.PlayerPackedScene.Instantiate<Player>();
 		parent.AddChild(player);
 
 		player.Position = position;

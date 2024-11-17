@@ -5,5 +5,3 @@
 [node name="Hud" type="CanvasLayer"]
 
 [node name="PlayerHealthbar" parent="." instance=ExtResource("1_du0q5")]
-position = Vector2(161, 67)
-scale = Vector2(0.33, 0.33)

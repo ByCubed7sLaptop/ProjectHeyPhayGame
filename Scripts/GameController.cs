@@ -39,13 +39,11 @@ public partial class GameController : Node
         GetTree().Root.AddChild(battle); 
 
         // TODO: Move to EncounterBody destroy method to add effects / ect
-        battle.OnWin += (e, o) => encounter.QueueFree();
-        battle.OnWin += (e, o) => TransferToLevel();
+        battle.OnEnd += (e, o) => encounter.QueueFree();
+        battle.OnEnd += (e, o) => TransferToLevel();
 
         // TODO: Change to game over scene or respawn at room enterence, ect.
-        battle.OnLose += (e, o) => encounter.QueueFree();
         battle.OnLose += (e, o) => Party.FullHeal();
-        battle.OnLose += (e, o) => TransferToLevel();
 
         return battle;
     }

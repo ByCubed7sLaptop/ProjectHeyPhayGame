@@ -75,7 +75,7 @@ public partial class CircularMenu : Control
 
         for (int i = 0; i < iconCount; i++)
         {
-            float angle = (i + currentSelectionIndex) * angleStep + angleOffset;
+            float angle = (i - currentSelectionIndex + 3) * angleStep + angleOffset;
             Vector2 iconPosition = new Vector2(
                 Mathf.Cos(angle) * radius,
                 Mathf.Sin(angle) * radius
@@ -105,19 +105,24 @@ public partial class CircularMenu : Control
         if (Input.IsActionJustPressed("ui_right"))
         {
             currentSelectionIndex = (currentSelectionIndex + 1) % menuIcons.Count;
+            ArrangeIconsInCircle();
             UpdateSelectionHighlight();
         }
         else if (Input.IsActionJustPressed("ui_left"))
         {
             currentSelectionIndex = (currentSelectionIndex - 1 + menuIcons.Count) % menuIcons.Count;
+            ArrangeIconsInCircle();
             UpdateSelectionHighlight();
         }
 
         // Handle confirmation (select the highlighted option)
         if (Input.IsActionJustPressed("ui_accept"))
         {
+            ArrangeIconsInCircle();
             ActivateSelection();
         }
+
+
     }
 
     private void ActivateSelection()

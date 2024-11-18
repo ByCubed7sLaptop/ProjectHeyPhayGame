@@ -1,8 +1,10 @@
 using Godot;
 using System;
 
-public partial class AttackBattleAction : BattleActionResource
+public partial class AttackBattleAction : BattleActionResource, IHasIcon
 {
+    [Export] public Texture2D Icon { get; set; }
+
     public override void Run()
     {
         Game.Battle.RequestChooseTarget((target) =>

@@ -19,3 +19,8 @@ public partial class BattleActionResource : Resource
         Game.Battle.Turn.End();
     }
 }
+
+public interface IHasIcon
+{
+    public Texture2D Icon { get; }
+}

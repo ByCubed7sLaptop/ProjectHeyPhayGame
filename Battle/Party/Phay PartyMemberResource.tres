@@ -1,13 +1,17 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://lw8hu80csg1"]
+[gd_resource type="Resource" load_steps=9 format=3 uid="uid://lw8hu80csg1"]
 
 [ext_resource type="Resource" uid="uid://cfa77mftbffyu" path="res://Battle/Party/Phay Base Stats.tres" id="1_uk21n"]
 [ext_resource type="Resource" uid="uid://cl2m5kjravd7s" path="res://Battle/Actions/BattleAction_Attack.tres" id="1_wklvv"]
+[ext_resource type="Resource" uid="uid://birah3y2i8tcl" path="res://Battle/Actions/BattleAction_Guard.tres" id="2_2cqbf"]
 [ext_resource type="Texture2D" uid="uid://qquja25ple77" path="res://Level/Phay/Phay.png" id="2_8bw8j"]
 [ext_resource type="Script" path="res://Battle/Party/PartyMemberResource.cs" id="3_0rh3e"]
+[ext_resource type="Resource" uid="uid://c6q82ugcv6b8h" path="res://Battle/Actions/BattleAction_Item.tres" id="3_l7eh1"]
+[ext_resource type="Resource" uid="uid://rtoceocws6nn" path="res://Battle/Actions/BattleAction_Run.tres" id="4_r50n3"]
+[ext_resource type="Resource" uid="uid://c3xfoe3q0yojr" path="res://Battle/Actions/BattleAction_Special.tres" id="5_xm8a7"]
 
 [resource]
 script = ExtResource("3_0rh3e")
 DisplayName = "Phay"
 Stats = ExtResource("1_uk21n")
 Texture = ExtResource("2_8bw8j")
-Actions = Array[Resource]([ExtResource("1_wklvv")])
+Actions = Array[Resource]([ExtResource("1_wklvv"), ExtResource("2_2cqbf"), ExtResource("3_l7eh1"), ExtResource("4_r50n3"), ExtResource("5_xm8a7")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b88gobkmsuk7d"]
+[gd_scene load_steps=12 format=3 uid="uid://b88gobkmsuk7d"]
 
 [ext_resource type="Script" path="res://Scripts/BattleController.cs" id="1_gc0vv"]
 [ext_resource type="Texture2D" uid="uid://cmh8i3f7ldb1a" path="res://Battle/Enviroment/Sky texture.png" id="2_kv2go"]
@@ -8,10 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bdeh2u8i1lclx" path="res://Battle/Enviroment/main shadow texture.png" id="6_5kptu"]
 [ext_resource type="Script" path="res://UI/BattleScene/CircularMenu.cs" id="7_qfa6m"]
 [ext_resource type="Texture2D" uid="uid://cf8clic62hqn7" path="res://UI/BattleScene/box outline texture.png" id="8_8sja4"]
-[ext_resource type="Texture2D" uid="uid://d0p8qy0eb4f42" path="res://UI/BattleScene/box item texture.png" id="8_g1ps2"]
-[ext_resource type="Texture2D" uid="uid://xd6djvntffeq" path="res://UI/BattleScene/box special texture.png" id="9_o53lw"]
-[ext_resource type="Texture2D" uid="uid://c3t774sxq3oac" path="res://UI/BattleScene/box guard texture.png" id="10_853v2"]
-[ext_resource type="Texture2D" uid="uid://ciscem7vait6v" path="res://UI/BattleScene/box run texture.png" id="11_b1vtc"]
 [ext_resource type="Script" path="res://UI/BattleScene/HealthCollectionMonitor.cs" id="13_vioa4"]
 [ext_resource type="Script" path="res://UI/BattleScene/TargetSelector.cs" id="14_gyjrf"]
 [ext_resource type="Texture2D" uid="uid://cg77g77yctbyy" path="res://UI/BattleScene/selector.png" id="14_yo6wk"]
@@ -119,45 +115,6 @@ horizontal_alignment = 1
 
 [node name="Icons" type="Control" parent="CircularMenu"]
 anchors_preset = 0
-
-[node name="Attack" type="TextureButton" parent="CircularMenu/Icons"]
-layout_mode = 0
-offset_right = 18.0
-offset_bottom = 18.0
-texture_normal = ExtResource("5_vbkg0")
-stretch_mode = 4
-
-[node name="Item" type="TextureButton" parent="CircularMenu/Icons"]
-layout_mode = 0
-offset_left = 19.0
-offset_right = 37.0
-offset_bottom = 18.0
-texture_normal = ExtResource("8_g1ps2")
-stretch_mode = 4
-
-[node name="Special" type="TextureButton" parent="CircularMenu/Icons"]
-layout_mode = 0
-offset_left = 38.0
-offset_right = 56.0
-offset_bottom = 18.0
-texture_normal = ExtResource("9_o53lw")
-stretch_mode = 4
-
-[node name="Guard" type="TextureButton" parent="CircularMenu/Icons"]
-layout_mode = 0
-offset_left = 57.0
-offset_right = 75.0
-offset_bottom = 18.0
-texture_normal = ExtResource("10_853v2")
-stretch_mode = 4
-
-[node name="Run" type="TextureButton" parent="CircularMenu/Icons"]
-layout_mode = 0
-offset_left = 76.0
-offset_right = 94.0
-offset_bottom = 18.0
-texture_normal = ExtResource("11_b1vtc")
-stretch_mode = 4
 
 [node name="SelectionHighlight" type="Sprite2D" parent="CircularMenu"]
 texture = ExtResource("8_8sja4")

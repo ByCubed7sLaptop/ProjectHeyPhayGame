@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://rtoceocws6nn"]
+
+[ext_resource type="Texture2D" uid="uid://ciscem7vait6v" path="res://UI/BattleScene/box run texture.png" id="1_ttkyk"]
+[ext_resource type="Script" path="res://Battle/Actions/RunBattleAction.cs" id="2_303ff"]
+
+[resource]
+script = ExtResource("2_303ff")
+Icon = ExtResource("1_ttkyk")
+DisplayName = "Run"
+Weight = 1

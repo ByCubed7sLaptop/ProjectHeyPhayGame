@@ -117,6 +117,7 @@ horizontal_alignment = 1
 anchors_preset = 0
 
 [node name="SelectionHighlight" type="Sprite2D" parent="CircularMenu"]
+z_index = 300
 texture = ExtResource("8_8sja4")
 centered = false
 

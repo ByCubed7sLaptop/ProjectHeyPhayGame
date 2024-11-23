@@ -64,7 +64,6 @@ public partial class CircularMenu : Control
         currentSelectionIndex %= menuIcons.Count;   
 
         ArrangeIconsInCircle();
-        UpdateSelectionHighlight();
         Show();
     }
 
@@ -81,14 +80,23 @@ public partial class CircularMenu : Control
                 Mathf.Sin(angle) * radius
             );
             iconPosition *= positionScale;
-            menuIcons[i].Position = iconPosition;
+            //menuIcons[i].Position = iconPosition;
+
+            Tween tween = CreateTween();
+            tween.TweenProperty(menuIcons[i], "position", iconPosition, 0.2f);
+            tween.TweenProperty(menuIcons[i], "z_index", (int)(iconPosition.Y + radius * positionScale.Y), 0.1f);
+
+            if (i == currentSelectionIndex)
+                tween.TweenCallback(Callable.From(UpdateSelectionHighlight));
         }
     }
 
     private void UpdateSelectionHighlight()
     {
         // Set highlight position to the currently selected icon
-        selectionHighlight.Position = menuIcons[currentSelectionIndex].Position;
+        //selectionHighlight.Position = menuIcons[currentSelectionIndex].Position;
+        Tween tween = CreateTween();
+        tween.TweenProperty(selectionHighlight, "position", menuIcons[currentSelectionIndex].Position, 0.1f);
         label.Text = menuIcons[currentSelectionIndex].Name;
     }
 
@@ -106,13 +114,11 @@ public partial class CircularMenu : Control
         {
             currentSelectionIndex = (currentSelectionIndex + 1) % menuIcons.Count;
             ArrangeIconsInCircle();
-            UpdateSelectionHighlight();
         }
         else if (Input.IsActionJustPressed("ui_left"))
         {
             currentSelectionIndex = (currentSelectionIndex - 1 + menuIcons.Count) % menuIcons.Count;
             ArrangeIconsInCircle();
-            UpdateSelectionHighlight();
         }
 
         // Handle confirmation (select the highlighted option)

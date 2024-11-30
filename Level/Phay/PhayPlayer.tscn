@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dk06usw83mpy3"]
+[gd_scene load_steps=12 format=3 uid="uid://dk06usw83mpy3"]
 
 [ext_resource type="Script" path="res://Level/Phay/Player.cs" id="1_0nt4j"]
 [ext_resource type="Texture2D" uid="uid://qquja25ple77" path="res://Level/Phay/Phay.png" id="2_5pgif"]
@@ -14,6 +14,12 @@ height = 40.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xs8o3"]
 height = 38.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_225nx"]
+random_pitch = 1.21
+streams_count = 1
+stream_0/stream = ExtResource("3_cnbs7")
+stream_0/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4ibtc"]
 random_pitch = 3.21
@@ -66,12 +72,14 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Jump AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_cnbs7")
-volume_db = -8.471
-pitch_scale = 0.78
+stream = SubResource("AudioStreamRandomizer_225nx")
+volume_db = -8.707
+pitch_scale = 0.85
 
 [node name="Land AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_88x7n")
+volume_db = -7.059
+pitch_scale = 0.73
 
 [node name="Walk AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_62fqb")

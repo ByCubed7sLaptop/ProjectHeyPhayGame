@@ -100,8 +100,9 @@ public partial class CircularMenu : Control
 
                 Tween bobbleTween = CreateTween();
                 bobbleTween.Stop();
-                bobbleTween.TweenProperty(menuIcons[i], "position", Vector2.Up * positionScale * 3, 0.4f).AsRelative();
-                bobbleTween.TweenProperty(menuIcons[i], "position", Vector2.Down * positionScale * 3, 0.4f).AsRelative();
+                bobbleTween.TweenProperty(menuIcons[i], "position", Vector2.Up * positionScale * 3, 0.2f).AsRelative();
+                bobbleTween.TweenProperty(menuIcons[i], "position", Vector2.Down * positionScale * 6, 0.4f).AsRelative();
+                bobbleTween.TweenProperty(menuIcons[i], "position", Vector2.Up * positionScale * 3, 0.2f).AsRelative();
                 bobbleTween.SetLoops();
 
                 bobbleTweenRef?.Kill();

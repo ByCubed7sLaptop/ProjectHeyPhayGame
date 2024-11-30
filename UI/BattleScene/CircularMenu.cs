@@ -67,6 +67,8 @@ public partial class CircularMenu : Control
         Show();
     }
 
+
+    Tween bobbleTweenRef = null;
     private void ArrangeIconsInCircle()
     {
         int iconCount = menuIcons.Count;
@@ -79,15 +81,39 @@ public partial class CircularMenu : Control
                 Mathf.Cos(angle) * radius,
                 Mathf.Sin(angle) * radius
             );
+
+
+            if (i == currentSelectionIndex)
+                iconPosition.Y += 2;
+
             iconPosition *= positionScale;
             //menuIcons[i].Position = iconPosition;
 
             Tween tween = CreateTween();
-            tween.TweenProperty(menuIcons[i], "position", iconPosition, 0.2f);
+            tween.SetParallel(true);
             tween.TweenProperty(menuIcons[i], "z_index", (int)(iconPosition.Y + radius * positionScale.Y), 0.1f);
+            tween.TweenProperty(menuIcons[i], "position", iconPosition, 0.2f);
 
             if (i == currentSelectionIndex)
-                tween.TweenCallback(Callable.From(UpdateSelectionHighlight));
+            {
+                tween.Chain().TweenCallback(Callable.From(UpdateSelectionHighlight));
+
+                Tween bobbleTween = CreateTween();
+                bobbleTween.Stop();
+                bobbleTween.TweenProperty(menuIcons[i], "position", Vector2.Up * positionScale * 3, 0.4f).AsRelative();
+                bobbleTween.TweenProperty(menuIcons[i], "position", Vector2.Down * positionScale * 3, 0.4f).AsRelative();
+                bobbleTween.SetLoops();
+
+                bobbleTweenRef?.Kill();
+                bobbleTweenRef = bobbleTween;
+
+                tween.TweenInterval(0.2f);
+                tween.Chain().TweenCallback(Callable.From(() =>
+                {
+                    if (bobbleTween.IsValid())
+                        bobbleTween?.Play();
+                }));
+            }
         }
     }
 

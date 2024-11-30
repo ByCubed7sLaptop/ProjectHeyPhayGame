@@ -1,27 +1,24 @@
 using Godot;
 using System;
 
-public partial class AttackBattleAction : BattleActionResource, IHasIcon
+public partial class RunBattleAction : BattleActionResource, IHasIcon
 {
     [Export] public Texture2D Icon { get; set; }
 
     public override void Run()
     {
-        Game.Battle.RequestChooseTarget((target) =>
-            ActionAttackBasic(Game.Battle.Turn.GetBattler(), target)
-        );
+        ActionRun(Game.Battle.Turn.GetBattler());
     }
 
-    static public Tween ActionAttackBasic(BattlerResource attack, BattlerResource defender)
+    static public Tween ActionRun(BattlerResource battler)
     {
         Tween tween = Game.Battle.CreateTween();
 
         // Play animation
         //tween.TweenCallback()
 
-        // Do attack damage
         tween.TweenCallback(Callable.From(() => {
-            Game.Battle.Attack(attack, defender);
+            Game.Battle.RequestStop();
             Game.Battle.Turn.End();
         }));
 

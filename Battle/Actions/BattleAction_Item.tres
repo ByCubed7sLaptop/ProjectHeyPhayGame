@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c6q82ugcv6b8h"]
+
+[ext_resource type="Texture2D" uid="uid://d0p8qy0eb4f42" path="res://UI/BattleScene/box item texture.png" id="1_0ixml"]
+[ext_resource type="Script" path="res://Battle/Actions/RunBattleAction.cs" id="2_0yoh8"]
+
+[resource]
+script = ExtResource("2_0yoh8")
+Icon = ExtResource("1_0ixml")
+DisplayName = "Use Item"
+Weight = 1

@@ -1,8 +1,10 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cl2m5kjravd7s"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cl2m5kjravd7s"]
 
+[ext_resource type="Texture2D" uid="uid://b37quotf157mm" path="res://UI/BattleScene/box bonk texture.png" id="1_6drlg"]
 [ext_resource type="Script" path="res://Battle/Actions/AttackBattleAction.cs" id="1_bf6pp"]
 
 [resource]
 script = ExtResource("1_bf6pp")
+Icon = ExtResource("1_6drlg")
 DisplayName = "Attack!"
 Weight = 1

@@ -19,12 +19,15 @@ public partial class BattleController : Node2D
 
 	public EventHandler OnWin;
 	public EventHandler OnLose;
+	public EventHandler OnEnd;
 
 	public EncounterResource currentEncounter;
 
 	[Export] public BattleTurn.StartOrder turnOrderStart = BattleTurn.StartOrder.PlayerGoesFirst;
 	public BattleTurn Turn { get; private set; } = new BattleTurn();
     public EncounterResource Encounter => currentEncounter;
+
+	private bool requestingEnd = false;
 
     public override void _Ready()
     {
@@ -94,9 +97,8 @@ public partial class BattleController : Node2D
             // Win after 2 seconds
             Tween tween = CreateTween();
             tween.TweenInterval(2);
-            tween.TweenCallback(Callable.From(() =>
-                Lose()
-            ));
+            tween.TweenCallback(Callable.From(() => End()));
+            tween.TweenCallback(Callable.From(() => Lose() ));
         }
 
 		// No more enemies left
@@ -107,10 +109,20 @@ public partial class BattleController : Node2D
 			// Win after 2 seconds
 			Tween tween = CreateTween();
 			tween.TweenInterval(2);
-			tween.TweenCallback(Callable.From(() =>
-				Win()
-			));
-		}
+            tween.TweenCallback(Callable.From(() => End()));
+            tween.TweenCallback(Callable.From(() => Win()));
+        }
+
+		else if (requestingEnd)
+		{
+            GD.Print("Ending battle!");
+
+            // Leave after 2 seconds
+            Tween tween = CreateTween();
+            tween.TweenInterval(2);
+            tween.TweenCallback(Callable.From(() => End()));
+        }
+
 		else
         {
 			// Tell the battler to do their turn
@@ -209,6 +221,22 @@ public partial class BattleController : Node2D
 		GD.Print($"{attacker.DisplayName} attacks {defender.DisplayName} and deals {amount} damage ({defender.Stats.Health} left)");
     }
 
+    public void Defend(BattlerResource battler)
+    {
+		// TODO: Apply defend status
+		// TODO: Create defend amount equation
+        GD.Print($"{battler.DisplayName} defends");
+    }
+
+	/// <summary>
+	/// Ask to end the battle on the next round.
+	/// Useful when running away, interupting a battle with a cutscene, ect.
+	/// </summary>
+	public void RequestStop()
+	{
+		requestingEnd = true;
+	}
+
     /// <summary>
     /// Can be called on either turn
     /// </summary>
@@ -287,6 +315,12 @@ public partial class BattleController : Node2D
 	private void Lose()
 	{
 		var handler = OnLose;
+		handler?.Invoke(this, EventArgs.Empty);
+	}
+
+	private void End()
+	{
+		var handler = OnEnd;
 		handler?.Invoke(this, EventArgs.Empty);
 	}
 

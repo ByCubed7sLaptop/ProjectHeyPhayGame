@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://birah3y2i8tcl"]
+
+[ext_resource type="Texture2D" uid="uid://c3t774sxq3oac" path="res://UI/BattleScene/box guard texture.png" id="1_h0hj8"]
+[ext_resource type="Script" path="res://Battle/Actions/GuardBattleAction.cs" id="2_wwsta"]
+
+[resource]
+script = ExtResource("2_wwsta")
+Icon = ExtResource("1_h0hj8")
+DisplayName = "Guard"
+Weight = 1

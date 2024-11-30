@@ -35,6 +35,16 @@ public partial class Player : CharacterBody2D
     private List<EntityInteractionHitbox> Interactables = new List<EntityInteractionHitbox>();
     private Label InteractLabel { get; set; }
 
+
+    [ExportCategory("AudioStreamPlayers")]
+    [Export] public AudioStreamPlayer2D JumpAudioStreamPlayer { get; set; }
+    [Export] public AudioStreamPlayer2D LandAudioStreamPlayer { get; set; }
+    [Export] public AudioStreamPlayer2D WalkAudioStreamPlayer { get; set; }
+    [Export] public AudioStreamPlayer2D HurtAudioStreamPlayer { get; set; }
+    [Export] public AudioStreamPlayer2D InteractAudioStreamPlayer { get; set; }
+
+
+
     public override void _Ready()
 	{
 		// Disabling a CollisionObject node during a physics callback is not allowed and will cause undesired behavior.
@@ -85,14 +95,30 @@ public partial class Player : CharacterBody2D
         if (!IsOnFloor()) PlayerVelocity.Y += gravity * (float)delta;
     }
 
+
+    float walkDelta = 0;
 	private void ProcessMovementDirection()
 	{
         // Get the input direction and handle the movement/deceleration.
         Vector2 direction = Input.GetVector("player_left", "player_right", "player_up", "player_down");
         if (direction != Vector2.Zero)
+        {
             PlayerVelocity.X = direction.X * Speed;
+            
+            if (IsOnFloor())
+                walkDelta += Math.Abs(PlayerVelocity.X);
+
+            if (walkDelta > 2000)
+            {
+                WalkAudioStreamPlayer.Play();
+                walkDelta = 0;
+            }
+        }
         else
+        {
             PlayerVelocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+            walkDelta = 1400; // Start higher to init first step
+        }
 
     }
 
@@ -117,14 +143,18 @@ public partial class Player : CharacterBody2D
         {
             PlayerVelocity.Y = -JumpVelocity;
             isJumping = true;
+            JumpAudioStreamPlayer.Play();
         }
 
         // If no longer requests to jump
         if (!requestJump && isJumping && PlayerVelocity.Y < gravity)
             PlayerVelocity.Y += gravity * (float)delta;
 
-        if (IsOnFloor())
+        if (IsOnFloor() && isJumping)
+        {
+            LandAudioStreamPlayer.Play();
             isJumping = false;
+        }
     }
 
     public void ProcessInteract()
@@ -156,11 +186,14 @@ public partial class Player : CharacterBody2D
     {
         Party.DamageAllMembers(1);
         Position = RespawnPosition;
+        HurtAudioStreamPlayer.Play();
     }
 
     private void OnTouchStageHazard()
     {
         Party.DamageRandomMember(1);
+        Position = RespawnPosition;
+        HurtAudioStreamPlayer.Play();
         //Get knocked back
         //Become invulnerable for a while
     }
@@ -224,6 +257,7 @@ public partial class Player : CharacterBody2D
         if (Interactables.Count > 0)
         {
             Interactables.First().Interact();
+            InteractAudioStreamPlayer.Play();
         }
     }
 }

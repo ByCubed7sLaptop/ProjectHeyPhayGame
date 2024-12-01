@@ -74,12 +74,12 @@ metadata/_edit_use_anchors_ = true
 [node name="Jump AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_225nx")
 volume_db = -8.707
-pitch_scale = 0.85
+pitch_scale = 0.66
 
 [node name="Land AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_88x7n")
 volume_db = -7.059
-pitch_scale = 0.73
+pitch_scale = 0.53
 
 [node name="Walk AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_62fqb")
@@ -91,3 +91,4 @@ stream = SubResource("AudioStreamRandomizer_4ibtc")
 
 [node name="Interact AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_nh1jc")
+volume_db = -20.235

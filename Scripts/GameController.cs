@@ -15,6 +15,7 @@ public partial class GameController : Node
 
     public BattleController battle;
 
+    public ScreenFade screenFade;
 
     public override void _Ready()
 	{

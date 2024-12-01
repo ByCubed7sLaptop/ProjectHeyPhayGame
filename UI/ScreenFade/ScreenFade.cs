@@ -11,15 +11,14 @@ public partial class ScreenFade : Node
         colorRect.Color = new Color(0, 0, 0, 0);
     }
 
-    private void Fade(Color target, float duration)
+    public Tween Fade(Color target, float duration, Tween tween = null)
     {
-        Tween tween = CreateTween();
+        tween ??= CreateTween();
         tween.TweenProperty(colorRect, "color", target, duration);
+        return tween;
     }
 
-    private void FadeOut(float duration)
-    {
-        Fade(Colors.Transparent, duration);
-    }
+    public Tween FadeOut(float duration, Tween tween = null) => Fade(colorRect.Color with { A=0 }, duration, tween);
+    
 
 }

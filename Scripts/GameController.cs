@@ -21,6 +21,7 @@ public partial class GameController : Node
 	{
 		Instance = this;
         DebugDrawer.Initialization();
+        screenFade = GetNode<ScreenFade>("ScreenFade");
     }
 
     public BattleController StartBattleWith(EncounterBody encounter)
@@ -54,6 +55,18 @@ public partial class GameController : Node
         // TODO: Assumes we're on the battle scene
         GetTree().Root.RemoveChild(battle);
         GetTree().Root.AddChild(LevelController.Instance);
+    }
+
+
+
+    public void LoadLevel(PackedScene scene)
+    {
+        GetTree().ChangeSceneToPacked(scene);
+    }
+    public void LoadLevel(string path)
+    {
+        var scene = ResourceLoader.Load<PackedScene>(path);
+        LoadLevel(scene);
     }
 }
 

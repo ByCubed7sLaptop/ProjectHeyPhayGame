@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=9 format=3 uid="uid://s14247na6fm8"]
+
+[ext_resource type="Resource" uid="uid://cl2m5kjravd7s" path="res://Battle/Actions/BattleAction_Attack.tres" id="1_h1n0w"]
+[ext_resource type="Resource" uid="uid://birah3y2i8tcl" path="res://Battle/Actions/BattleAction_Guard.tres" id="2_etx38"]
+[ext_resource type="Resource" uid="uid://c6q82ugcv6b8h" path="res://Battle/Actions/BattleAction_Item.tres" id="3_ujkd1"]
+[ext_resource type="Resource" uid="uid://rtoceocws6nn" path="res://Battle/Actions/BattleAction_Run.tres" id="4_aiwcm"]
+[ext_resource type="Resource" uid="uid://c3xfoe3q0yojr" path="res://Battle/Actions/BattleAction_Special.tres" id="5_2y0et"]
+[ext_resource type="Resource" uid="uid://cmmx3bn3sn6mo" path="res://Battle/Party/Gremdolyn/Gremdolyn Base Stats.tres" id="6_pnnb2"]
+[ext_resource type="Texture2D" uid="uid://chl1ww7oed1xj" path="res://Battle/Party/Gremdolyn/Grem.png" id="7_ll7vd"]
+[ext_resource type="Script" path="res://Battle/Party/PartyMemberResource.cs" id="8_0omft"]
+
+[resource]
+script = ExtResource("8_0omft")
+DisplayName = "Gremdolyn"
+Stats = ExtResource("6_pnnb2")
+Texture = ExtResource("7_ll7vd")
+Actions = Array[Resource]([ExtResource("1_h1n0w"), ExtResource("2_etx38"), ExtResource("3_ujkd1"), ExtResource("4_aiwcm"), ExtResource("5_2y0et")])

@@ -5,9 +5,10 @@ using System;
 public partial class LevelController : Node2D
 {
 	// The current level being used
-	public static LevelController Instance { get; set; }
+	public static LevelController Instance { get; private set; }
+	private static Vector2I? PlayerSpawnPositionOverride = null;
 
-	public Player Player { get; private set; }
+    public Player Player { get; private set; }
 	public CanvasLayer HUD { get; private set; }
 
     [Export] public LevelCamera Camera;
@@ -18,7 +19,14 @@ public partial class LevelController : Node2D
 		Instance = this;
 
 		// Create the player
-		Player = Player.CreateAt(this, PlayerSpawnPosition.Position);
+		if (PlayerSpawnPositionOverride is null)
+			Player = Player.CreateAt(this, PlayerSpawnPosition.Position);
+		else
+		{
+			Player = Player.CreateAt(this, (Vector2I)PlayerSpawnPositionOverride);
+			PlayerSpawnPositionOverride = null;
+        }
+
 		Player.OnHitEncounter += OnPlayerHitEncounter;
 
 		Camera.Target = Player;
@@ -56,4 +64,9 @@ public partial class LevelController : Node2D
 		// Tell the game controller to start the battle mode
 		Game.Controller.StartBattleWith(encounterBody);
 	}
+
+	public void OverrideNextPlayerSpawnPosition(Vector2I position)
+	{
+        PlayerSpawnPositionOverride = position;
+    }
 }

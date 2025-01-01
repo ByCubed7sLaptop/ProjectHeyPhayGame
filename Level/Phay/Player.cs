@@ -152,7 +152,9 @@ public partial class Player : CharacterBody2D
 
         if (IsOnFloor() && isJumping)
         {
-            LandAudioStreamPlayer.Play();
+            if (PlayerVelocity.Y >= 0)
+                LandAudioStreamPlayer.Play();
+
             isJumping = false;
         }
     }

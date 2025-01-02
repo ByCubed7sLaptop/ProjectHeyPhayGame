@@ -5,12 +5,9 @@ using System.Data;
 
 public partial class LevelCamera : Camera2D
 {
-
-
     [ExportCategory("Updates")]
     [Export] bool UpdateOnPhysicsProcess { get; set; } = false;
     [Export] bool UpdateOnProcess { get; set; } = false;
-    
 
     [ExportCategory("Position")]
     [Export]
@@ -27,7 +24,6 @@ public partial class LevelCamera : Camera2D
     [Export] float VelocityLookAhead { get; set; } = 5;
     [Export] float Speed { get; set; } = 3.2f;
 
-
     [ExportCategory("Zoom")]
     [Export] float ZoomDefault { get; set; } = 3f;
 	[Export] float ZoomExponential { get; set; } = 2000f;
@@ -37,17 +33,18 @@ public partial class LevelCamera : Camera2D
 
 	private CharacterBody2D _target;
 	private Vector2 targetPosition;
+	private Vector2 targetFloorLevel;
     Dictionary<Node2D, int> PointsOfInterest { get; set; } = new();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        var example = GetTree().Root.GetNode<Node2D>("Level/Spike");
-        Tween tween = CreateTween();
-        tween.TweenInterval(2);
-        tween.TweenCallback(Callable.From(() => { AddPOI(example); }));
-        tween.TweenInterval(4);
-        tween.TweenCallback(Callable.From(() => { RemovePOI(example); }));
+        //var example = GetTree().Root.GetNode<Node2D>("Level/Spike");
+        //Tween tween = CreateTween();
+        //tween.TweenInterval(2);
+        //tween.TweenCallback(Callable.From(() => { AddPOI(example); }));
+        //tween.TweenInterval(4);
+        //tween.TweenCallback(Callable.From(() => { RemovePOI(example); }));
 
 
         if (Target is null)
@@ -74,20 +71,16 @@ public partial class LevelCamera : Camera2D
         if (Target is null)
             return;
 
+        // Update floored position
+        if (Target.IsOnFloor())
+            targetFloorLevel = Target.Position;
+
         // Follow the target if below or moving down
         if (Target.Position.Y >= Position.Y)
             targetPosition = Target.Position;
 
-        // Move to target (more slowler) only if on the floor, no matter what Y level
-        else if (Target.IsOnFloor())
-            targetPosition = new Vector2(
-                Target.Position.X,
-                (float)Mathf.Lerp(Position.Y, Target.Position.Y, 0.2f)
-            );
-
         // Otherwise, Lock Y and only move to X of target
-        else
-            targetPosition = targetPosition with { X = Target.Position.X };
+        else targetPosition = targetFloorLevel with { X = Target.Position.X };
 
         // Check the velocity and pivot forwards
         targetPosition.X += Target.Velocity.X / VelocityLookAhead;

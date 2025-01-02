@@ -35,6 +35,7 @@ public partial class Player : CharacterBody2D
     private List<EntityInteractionHitbox> Interactables = new List<EntityInteractionHitbox>();
     private Label InteractLabel { get; set; }
 
+    public int CameraPanYOffset { get; set; } = 100;
 
     [ExportCategory("AudioStreamPlayers")]
     [Export] public AudioStreamPlayer2D JumpAudioStreamPlayer { get; set; }
@@ -71,6 +72,7 @@ public partial class Player : CharacterBody2D
         MoveAndSlide();
 		ProcessRespawnPosition();
         ProcessInteract();
+        ProcessPan();
     }
 
     private void ProcessMovementVelocity(double delta)
@@ -100,10 +102,9 @@ public partial class Player : CharacterBody2D
 	private void ProcessMovementDirection()
 	{
         // Get the input direction and handle the movement/deceleration.
-        Vector2 direction = Input.GetVector("player_left", "player_right", "player_up", "player_down");
-        if (direction != Vector2.Zero)
+        if (InputDirection != Vector2.Zero)
         {
-            PlayerVelocity.X = direction.X * Speed;
+            PlayerVelocity.X = InputDirection.X * Speed;
             
             if (IsOnFloor())
                 walkDelta += Math.Abs(PlayerVelocity.X);
@@ -261,6 +262,65 @@ public partial class Player : CharacterBody2D
             Interactables.First().Interact();
             InteractAudioStreamPlayer.Play();
         }
+    }
+
+
+    // Input states
+
+    private Vector2 InputDirection { get; set; }
+    private Vector2 LastInputDirection { get; set; }
+    private bool IsDownHeld { get; set; }
+    private bool IsUpHeld { get; set; }
+
+    private double holdTime = 0.8;
+    private double upLastPressed = 0.0;
+    private double downLastPressed = 0.0;
+    public override void _Input(InputEvent @event)
+    {
+        InputDirection = Input.GetVector("player_left", "player_right", "player_up", "player_down");
+
+        if (InputDirection != Vector2.Zero)
+            LastInputDirection = InputDirection;
+
+        // Calculate holding the up down button
+        if (InputDirection.Y >= 0) upLastPressed = Time.GetUnixTimeFromSystem();
+        if (InputDirection.Y <= 0) downLastPressed = Time.GetUnixTimeFromSystem();
+        IsUpHeld = InputDirection.Y < 0 && Time.GetUnixTimeFromSystem() - upLastPressed > holdTime;
+        IsDownHeld = InputDirection.Y > 0 && Time.GetUnixTimeFromSystem() - downLastPressed > holdTime;
+    }
+
+    public void ProcessPan()
+    {
+        if (IsUpHeld)
+            PanUp();
+        else if (IsDownHeld)
+            PanDown();
+        else
+            PanReset();
+    }
+
+    /// <summary>
+    /// Pan the camera downwards
+    /// </summary>
+    public void PanDown()
+    {
+        Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = CameraPanYOffset };
+    }
+
+    /// <summary>
+    /// Pan the camera upwards
+    /// </summary>
+    public void PanUp()
+    {
+        Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = -CameraPanYOffset };
+    }
+
+    /// <summary>
+    /// Reset the camera pan offset
+    /// </summary>
+    public void PanReset()
+    {
+        Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = 0 };
     }
 }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bob2spgcbowqy"]
+[gd_scene load_steps=15 format=3 uid="uid://bob2spgcbowqy"]
 
 [ext_resource type="PackedScene" uid="uid://b5he6b8gh5ik1" path="res://Level/Level Base.tscn" id="1_48r12"]
 [ext_resource type="Texture2D" uid="uid://vl6uqsdoym2e" path="res://Level/Enviroment/Tree Texture.png" id="2_kl5wn"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dxf8ybafr23ox" path="res://Level/Interactables/Lever/Lever.tscn" id="10_hvrrj"]
 [ext_resource type="PackedScene" uid="uid://dqubsh2fba1vr" path="res://Level/Interactables/Sign/Sign.tscn" id="11_32ah1"]
 [ext_resource type="Script" path="res://Level/LevelTransition/TransitionArea.cs" id="12_xto3q"]
+[ext_resource type="Texture2D" uid="uid://457cdtwunn5h" path="res://Level/Spike/spike.png" id="13_kwku5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hyveu"]
 size = Vector2(100, 100)
@@ -93,3 +94,7 @@ spawnPosition = Vector2i(580, -15)
 shape = SubResource("RectangleShape2D_hyveu")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
+
+[node name="Spike" type="Sprite2D" parent="." index="5"]
+position = Vector2(341, -87)
+texture = ExtResource("13_kwku5")

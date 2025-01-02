@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cmmx3bn3sn6mo"]
+
+[ext_resource type="Script" path="res://Battle/StatsResource.cs" id="1_x3bvl"]
+
+[resource]
+script = ExtResource("1_x3bvl")
+Health = 120
+HealthMax = 120
+Cutie = 10
+CutieMax = 10
+Power = 2
+Defence = 3
+Speed = 1
+Luck = 2
+Exp = 0

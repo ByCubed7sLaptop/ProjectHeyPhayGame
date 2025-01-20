@@ -12,8 +12,6 @@ PlayerSpawnPosition = NodePath("Start Location")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
 process_callback = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
 script = ExtResource("3_avomq")
 UpdateOnPhysicsProcess = true
 UpdateOnProcess = true

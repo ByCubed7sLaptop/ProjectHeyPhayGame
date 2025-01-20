@@ -9,6 +9,8 @@ public partial class CircularMenu : Control
     [Export] public Vector2 positionScale = Vector2.One;
     [Export] public Vector2 positionOffset = Vector2.Zero;
 
+    [Export] public float unselectedBrightness = 0.6f;
+
     private Node2D target;
     private BattlerResource targetBattler;
 
@@ -92,6 +94,12 @@ public partial class CircularMenu : Control
             Tween tween = CreateTween();
             tween.SetParallel(true);
             tween.TweenProperty(menuIcons[i], "z_index", (int)(iconPosition.Y + radius * positionScale.Y), 0.1f);
+
+
+            if (i != currentSelectionIndex)
+                tween.TweenProperty(menuIcons[i], "modulate", new Color(unselectedBrightness, unselectedBrightness, unselectedBrightness), 0.1f);
+            else tween.TweenProperty(menuIcons[i], "modulate", Colors.White, 0.1f);
+
             tween.TweenProperty(menuIcons[i], "position", iconPosition, 0.2f);
 
             if (i == currentSelectionIndex)

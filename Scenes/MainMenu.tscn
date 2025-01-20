@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvs8nqo7v0vgm"]
+[gd_scene load_steps=5 format=3 uid="uid://cvs8nqo7v0vgm"]
 
 [ext_resource type="Texture2D" uid="uid://bpxf0csf4gyib" path="res://UI/MainMenu/MainMenu Title Texture.png" id="2_0ph81"]
 [ext_resource type="Script" path="res://UI/MainMenu/ButtonNewGame.cs" id="2_8nlm3"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="3_j07ig"]
+[ext_resource type="Script" path="res://UI/MainMenu/QuitButton.cs" id="4_hy4mu"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -64,3 +65,4 @@ text = "Options"
 [node name="Button Quit" type="Button" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+script = ExtResource("4_hy4mu")

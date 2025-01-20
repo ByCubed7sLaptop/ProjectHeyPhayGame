@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b11x8rvewxq16"]
+[gd_scene load_steps=12 format=3 uid="uid://b11x8rvewxq16"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_53c0d"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="2_87usi"]
@@ -8,18 +8,23 @@
 [ext_resource type="Resource" uid="uid://lw8hu80csg1" path="res://Battle/Party/Phay PartyMemberResource.tres" id="4_r61ni"]
 [ext_resource type="PackedScene" uid="uid://dk06usw83mpy3" path="res://Level/Phay/PhayPlayer.tscn" id="5_in20t"]
 [ext_resource type="Script" path="res://Scripts/PartyController.cs" id="6_7sow6"]
+[ext_resource type="PackedScene" uid="uid://c1b6xtx86ewu1" path="res://UI/PauseMenu/PauseMenu.tscn" id="6_35iy3"]
 [ext_resource type="Resource" uid="uid://s14247na6fm8" path="res://Battle/Party/Gremdolyn/Gremdolyn Party Member.tres" id="9_5f1gf"]
 [ext_resource type="Script" path="res://UI/ScreenFade/ScreenFade.cs" id="9_ksqvr"]
 
-[node name="GameController" type="Node"]
+[node name="GameController" type="Node" node_paths=PackedStringArray("pauseMenu")]
 script = ExtResource("1_53c0d")
 LevelPackedScene = ExtResource("2_87usi")
 BattlePackedScene = ExtResource("3_wmyri")
 LevelHudPackedScene = ExtResource("4_jjs40")
 PlayerPackedScene = ExtResource("5_in20t")
+pauseMenu = NodePath("CanvasLayer/PauseMenu")
 
-[node name="DebugDrawer" type="Node2D" parent="."]
-script = ExtResource("4_7e2ig")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_35iy3")]
+process_mode = 3
+visible = false
 
 [node name="PartyController" type="Node" parent="."]
 script = ExtResource("6_7sow6")
@@ -39,3 +44,6 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
+
+[node name="DebugDrawer" type="Node2D" parent="."]
+script = ExtResource("4_7e2ig")

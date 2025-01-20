@@ -14,6 +14,7 @@ public partial class GameController : Node
 	[Export] public PackedScene PlayerPackedScene;
 
     public BattleController battle;
+    [Export] public PauseMenu pauseMenu;
 
     public ScreenFade screenFade;
 
@@ -68,6 +69,20 @@ public partial class GameController : Node
         var scene = ResourceLoader.Load<PackedScene>(path);
         LoadLevel(scene);
     }
+
+    public void ShowPauseMenu()
+    {
+        GetTree().Paused = true;
+        pauseMenu.Show();
+    }
+
+    public void HidePauseMenu()
+    {
+        GetTree().Paused = false;
+        pauseMenu.Hide();
+    }
+
+
 }
 
 
@@ -78,4 +93,9 @@ static public class Game
     public static BattleController Battle => GameController.Battle;
     public static LevelController Level => LevelController.Instance;
     public static CanvasLayer HUD => Level.HUD;
+
+
+    public static void Pause() => Controller.ShowPauseMenu();
+    public static void Play() => Controller.HidePauseMenu();
+    public static bool IsPaused => Controller.GetTree().Paused;
 }

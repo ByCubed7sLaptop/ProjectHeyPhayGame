@@ -1,7 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://hog7keqygwis"]
+[gd_scene load_steps=4 format=3 uid="uid://hog7keqygwis"]
 
 [ext_resource type="PackedScene" uid="uid://cqsejobjamhkt" path="res://UI/HUD/PlayerHealthbar/PlayerHealthbar.tscn" id="1_du0q5"]
+[ext_resource type="Texture2D" uid="uid://dda3ycxa8xxfw" path="res://UI/PauseMenu/pause.png" id="2_1loi2"]
+[ext_resource type="Script" path="res://UI/PauseMenu/PauseButton.cs" id="3_1gbfi"]
 
 [node name="Hud" type="CanvasLayer"]
 
 [node name="PlayerHealthbar" parent="." instance=ExtResource("1_du0q5")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Pause" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 64.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_1loi2")
+script = ExtResource("3_1gbfi")

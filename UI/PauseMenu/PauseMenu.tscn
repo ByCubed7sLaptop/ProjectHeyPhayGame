@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1b6xtx86ewu1"]
+
+[ext_resource type="Script" path="res://UI/PauseMenu/PauseMenu.cs" id="1_71mx0"]
+[ext_resource type="Script" path="res://UI/PauseMenu/UnpauseButton.cs" id="2_tn38j"]
+[ext_resource type="Shader" path="res://UI/PauseMenu/Blur/Blur.gdshader" id="2_x8twn"]
+[ext_resource type="Script" path="res://UI/MainMenu/QuitButton.cs" id="3_sinc2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwor2"]
+shader = ExtResource("2_x8twn")
+shader_parameter/lod = 2.531
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_71mx0")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gwor2")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.141176, 0.141176, 0.141176, 0.266667)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -87.0
+offset_right = 123.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -319.5
+offset_top = -239.0
+offset_right = 319.5
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect2/VBoxContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Continue" type="Button" parent="ColorRect2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+script = ExtResource("2_tn38j")
+
+[node name="Button Options" type="Button" parent="ColorRect2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Button Quit" type="Button" parent="ColorRect2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+script = ExtResource("3_sinc2")

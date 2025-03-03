@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvs8nqo7v0vgm"]
+[gd_scene load_steps=5 format=3 uid="uid://cvs8nqo7v0vgm"]
 
 [ext_resource type="Texture2D" uid="uid://bi6j1qp8f05w7" path="res://UI/MainMenu/The Legend of Phay.png" id="1_pf8iv"]
 [ext_resource type="Script" path="res://UI/MainMenu/ButtonNewGame.cs" id="2_8nlm3"]

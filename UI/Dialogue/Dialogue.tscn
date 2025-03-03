@@ -1,0 +1,134 @@
+[gd_scene load_steps=3 format=3 uid="uid://d132u462006e"]
+
+[ext_resource type="Texture2D" uid="uid://t5bhie4bb3h" path="res://UI/Dialogue/PhayDialogueTemp.png" id="1_4prm8"]
+[ext_resource type="Texture2D" uid="uid://d36xic41lnyy8" path="res://UI/Dialogue/OtherDialogueTemp.png" id="2_0hhtv"]
+
+[node name="Dialogue" type="CanvasLayer"]
+
+[node name="Dialgue" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PhayDialogueTemp" type="TextureRect" parent="Dialgue"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -599.0
+offset_top = -563.0
+offset_right = 66.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_4prm8")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="PhayDialogueTemp2" type="TextureRect" parent="Dialgue"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -563.0
+offset_right = 605.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_0hhtv")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Textbox Positioner" type="HBoxContainer" parent="Dialgue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Textbox" type="MarginContainer" parent="Dialgue/Textbox Positioner"]
+custom_minimum_size = Vector2(700, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Speaker Container" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container"]
+layout_mode = 2
+color = Color(0.231373, 0.231373, 0.231373, 0.784314)
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Speaker" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container/MarginContainer"]
+z_index = 1
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.576471, 0.45098, 1)
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]Phayzini[/b]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Textbox Container" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox"]
+custom_minimum_size = Vector2(700, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 8
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+
+[node name="ColorRect" type="ColorRect" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+layout_mode = 2
+color = Color(0.231373, 0.231373, 0.231373, 0.784314)
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="Text Container" type="Control" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer"]
+custom_minimum_size = Vector2(700, 180)
+layout_mode = 2
+
+[node name="Text" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer/Text Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "Aba aba aba aba aba aba aba aba aba aba aba aba aba aba aba"
+fit_content = true
+scroll_active = false

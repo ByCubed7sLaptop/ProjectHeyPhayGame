@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvs8nqo7v0vgm"]
 
-[ext_resource type="Texture2D" uid="uid://bpxf0csf4gyib" path="res://UI/MainMenu/MainMenu Title Texture.png" id="2_0ph81"]
+[ext_resource type="Texture2D" uid="uid://bi6j1qp8f05w7" path="res://UI/MainMenu/The Legend of Phay.png" id="1_pf8iv"]
 [ext_resource type="Script" path="res://UI/MainMenu/ButtonNewGame.cs" id="2_8nlm3"]
+[ext_resource type="Texture2D" uid="uid://ck8dh4ltbheif" path="res://UI/MainMenu/The Legend of Phay Title.png" id="2_fhxo8"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="3_j07ig"]
 
 [node name="MainMenu" type="Control"]
@@ -17,6 +18,15 @@ layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="TheLegendOfPhay" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 1162.0
+offset_bottom = 658.0
+texture = ExtResource("1_pf8iv")
+stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -35,7 +45,8 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_0ph81")
+texture = ExtResource("2_fhxo8")
+stretch_mode = 5
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 28.3)

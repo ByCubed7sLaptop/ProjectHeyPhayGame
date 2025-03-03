@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d132u462006e"]
+[gd_scene load_steps=5 format=3 uid="uid://d132u462006e"]
 
 [ext_resource type="Texture2D" uid="uid://t5bhie4bb3h" path="res://UI/Dialogue/PhayDialogueTemp.png" id="1_4prm8"]
 [ext_resource type="Texture2D" uid="uid://d36xic41lnyy8" path="res://UI/Dialogue/OtherDialogueTemp.png" id="2_0hhtv"]
+[ext_resource type="Texture2D" uid="uid://cgwlpxnbw6o6j" path="res://UI/Dialogue/textbox2.png" id="3_obrtg"]
+[ext_resource type="Texture2D" uid="uid://c35h1ys3spe4i" path="res://UI/Dialogue/textbox.png" id="4_7q0vq"]
 
 [node name="Dialogue" type="CanvasLayer"]
 
@@ -77,6 +79,14 @@ size_flags_vertical = 0
 layout_mode = 2
 color = Color(0.231373, 0.231373, 0.231373, 0.784314)
 
+[node name="ColorRect2" type="TextureRect" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container"]
+z_index = 1
+clip_contents = true
+layout_mode = 2
+texture = ExtResource("3_obrtg")
+expand_mode = 1
+stretch_mode = 2
+
 [node name="MarginContainer" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
@@ -106,8 +116,13 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 50
 
 [node name="ColorRect" type="ColorRect" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+visible = false
 layout_mode = 2
 color = Color(0.231373, 0.231373, 0.231373, 0.784314)
+
+[node name="ColorRect2" type="TextureRect" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+layout_mode = 2
+texture = ExtResource("4_7q0vq")
 
 [node name="MarginContainer" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
 layout_mode = 2
@@ -121,6 +136,7 @@ custom_minimum_size = Vector2(700, 180)
 layout_mode = 2
 
 [node name="Text" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer/Text Container"]
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

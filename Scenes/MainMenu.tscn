@@ -1,9 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvs8nqo7v0vgm"]
+[gd_scene load_steps=12 format=3 uid="uid://cvs8nqo7v0vgm"]
 
+[ext_resource type="Shader" path="res://Shaders/Clouds.gdshader" id="1_44cdt"]
 [ext_resource type="Texture2D" uid="uid://bi6j1qp8f05w7" path="res://UI/MainMenu/The Legend of Phay.png" id="1_pf8iv"]
 [ext_resource type="Script" path="res://UI/MainMenu/ButtonNewGame.cs" id="2_8nlm3"]
+[ext_resource type="Texture2D" uid="uid://dl4avsfjigdxy" path="res://Shaders/bubbles.png" id="2_cosp1"]
 [ext_resource type="Texture2D" uid="uid://ck8dh4ltbheif" path="res://UI/MainMenu/The Legend of Phay Title.png" id="2_fhxo8"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="3_j07ig"]
+[ext_resource type="Shader" path="res://Shaders/Bounce.gdshader" id="4_emjxi"]
+[ext_resource type="Shader" path="res://Shaders/Diamond transistion.gdshader" id="8_wh0tg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tc714"]
+shader = ExtResource("1_44cdt")
+shader_parameter/bottom_color = Color(0.286275, 0.501961, 1, 1)
+shader_parameter/top_color = Color(0.768627, 0.847059, 1, 1)
+shader_parameter/layer_count = 6
+shader_parameter/time_scale = 0.034
+shader_parameter/base_intensity = 0.691
+shader_parameter/size = 0.70401
+shader_parameter/tex = ExtResource("2_cosp1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6ti1"]
+shader = ExtResource("4_emjxi")
+shader_parameter/do_abs = null
+shader_parameter/do_quantize = null
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(0, 30)
+shader_parameter/sine_speed = Vector2(1, 0.6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgt02"]
+shader = ExtResource("8_wh0tg")
+shader_parameter/diamond_color = Color(0, 0, 0, 1)
+shader_parameter/aspect_ratio = 1.61
+shader_parameter/diamonds_count = 10.0
+shader_parameter/delta = 0.0
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -14,10 +43,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tc714")
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
-color = Color(0.141176, 0.141176, 0.141176, 1)
 
 [node name="TheLegendOfPhay" type="TextureRect" parent="."]
 layout_mode = 0
@@ -44,6 +73,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+material = SubResource("ShaderMaterial_k6ti1")
 layout_mode = 2
 texture = ExtResource("2_fhxo8")
 stretch_mode = 5
@@ -63,6 +93,7 @@ layout_mode = 2
 text = "New Game"
 script = ExtResource("2_8nlm3")
 targetScene = ExtResource("3_j07ig")
+transistion = SubResource("ShaderMaterial_cgt02")
 
 [node name="Button Continue" type="Button" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -75,3 +106,10 @@ text = "Options"
 [node name="Button Quit" type="Button" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+
+[node name="TransitionRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_cgt02")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2

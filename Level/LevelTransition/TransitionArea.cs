@@ -22,9 +22,9 @@ public partial class TransitionArea : Area2D
 
         GD.Print($"spawnPosition: {spawnPosition}");
 
-        Tween tween = Game.Controller.screenFade.Fade(Colors.Black, 1); 
+        Tween tween = Game.Controller.screenFade.FadeColorTo(Colors.Black, 1); 
         tween.TweenCallback(Callable.From(() => { Game.Level.OverrideNextPlayerSpawnPosition(spawnPosition); }));
         tween.TweenCallback(Callable.From(() => { Game.Controller.LoadLevel(targetScenePath); }));
-        Game.Controller.screenFade.FadeOut(1, tween);
+        Game.Controller.screenFade.FadeColorOut(1, tween);
     }
 }

@@ -18,7 +18,6 @@ UpdateOnProcess = true
 ZoomDefault = 3.5
 
 [node name="Start Location" type="Node2D" parent="."]
-position = Vector2(-158, -153)
 
 [node name="Enviroment" type="Node2D" parent="."]
 

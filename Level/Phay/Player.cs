@@ -201,7 +201,6 @@ public partial class Player : CharacterBody2D
         //Become invulnerable for a while
     }
 
-
 	// Create the player and place at the given position
 	public static Player CreateAt(Node parent, Vector2 position)
     {

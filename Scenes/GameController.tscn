@@ -30,7 +30,7 @@ shader_parameter/resolution = 150.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hggdm"]
 shader = ExtResource("13_hicqn")
-shader_parameter/delta = -0.6
+shader_parameter/delta = 0.0
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/aspect_ratio = Vector2(1, 1)
 

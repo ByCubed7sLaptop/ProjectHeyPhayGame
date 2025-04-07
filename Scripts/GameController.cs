@@ -34,10 +34,10 @@ public partial class GameController : Node
         // Set up the battle scene
         battle = BattlePackedScene.Instantiate<BattleController>();
 
-        battle.currentEncounter = encounter.Resource.Duplicate(true) as EncounterResource;
 
         // Spawn the player back
         //battle.OnEnd += (e, o) => level.OverrideNextPlayerSpawnPosition(level.Player.Position);
+        battle.currentEncounter = encounter.GetResource();
 
         // TODO: Move to EncounterBody destroy method to add effects / ect
         battle.OnEnd += (e, o) => encounter.QueueFree();

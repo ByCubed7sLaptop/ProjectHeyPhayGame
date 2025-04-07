@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b11x8rvewxq16"]
+[gd_scene load_steps=18 format=3 uid="uid://b11x8rvewxq16"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_53c0d"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="2_87usi"]
@@ -10,6 +10,32 @@
 [ext_resource type="Script" path="res://Scripts/PartyController.cs" id="6_7sow6"]
 [ext_resource type="Resource" uid="uid://s14247na6fm8" path="res://Battle/Party/Gremdolyn/Gremdolyn Party Member.tres" id="9_5f1gf"]
 [ext_resource type="Script" path="res://UI/ScreenFade/ScreenFade.cs" id="9_ksqvr"]
+[ext_resource type="Shader" path="res://Shaders/Diamond transistion.gdshader" id="11_rvlk6"]
+[ext_resource type="Shader" path="res://Shaders/Blocky transistion.gdshader" id="12_n4f1e"]
+[ext_resource type="Shader" path="res://Shaders/Cut transistion.gdshader" id="13_hicqn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_runlf"]
+shader = ExtResource("11_rvlk6")
+shader_parameter/diamond_color = Color(0, 0, 0, 1)
+shader_parameter/aspect_ratio = 1.61
+shader_parameter/diamonds_count = 10.0
+shader_parameter/delta = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0vm6"]
+shader = ExtResource("12_n4f1e")
+shader_parameter/delta = 0.0
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/aspect_ratio = Vector2(1.8, 1)
+shader_parameter/resolution = 150.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hggdm"]
+shader = ExtResource("13_hicqn")
+shader_parameter/delta = 0.0
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/aspect_ratio = Vector2(1, 1)
+
+[sub_resource type="Environment" id="Environment_m3gem"]
+background_mode = 3
 
 [node name="GameController" type="Node"]
 script = ExtResource("1_53c0d")
@@ -28,8 +54,12 @@ CurrentParty = Array[Resource]([ExtResource("4_r61ni"), ExtResource("9_5f1gf")])
 [node name="ScreenFade" type="CanvasLayer" parent="."]
 layer = 5
 script = ExtResource("9_ksqvr")
+shaderMaterialDiamonds = SubResource("ShaderMaterial_runlf")
+shaderMaterialBlocky = SubResource("ShaderMaterial_o0vm6")
+shaderMaterialCut = SubResource("ShaderMaterial_hggdm")
 
 [node name="ColorRect" type="ColorRect" parent="ScreenFade"]
+material = SubResource("ShaderMaterial_hggdm")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -39,3 +69,6 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m3gem")

@@ -27,42 +27,30 @@ public partial class GameController : Node
         screenFade ??= GetNode<ScreenFade>("ScreenFade");
     }
 
-    public BattleController StartBattleWith(EncounterBody encounter)
+    public void StartBattleWith(EncounterBody encounter)
     {
         // TODO: Assumes level controller is loaded and is the main scene
 
-        // Set up the battle scene
-        battle ??= BattlePackedScene.Instantiate<BattleController>();
+        // Clear out the old battle cache
+        if (battle is not null)
+        {
+            GetTree().Root.RemoveChild(battle);
+            battle.QueueFree();
+            battle = null;
+        }
 
+        // Set up the battle scene
+        battle = BattlePackedScene.Instantiate<BattleController>();
         battle.currentEncounter = encounter.GetResource();
 
         // TODO: Move to EncounterBody destroy method to add effects / ect
         battle.OnEnd += (e, o) => encounter.QueueFree();
         battle.OnEnd += (e, o) => TransferToLevel();
 
-        // Clear out the battle cache (or don't if you want the player to be able to reenter the battle later?)
-        battle.OnEnd += (e, o) => {
-
-            var battleToRemove = battle;
-            battle = null;
-
-            // Gives time to transition out of the scene before removing
-            // TODO: Transition should use a snapshot to transition through
-            var tween = CreateTween();
-            tween.TweenInterval(3);
-            tween.TweenCallback(Callable.From(() => {
-                GetTree().Root.RemoveChild(battleToRemove);
-                battleToRemove.QueueFree();
-            }));
-
-        };
-
         // TODO: Change to game over scene or respawn at room enterence, ect.
         battle.OnLose += (e, o) => Party.FullHeal();
 
         TransferToBattle();
-
-        return battle;
     }
 
     /// <summary>
@@ -70,6 +58,12 @@ public partial class GameController : Node
     /// </summary>
     public void TransferToBattle()
     {
+        if (battle is null)
+        {
+            GD.PushError("Transfer to battle called but Battle is null!");
+            throw new Exception("Transfer to battle called but Battle is null!");
+        }
+
         GetTree().Paused = true;
 
         // TODO: Assumes we're on the level scene
@@ -125,7 +119,7 @@ public partial class GameController : Node
 
             isLoadingInProgress = false;
             GetTree().Paused = false;
-        }, 1.5f).SetPauseMode(Tween.TweenPauseMode.Process);
+        }, 1.0f).SetPauseMode(Tween.TweenPauseMode.Process);
     }
     public void LoadLevel(string path) => LoadLevel(ResourceLoader.Load<PackedScene>(path));
 

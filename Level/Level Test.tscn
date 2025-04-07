@@ -87,8 +87,8 @@ scale = Vector2(0.25, 0.25)
 [node name="Transition Area2D" type="Area2D" parent="." index="4"]
 position = Vector2(649, -51)
 script = ExtResource("12_xto3q")
-targetScenePath = "res://Level/Level Test.tscn"
-spawnPosition = Vector2i(580, -15)
+targetScenePath = "res://Level/Level Plains.tscn"
+spawnPosition = Vector2(-173, -24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Transition Area2D" index="0"]
 shape = SubResource("RectangleShape2D_hyveu")

@@ -32,17 +32,30 @@ public partial class GameController : Node
         // TODO: Assumes level controller is loaded and is the main scene
 
         // Set up the battle scene
-        battle = BattlePackedScene.Instantiate<BattleController>();
+        battle ??= BattlePackedScene.Instantiate<BattleController>();
 
-
-        // Spawn the player back
-        //battle.OnEnd += (e, o) => level.OverrideNextPlayerSpawnPosition(level.Player.Position);
         battle.currentEncounter = encounter.GetResource();
 
         // TODO: Move to EncounterBody destroy method to add effects / ect
         battle.OnEnd += (e, o) => encounter.QueueFree();
         battle.OnEnd += (e, o) => TransferToLevel();
 
+        // Clear out the battle cache (or don't if you want the player to be able to reenter the battle later?)
+        battle.OnEnd += (e, o) => {
+
+            var battleToRemove = battle;
+            battle = null;
+
+            // Gives time to transition out of the scene before removing
+            // TODO: Transition should use a snapshot to transition through
+            var tween = CreateTween();
+            tween.TweenInterval(3);
+            tween.TweenCallback(Callable.From(() => {
+                GetTree().Root.RemoveChild(battleToRemove);
+                battleToRemove.QueueFree();
+            }));
+
+        };
 
         // TODO: Change to game over scene or respawn at room enterence, ect.
         battle.OnLose += (e, o) => Party.FullHeal();

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c7xabestmmijq"
+path="res://.godot/imported/Forest Ambience.mp3-ad34d1ef6fc17e8d94ff7f30d2477616.mp3str"
+
+[deps]
+
+source_file="res://Audio/Soundtracks/Forest Ambience.mp3"
+dest_files=["res://.godot/imported/Forest Ambience.mp3-ad34d1ef6fc17e8d94ff7f30d2477616.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

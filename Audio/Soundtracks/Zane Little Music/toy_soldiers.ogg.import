@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://rb6pwqj50q0e"
+path="res://.godot/imported/toy_soldiers.ogg-228781f8b76ea3aa2650a8cb27dcd3d3.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Soundtracks/Zane Little Music/toy_soldiers.ogg"
+dest_files=["res://.godot/imported/toy_soldiers.ogg-228781f8b76ea3aa2650a8cb27dcd3d3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

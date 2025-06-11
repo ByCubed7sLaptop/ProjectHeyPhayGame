@@ -50,7 +50,7 @@ public partial class Tool_TileMapAutoFoliage : Node
         if (!Engine.IsEditorHint())
         {
             QueueFree();
-            GetParent().RemoveChild(this);
+            //GetParent().RemoveChild(this);
             return;
         }
 

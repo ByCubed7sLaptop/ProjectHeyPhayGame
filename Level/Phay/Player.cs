@@ -13,7 +13,11 @@ public partial class Player : CharacterBody2D
 	[Export] public float Acceleration = 0.15f; // Time to max speed
 	[Export] public float JumpVelocity = 300.0f;
 
-	private Vector2 PlayerVelocity;
+    // TODO: Sloppy implementation add dedicated varibles
+    public double TimeSinceLastOnFloor { get { return CoyoteTime - coyoteTimeCounter; } }
+
+
+    private Vector2 PlayerVelocity;
 
 	// Time since the last jump press to buffer
 	[Export] public const float JumpBufferTime = 0.1f;
@@ -67,11 +71,13 @@ public partial class Player : CharacterBody2D
     }
 
     public override void _PhysicsProcess(double delta)
-	{
+    {
+        ProcessWalkAudio();
         ProcessMovementVelocity(delta);
         MoveAndSlide();
 		ProcessRespawnPosition();
         ProcessInteract();
+        ProcessCollsionMask();
         ProcessPan();
     }
 
@@ -92,35 +98,55 @@ public partial class Player : CharacterBody2D
         Velocity = PlayerVelocity;
     }
 
+    private void ProcessCollsionMask()
+    {
+        // If down pressed
+        if (IsDown)
+        {
+            // Remove mask and layer 2
+            CollisionMask &= ~2u;
+            CollisionLayer &= ~2u;
+        }
+        else
+        {
+            // Add mask and layer 2
+            CollisionMask |= 2;
+            CollisionLayer |= 2;
+        }
+    }
+
     private void ProcessGravity(double delta)
     {
         if (!IsOnFloor()) PlayerVelocity.Y += gravity * (float)delta;
     }
 
 
-    float walkDelta = 0;
-	private void ProcessMovementDirection()
+    private float _walkDelta = 0;
+	private void ProcessWalkAudio()
+    {
+        if (IsOnFloor())
+            _walkDelta += Math.Abs(PlayerVelocity.X);
+
+        if (_walkDelta > 4000)
+        {
+            WalkAudioStreamPlayer.Play();
+            _walkDelta = 0;
+        }
+
+        if (InputDirection == Vector2.Zero)
+            _walkDelta = 1400; // Start higher to init first step
+    }
+    
+ 
+    private void ProcessMovementDirection()
 	{
-        // Get the input direction and handle the movement/deceleration.
+        // Handle movement direction & speed
         if (InputDirection != Vector2.Zero)
-        {
             PlayerVelocity.X = InputDirection.X * Speed;
-            
-            if (IsOnFloor())
-                walkDelta += Math.Abs(PlayerVelocity.X);
 
-            if (walkDelta > 2000)
-            {
-                WalkAudioStreamPlayer.Play();
-                walkDelta = 0;
-            }
-        }
+        // Handle deceleration
         else
-        {
             PlayerVelocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-            walkDelta = 1400; // Start higher to init first step
-        }
-
     }
 
 	private void ProcessJump(double delta)
@@ -268,12 +294,17 @@ public partial class Player : CharacterBody2D
 
     private Vector2 InputDirection { get; set; }
     private Vector2 LastInputDirection { get; set; }
-    private bool IsDownHeld { get; set; }
-    private bool IsUpHeld { get; set; }
 
     private double holdTime = 0.8;
     private double upLastPressed = 0.0;
     private double downLastPressed = 0.0;
+
+    private bool IsDown { get => InputDirection.Y > 0; }
+    private bool IsDownHeld { get => IsDown && Time.GetUnixTimeFromSystem() - downLastPressed > holdTime; }
+
+    private bool IsUp { get => InputDirection.Y < 0; }
+    private bool IsUpHeld { get => IsUp && Time.GetUnixTimeFromSystem() - upLastPressed > holdTime; }
+
     public override void _Input(InputEvent @event)
     {
         InputDirection = Input.GetVector("player_left", "player_right", "player_up", "player_down");
@@ -282,10 +313,16 @@ public partial class Player : CharacterBody2D
             LastInputDirection = InputDirection;
 
         // Calculate holding the up down button
-        if (InputDirection.Y >= 0) upLastPressed = Time.GetUnixTimeFromSystem();
-        if (InputDirection.Y <= 0) downLastPressed = Time.GetUnixTimeFromSystem();
-        IsUpHeld = InputDirection.Y < 0 && Time.GetUnixTimeFromSystem() - upLastPressed > holdTime;
-        IsDownHeld = InputDirection.Y > 0 && Time.GetUnixTimeFromSystem() - downLastPressed > holdTime;
+        if (IsDown) downLastPressed = Time.GetUnixTimeFromSystem();
+        if (IsUp) upLastPressed = Time.GetUnixTimeFromSystem();
+
+        //GD.Print("downLastPressed ", downLastPressed);
+        //GD.Print("upLastPressed ", upLastPressed);
+        //GD.Print("IsDownHeld ", IsDownHeld);
+        //GD.Print("IsUpHeld ", IsUpHeld);
+        //GD.Print("down ", Time.GetUnixTimeFromSystem() - downLastPressed);
+        //GD.Print("up ", Time.GetUnixTimeFromSystem() - upLastPressed);
+        //GD.Print("--------");
     }
 
     public void ProcessPan()

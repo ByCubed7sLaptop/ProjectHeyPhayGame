@@ -1,0 +1,141 @@
+[gd_scene load_steps=24 format=3 uid="uid://rau7g5djm1x6"]
+
+[ext_resource type="PackedScene" uid="uid://b5he6b8gh5ik1" path="res://Level/Level Base.tscn" id="1_hwmu8"]
+[ext_resource type="AudioStream" uid="uid://c0h1fglviwgqp" path="res://Audio/Soundtracks/Home Sweet Home.ogg" id="2_bnxcn"]
+[ext_resource type="Texture2D" uid="uid://drkoesct71vcp" path="res://Level/Enviroment/Bedroom/Plank Texture.png" id="2_lkn6h"]
+[ext_resource type="Texture2D" uid="uid://cxpxipulpn30p" path="res://Level/Enviroment/Bedroom/Desk Texture.png" id="3_oysn5"]
+[ext_resource type="Script" path="res://Level/LevelTransition/TransitionArea.cs" id="3_ylrlu"]
+[ext_resource type="Script" path="res://Tools/Tool_TileMapAutoFoliage.cs" id="4_6mkc2"]
+[ext_resource type="Texture2D" uid="uid://dytb375vld2q4" path="res://Level/Enviroment/Bedroom/Bed Texture.png" id="4_gh3nh"]
+[ext_resource type="Texture2D" uid="uid://bccgml1fc5ajf" path="res://Level/Enviroment/Bedroom/Chalkboard Texture.png" id="5_j04fe"]
+[ext_resource type="Texture2D" uid="uid://bi1etfqt40rjm" path="res://Level/Enviroment/Bedroom/Clock Texture.png" id="6_j5k16"]
+[ext_resource type="Texture2D" uid="uid://qyg1q0niq310" path="res://Level/Enviroment/Bedroom/Cupboard Texture.png" id="7_llo2r"]
+[ext_resource type="Texture2D" uid="uid://bx7aqhduf4a52" path="res://Level/Enviroment/Bedroom/Flag Texture.png" id="8_6omeo"]
+[ext_resource type="Shader" path="res://Shaders/Foliage wind.gdshader" id="9_cbaow"]
+[ext_resource type="Texture2D" uid="uid://ck6au4pa4xdy1" path="res://Level/Enviroment/Bedroom/Light Texture.png" id="9_fo4be"]
+[ext_resource type="Texture2D" uid="uid://dcc1gvowgihgf" path="res://Level/Enviroment/Bedroom/PC Texture.png" id="10_siufk"]
+[ext_resource type="Texture2D" uid="uid://bvlqkfn6yhc34" path="res://Level/Enviroment/Bedroom/Shelf Texture.png" id="11_153y7"]
+[ext_resource type="Texture2D" uid="uid://bujmiu7y0absx" path="res://Level/Enviroment/Bedroom/Blahaj Banjo Texture.png" id="12_ralbu"]
+[ext_resource type="Texture2D" uid="uid://vx38k4r53540" path="res://Level/Enviroment/Bedroom/Blahaj Blooper Texture.png" id="13_f8ukm"]
+[ext_resource type="Texture2D" uid="uid://cwma8aoeo8gya" path="res://Level/Enviroment/Bedroom/Blahaj Kazooie Texture.png" id="14_6cn5v"]
+[ext_resource type="Texture2D" uid="uid://d0lbxsnhnwm5v" path="res://Level/Enviroment/Bedroom/Blahaj Small Texture.png" id="15_fbcrq"]
+[ext_resource type="Texture2D" uid="uid://qp46kfn54j7n" path="res://Level/Enviroment/Bedroom/Chair Texture.png" id="16_l6e3g"]
+[ext_resource type="Texture2D" uid="uid://bknyx1f80ira3" path="res://Level/Enviroment/Bedroom/Door Texture.png" id="19_rxk8b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qas8b"]
+shader = ExtResource("9_cbaow")
+shader_parameter/pixel_mode = true
+shader_parameter/pixel_amount = 1.0
+shader_parameter/distortion = 0.001
+shader_parameter/texture_noise_system = false
+shader_parameter/noise_speed = 0.0
+shader_parameter/noise_direction = -1
+shader_parameter/worley_noise_system = true
+shader_parameter/worley_cell_density = 10.0
+shader_parameter/worley_speed = 2.0
+shader_parameter/edge_and_mask = false
+shader_parameter/alpha_value = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0r14"]
+size = Vector2(100, 100)
+
+[node name="Level" instance=ExtResource("1_hwmu8")]
+BackgroundTracks = Array[AudioStream]([ExtResource("2_bnxcn")])
+
+[node name="Camera2D" parent="." index="1"]
+VelocityLookAhead = 5.0
+ZoomDefault = 6.0
+
+[node name="TileMap" parent="Enviroment" index="0"]
+layer_0/tile_data = PackedInt32Array(0, 65540, 0, 1, 65540, 0, 2, 65540, 0, 3, 65540, 0, 4, 65540, 0, 5, 65540, 0, 6, 65540, 0, 7, 65540, 0, 8, 65540, 0, 9, 65540, 0, 10, 131076, 0, 65546, 131076, 1, 131082, 131076, 1, 196618, 131076, 1, 262154, 131076, 1, 327689, 65540, 2, 327690, 131076, 2, 327688, 65540, 2, 327687, 65540, 2, 327686, 65540, 2, 327685, 65540, 2, 327684, 65540, 2, 327683, 65540, 2, 327682, 65540, 2, 327681, 65540, 2, 327680, 65540, 2, 65535, 4, 0, 393215, 4, 2, 131071, 4, 1, 458751, 65540, 1, 393216, 65540, 1, 393217, 65540, 1, 393218, 65540, 1, 393219, 65540, 1, 393220, 65540, 1, 393221, 65540, 1, 393222, 65540, 1, 393223, 65540, 1, 393224, 65540, 1, 393225, 65540, 1, 393226, 65540, 1, 393227, 65540, 1, 327691, 65540, 1, 262155, 65540, 1, 196619, 65540, 1, 131083, 65540, 1, 65547, 65540, 1, 11, 65540, 1, -65525, 65540, 1, -65526, 65540, 1, -65527, 65540, 1, -65528, 65540, 1, -65529, 65540, 1, -65530, 65540, 1, -65531, 65540, 1, -65532, 65540, 1, -65533, 65540, 1, -65534, 65540, 1, -65535, 65540, 1, -65536, 65540, 1, -1, 65540, 1, -65537, 65540, 1, -131072, 65540, 1, -131071, 65540, 1, -131070, 65540, 1, -131069, 65540, 1, -131068, 65540, 1, -131067, 65540, 1, -131066, 65540, 1, -131065, 65540, 1, -131064, 65540, 1, -131063, 65540, 1, -131062, 65540, 1, -131061, 65540, 1, -131060, 65540, 1, -65524, 65540, 1, 12, 65540, 1, 65548, 65540, 1, 131084, 65540, 1, 196620, 65540, 1, 262156, 65540, 1, 327692, 65540, 1, 393228, 65540, 1, 458764, 65540, 1, 524300, 65540, 1, 458763, 65540, 1, 524299, 65540, 1, 524298, 65540, 1, 524297, 65540, 1, 524296, 65540, 1, 524295, 65540, 1, 524294, 65540, 1, 524293, 65540, 1, 524292, 65540, 1, 524291, 65540, 1, 524290, 65540, 1, 524289, 65540, 1, 524288, 65540, 1, 589823, 65540, 1, 524287, 65540, 1, 458761, 65540, 1, 458762, 65540, 1, 458760, 65540, 1, 458759, 65540, 1, 458758, 65540, 1, 458757, 65540, 1, 458756, 65540, 1, 458755, 65540, 1, 458754, 65540, 1, 458753, 65540, 1, 458752, 65540, 1, 458765, 65540, 1, 393229, 65540, 1, 327693, 65540, 1, 524301, 65540, 1, 262157, 65540, 1, 196621, 65540, 1, 131085, 65540, 1, 65549, 65540, 1, 13, 65540, 1, -196596, 65540, 1, -65523, 65540, 1, -131059, 65540, 1, -196595, 65540, 1, -196597, 65540, 1, -196598, 65540, 1, -196599, 65540, 1, -196600, 65540, 1, -196601, 65540, 1, -196602, 65540, 1, -196603, 65540, 1, -196604, 65540, 1, -196605, 65540, 1, -196606, 65540, 1, -196607, 65540, 1, -196608, 65540, 1, -131073, 65540, 1, 393213, 196611, 1, 458749, 3, 1, 393214, 262147, 1, 458750, 65539, 1, 393211, 196611, 1, 458747, 3, 1, 393212, 196611, 1, 458748, 65539, 1, 393209, 196611, 1, 458745, 3, 1, 393210, 196611, 1, 458746, 65539, 1, 393207, 196611, 1, 458743, 3, 1, 393208, 196611, 1, 458744, 65539, 1, 393205, 131075, 1, 458741, 3, 1, 393206, 196611, 1, 458742, 65539, 1, 524285, 3, 0, 589821, 3, 1, 524286, 65539, 0, 589822, 65539, 1, 524283, 3, 0, 589819, 3, 1, 524284, 65539, 0, 589820, 65539, 1, 524280, 65539, 0, 589816, 65539, 1, 524281, 3, 0, 589817, 3, 1, 524282, 65539, 0, 589818, 65539, 1, 524279, 3, 0, 589815, 3, 1, 524277, 3, 0, 589813, 3, 1, 524278, 65539, 0, 589814, 65539, 1, 524302, 65540, 1, 458766, 65540, 1, 393230, 65540, 1, 327694, 65540, 1, 262158, 65540, 1, 196622, 65540, 1, 131086, 65540, 1, 65550, 65540, 1, 14, 65540, 1, -196594, 65540, 1, -131058, 65540, 1, -65522, 65540, 1, -196593, 65540, 1, -131057, 65540, 1, -65521, 65540, 1, 15, 65540, 1, 65551, 65540, 1, 131087, 65540, 1, 196623, 65540, 1, 262159, 65540, 1, 327695, 65540, 1, 393231, 65540, 1, 458767, 65540, 1, 524303, 65540, 1, 327675, 65541, 2, 327671, 5, 0, 327669, 5, 2)
+
+[node name="Wall Background" type="ColorRect" parent="Enviroment" index="1"]
+offset_top = 16.0
+offset_right = 160.0
+offset_bottom = 80.0
+mouse_filter = 2
+color = Color(0.776471, 0.729412, 0.694118, 1)
+
+[node name="PlankTexture2" type="Sprite2D" parent="Enviroment" index="2"]
+position = Vector2(153, 59)
+texture = ExtResource("2_lkn6h")
+
+[node name="DeskTexture2" type="Sprite2D" parent="Enviroment" index="3"]
+position = Vector2(112, 64)
+texture = ExtResource("3_oysn5")
+
+[node name="BedTexture2" type="Sprite2D" parent="Enviroment" index="4"]
+position = Vector2(83, 64)
+texture = ExtResource("4_gh3nh")
+
+[node name="ChalkboardTexture2" type="Sprite2D" parent="Enviroment" index="5"]
+position = Vector2(137, 34)
+texture = ExtResource("5_j04fe")
+
+[node name="ClockTexture2" type="Sprite2D" parent="Enviroment" index="6"]
+position = Vector2(85, 21)
+texture = ExtResource("6_j5k16")
+
+[node name="CupboardTexture2" type="Sprite2D" parent="Enviroment" index="7"]
+position = Vector2(26, 48)
+texture = ExtResource("7_llo2r")
+
+[node name="FlagTexture2" type="Sprite2D" parent="Enviroment" index="8"]
+material = SubResource("ShaderMaterial_qas8b")
+position = Vector2(112, 32)
+texture = ExtResource("8_6omeo")
+
+[node name="LightTexture2" type="Sprite2D" parent="Enviroment" index="9"]
+position = Vector2(103, 24)
+texture = ExtResource("9_fo4be")
+
+[node name="PcTexture2" type="Sprite2D" parent="Enviroment" index="10"]
+position = Vector2(128, 72)
+texture = ExtResource("10_siufk")
+
+[node name="ShelfTexture2" type="Sprite2D" parent="Enviroment" index="11"]
+position = Vector2(75, 45)
+texture = ExtResource("11_153y7")
+
+[node name="BlahajBanjoTexture2" type="Sprite2D" parent="Enviroment" index="12"]
+position = Vector2(100, 37)
+texture = ExtResource("12_ralbu")
+
+[node name="BlahajBlooperTexture2" type="Sprite2D" parent="Enviroment" index="13"]
+position = Vector2(87, 64)
+texture = ExtResource("13_f8ukm")
+
+[node name="BlahajKazooieTexture2" type="Sprite2D" parent="Enviroment" index="14"]
+position = Vector2(70, 37)
+texture = ExtResource("14_6cn5v")
+
+[node name="BlahajSmallTexture2" type="Sprite2D" parent="Enviroment" index="15"]
+position = Vector2(49, 29)
+texture = ExtResource("15_fbcrq")
+
+[node name="ChairTexture2" type="Sprite2D" parent="Enviroment" index="16"]
+position = Vector2(154, 56)
+texture = ExtResource("16_l6e3g")
+
+[node name="Transition Area2D" type="Area2D" parent="." index="4"]
+position = Vector2(-63, 49)
+script = ExtResource("3_ylrlu")
+targetScenePath = "res://Level/Level Plains.tscn"
+spawnPosition = Vector2i(500, -50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transition Area2D" index="0"]
+shape = SubResource("RectangleShape2D_c0r14")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Tool_TileMapAutoFoliage" type="Node" parent="." index="6" node_paths=PackedStringArray("TileMap")]
+script = ExtResource("4_6mkc2")
+TileMap = NodePath("../Enviroment/TileMap")
+TargetLayerID = 0
+FoliageLayerID = 2
+TerrianSet = 0
+TerrianID = 0
+
+[node name="DoorTexture" type="Sprite2D" parent="." index="7"]
+position = Vector2(8, 56)
+texture = ExtResource("19_rxk8b")

@@ -21,7 +21,7 @@ public partial class LevelCamera : Camera2D
         }
     }
     [Export] public Vector2I TargetOffset { get; set; }
-    [Export] float VelocityLookAhead { get; set; } = 5;
+    [Export] float VelocityLookAhead { get; set; } = 3;
     [Export] float Speed { get; set; } = 3.2f;
 
     [ExportCategory("Zoom")]
@@ -94,6 +94,8 @@ public partial class LevelCamera : Camera2D
 
 
         Position = Position.Lerp(targetPosition, Speed * (float)delta);
+
+        Position = Position with { Y = Mathf.Lerp(Position.Y, targetPosition.Y, Speed * (float)delta)};
 
         // Percentage of the distance between 0 and ZoomExponential
         // Zoom is inversed so 1-percentage

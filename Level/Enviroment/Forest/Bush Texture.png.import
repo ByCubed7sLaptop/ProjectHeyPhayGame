@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnytor1rctu56"
-path="res://.godot/imported/TileSheet Texture.png-e55f7bda48cd9c98864e1de4dd421050.ctex"
+uid="uid://cdeowyeoqspk8"
+path="res://.godot/imported/Bush Texture.png-9d22bd49ee23bd2e2120f586a95d4f32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level/Enviroment/TileSheet Texture.png"
-dest_files=["res://.godot/imported/TileSheet Texture.png-e55f7bda48cd9c98864e1de4dd421050.ctex"]
+source_file="res://Level/Enviroment/Forest/Bush Texture.png"
+dest_files=["res://.godot/imported/Bush Texture.png-9d22bd49ee23bd2e2120f586a95d4f32.ctex"]
 
 [params]
 

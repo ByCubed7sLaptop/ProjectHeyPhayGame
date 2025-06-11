@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vl6uqsdoym2e"
-path="res://.godot/imported/Tree Texture.png-6606a575685c32f5cf80f5aa4a5d1ae1.ctex"
+uid="uid://wdej4uy2udlq"
+path="res://.godot/imported/Lantern Texture.png-4be1da6c1fca87d1be86b0c22bd33ab4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level/Enviroment/Tree Texture.png"
-dest_files=["res://.godot/imported/Tree Texture.png-6606a575685c32f5cf80f5aa4a5d1ae1.ctex"]
+source_file="res://Level/Enviroment/Forest/Lantern Texture.png"
+dest_files=["res://.godot/imported/Lantern Texture.png-4be1da6c1fca87d1be86b0c22bd33ab4.ctex"]
 
 [params]
 

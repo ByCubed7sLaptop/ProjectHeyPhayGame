@@ -12,6 +12,7 @@ public partial class LevelController : Node2D
 
     [Export] public LevelCamera Camera;
     [Export] public Node2D PlayerSpawnPosition;
+    [Export] public Godot.Collections.Array<AudioStream> BackgroundTracks;
 
     public override void _EnterTree()
     {
@@ -24,6 +25,8 @@ public partial class LevelController : Node2D
             HUD = Game.Controller.LevelHudPackedScene.Instantiate<CanvasLayer>();
             AddChild(HUD);
         }
+
+        Game.AudioController.TransitionUsing(BackgroundTracks);
     }
 
     //public override void _ExitTree()

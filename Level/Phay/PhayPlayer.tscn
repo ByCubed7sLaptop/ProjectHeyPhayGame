@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dk06usw83mpy3"]
+[gd_scene load_steps=16 format=3 uid="uid://dk06usw83mpy3"]
 
 [ext_resource type="Script" path="res://Level/Phay/Player.cs" id="1_0nt4j"]
 [ext_resource type="Texture2D" uid="uid://qquja25ple77" path="res://Level/Phay/Phay.png" id="2_5pgif"]
 [ext_resource type="AudioStream" uid="uid://jiewcirb7cxv" path="res://Audio/OverWorld/Jump.wav" id="3_cnbs7"]
+[ext_resource type="SpriteFrames" uid="uid://sxa3hu7g13op" path="res://Level/Phay/sprite_frames.tres" id="3_dxvbo"]
+[ext_resource type="Shader" path="res://Shaders/Random displacement.gdshader" id="3_nngs4"]
+[ext_resource type="Script" path="res://Level/Phay/AnimationController.cs" id="4_50cue"]
 [ext_resource type="AudioStream" uid="uid://dnrhcymr4bcns" path="res://Audio/OverWorld/Land.wav" id="4_88x7n"]
 [ext_resource type="AudioStream" uid="uid://b8xa2oedq6eh3" path="res://Audio/OverWorld/Step-walk noise.wav" id="5_62fqb"]
 [ext_resource type="AudioStream" uid="uid://ssgk1ndmdocv" path="res://Audio/OverWorld/Hurt.wav" id="6_mw537"]
@@ -11,6 +14,14 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m00ep"]
 radius = 12.0
 height = 40.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02f0k"]
+shader = ExtResource("3_nngs4")
+shader_parameter/interval = 1.0
+shader_parameter/timeDelay = 0.0
+shader_parameter/intensityX = 0.5
+shader_parameter/intensityY = 0.5
+shader_parameter/seed = 42.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xs8o3"]
 height = 38.0
@@ -29,6 +40,8 @@ stream_0/weight = 1.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Hitbox", "InteractableHitbox", "JumpAudioStreamPlayer", "LandAudioStreamPlayer", "WalkAudioStreamPlayer", "HurtAudioStreamPlayer", "InteractAudioStreamPlayer")]
 disable_mode = 2
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_0nt4j")
 Hitbox = NodePath("Area2D")
 InteractableHitbox = NodePath("Interaction Components/InteractionArea")
@@ -42,12 +55,24 @@ InteractAudioStreamPlayer = NodePath("Interact AudioStreamPlayer2D")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CapsuleShape2D_m00ep")
 
 [node name="Phay" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_5pgif")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+material = SubResource("ShaderMaterial_02f0k")
+sprite_frames = ExtResource("3_dxvbo")
+animation = &"walk"
+autoplay = "idle"
+script = ExtResource("4_50cue")
+player = NodePath("..")
+walkThreshold = 100.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_xs8o3")
 
 [node name="Interaction Components" type="Node2D" parent="."]
@@ -58,6 +83,7 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction Components/InteractionArea"]
+visible = false
 shape = SubResource("CapsuleShape2D_m00ep")
 
 [node name="InteractLabel" type="Label" parent="Interaction Components"]

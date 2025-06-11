@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b37vcdumfc8ah"
-path="res://.godot/imported/Small Folliage Texture.png-39ee7d88eaa8161cc59b50a629fb5e08.ctex"
+path="res://.godot/imported/TileSheet Small Folliage Texture.png-eae8209d883265bdfee3a023cd5e7b96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level/Enviroment/Small Folliage Texture.png"
-dest_files=["res://.godot/imported/Small Folliage Texture.png-39ee7d88eaa8161cc59b50a629fb5e08.ctex"]
+source_file="res://Level/Enviroment/Forest/TileSheet Small Folliage Texture.png"
+dest_files=["res://.godot/imported/TileSheet Small Folliage Texture.png-eae8209d883265bdfee3a023cd5e7b96.ctex"]
 
 [params]
 

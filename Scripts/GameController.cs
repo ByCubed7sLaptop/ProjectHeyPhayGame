@@ -8,7 +8,6 @@ using static System.Formats.Asn1.AsnWriter;
 public partial class GameController : Node
 {
     static public GameController Instance { get; set; }
-    static public BattleController Battle => Instance.battle;
 
 	[Export] public PackedScene LevelPackedScene;
 	[Export] public PackedScene BattlePackedScene;
@@ -19,12 +18,19 @@ public partial class GameController : Node
     public LevelController level;
 
     [Export] public ScreenFade screenFade;
+    [Export] public AudioController audioController;
+    [Export] public Godot.Collections.Array<AudioStream> MainMenuTracks;
 
     public override void _Ready()
 	{
 		Instance = this;
         DebugDrawer.Initialization();
         screenFade ??= GetNode<ScreenFade>("ScreenFade");
+        audioController ??= GetNode<AudioController>("AudioStreamPlayers");
+
+        // Main menu
+
+        Game.AudioController.TransitionUsing(MainMenuTracks);
     }
 
     public void StartBattleWith(EncounterBody encounter)
@@ -154,7 +160,8 @@ public partial class GameController : Node
 static public class Game
 {
     public static GameController Controller => GameController.Instance;
-    public static BattleController Battle => GameController.Battle;
+    public static BattleController Battle => GameController.Instance.battle;
     public static LevelController Level => GameController.Instance.level;
     public static CanvasLayer HUD => Level.HUD;
+    public static AudioController AudioController => GameController.Instance.audioController;
 }

@@ -1,8 +1,8 @@
 [gd_scene load_steps=24 format=3 uid="uid://rau7g5djm1x6"]
 
 [ext_resource type="PackedScene" uid="uid://b5he6b8gh5ik1" path="res://Level/Level Base.tscn" id="1_hwmu8"]
-[ext_resource type="AudioStream" uid="uid://c0h1fglviwgqp" path="res://Audio/Soundtracks/Home Sweet Home.ogg" id="2_bnxcn"]
 [ext_resource type="Texture2D" uid="uid://drkoesct71vcp" path="res://Level/Enviroment/Bedroom/Plank Texture.png" id="2_lkn6h"]
+[ext_resource type="AudioStream" uid="uid://dwx0o6exvip5n" path="res://Audio/Soundtracks/Story Time.ogg" id="2_y08vt"]
 [ext_resource type="Texture2D" uid="uid://cxpxipulpn30p" path="res://Level/Enviroment/Bedroom/Desk Texture.png" id="3_oysn5"]
 [ext_resource type="Script" path="res://Level/LevelTransition/TransitionArea.cs" id="3_ylrlu"]
 [ext_resource type="Script" path="res://Tools/Tool_TileMapAutoFoliage.cs" id="4_6mkc2"]
@@ -40,7 +40,7 @@ shader_parameter/alpha_value = 1.0
 size = Vector2(100, 100)
 
 [node name="Level" instance=ExtResource("1_hwmu8")]
-BackgroundTracks = Array[AudioStream]([ExtResource("2_bnxcn")])
+BackgroundTracks = Array[AudioStream]([ExtResource("2_y08vt")])
 
 [node name="Camera2D" parent="." index="1"]
 VelocityLookAhead = 5.0

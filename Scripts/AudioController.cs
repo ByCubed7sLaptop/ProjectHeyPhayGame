@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 
 public partial class AudioController : Node
 {
+    [Export] public string BusName { get; set; } = "Music";
+
     public void TransitionUsing(IEnumerable<AudioStream> audioStreams)
     {
         if (audioStreams is null)
@@ -36,6 +38,8 @@ public partial class AudioController : Node
         player.VolumeDb = -80;
         player.Autoplay = true;
         player.Finished += ()=>player.Play(); // Loop
+        player.Bus = BusName;
+
         AddChild(player);
 
         Tween tween = null;

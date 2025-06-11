@@ -101,11 +101,13 @@ metadata/_edit_use_anchors_ = true
 stream = SubResource("AudioStreamRandomizer_225nx")
 volume_db = -8.707
 pitch_scale = 0.66
+bus = &"Player"
 
 [node name="Land AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_88x7n")
 volume_db = -7.059
 pitch_scale = 0.53
+bus = &"Player"
 
 [node name="Walk AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_62fqb")

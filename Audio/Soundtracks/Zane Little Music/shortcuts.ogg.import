@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://j7e7ylbk4irt"
+path="res://.godot/imported/shortcuts.ogg-ce953215cf9e7ad96f757c231fba1e24.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Soundtracks/Zane Little Music/shortcuts.ogg"
+dest_files=["res://.godot/imported/shortcuts.ogg-ce953215cf9e7ad96f757c231fba1e24.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

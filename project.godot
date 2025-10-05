@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
+[audio]
+
+buses/default_bus_layout="res://Audio/bus_layout.tres"
+
 [autoload]
 
 GameController="*res://Scenes/GameController.tscn"
@@ -24,6 +28,10 @@ GameController="*res://Scenes/GameController.tscn"
 [dotnet]
 
 project/assembly_name="ThePhayGame"
+
+[gui]
+
+theme/custom="res://UI/Theme.tres"
 
 [input]
 

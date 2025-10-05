@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://23mjr7nt56ve"]
+
+[ext_resource type="FontFile" uid="uid://bymsux27tq2gy" path="res://UI/Font/QarmicSansFree-P23d.ttf" id="1_ysmru"]
+
+[resource]
+Label/colors/font_color = Color(1, 0.337255, 0.329412, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 14
+Label/font_sizes/font_size = 17
+Label/fonts/font = ExtResource("1_ysmru")

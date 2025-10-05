@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4x307ig7wv0"
-path="res://.godot/imported/Bush Flower Texture.png-cf1cab0b4fe6a86bda7daba44b5e046e.ctex"
+uid="uid://dcc1gvowgihgf"
+path="res://.godot/imported/PC Texture.png-0fbf0618b2530e120f1c8c47873f817f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level/Enviroment/Bush Flower Texture.png"
-dest_files=["res://.godot/imported/Bush Flower Texture.png-cf1cab0b4fe6a86bda7daba44b5e046e.ctex"]
+source_file="res://Level/Enviroment/Bedroom/PC Texture.png"
+dest_files=["res://.godot/imported/PC Texture.png-0fbf0618b2530e120f1c8c47873f817f.ctex"]
 
 [params]
 

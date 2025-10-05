@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://mdsavg13cfya"
+path="res://.godot/imported/apple_cider.ogg-3944678d7abd4bd3c5c5a3e1e7c55d51.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Soundtracks/Zane Little Music/apple_cider.ogg"
+dest_files=["res://.godot/imported/apple_cider.ogg-3944678d7abd4bd3c5c5a3e1e7c55d51.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

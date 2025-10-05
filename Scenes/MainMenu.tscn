@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cvs8nqo7v0vgm"]
+[gd_scene load_steps=16 format=3 uid="uid://cvs8nqo7v0vgm"]
 
 [ext_resource type="Shader" path="res://Shaders/Clouds.gdshader" id="1_44cdt"]
 [ext_resource type="Texture2D" uid="uid://bi6j1qp8f05w7" path="res://UI/MainMenu/The Legend of Phay.png" id="1_pf8iv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="3_j07ig"]
 [ext_resource type="Shader" path="res://Shaders/Bounce.gdshader" id="4_emjxi"]
 [ext_resource type="Shader" path="res://Shaders/Diamond transistion.gdshader" id="8_wh0tg"]
+[ext_resource type="PackedScene" uid="uid://chhauuk3qikqf" path="res://UI/Options/Options.tscn" id="9_q28iy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tc714"]
 shader = ExtResource("1_44cdt")
@@ -33,6 +34,42 @@ shader_parameter/diamond_color = Color(0, 0, 0, 1)
 shader_parameter/aspect_ratio = 1.61
 shader_parameter/diamonds_count = 10.0
 shader_parameter/delta = 0.0
+
+[sub_resource type="Animation" id="Animation_g22rn"]
+resource_name = "Options"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.707107, 0.554785),
+"update": 0,
+"values": [Vector2(1183, 83), Vector2(102, 83)]
+}
+
+[sub_resource type="Animation" id="Animation_3fp6s"]
+resource_name = "Options Pan Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.554785, 0.707107),
+"update": 0,
+"values": [Vector2(102, 83), Vector2(1183, 83)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h847m"]
+_data = {
+"Options Pan In": SubResource("Animation_g22rn"),
+"Options Pan Out": SubResource("Animation_3fp6s")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -113,3 +150,15 @@ layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
+
+[node name="Options" parent="." instance=ExtResource("9_q28iy")]
+layout_mode = 1
+offset_left = 1183.0
+offset_top = 83.0
+offset_right = 977.0
+offset_bottom = -158.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Options"]
+libraries = {
+"": SubResource("AnimationLibrary_h847m")
+}

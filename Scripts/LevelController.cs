@@ -4,90 +4,93 @@ using System;
 // Controls aspects of the level, the player platforming
 public partial class LevelController : Node2D
 {
-    // The current level being used
-    private static Vector2? PlayerSpawnPositionOverride = null;
+	// The current level being used
+	private static Vector2? PlayerSpawnPositionOverride = null;
 
-    public Player Player { get; private set; }
-    public CanvasLayer HUD { get; private set; }
+	public Player Player { get; private set; }
+	public CanvasLayer HUD { get; private set; }
 
-    [Export] public LevelCamera Camera;
-    [Export] public Node2D PlayerSpawnPosition;
+	[Export] public LevelCamera Camera;
+	[Export] public Node2D PlayerSpawnPosition;
+	[Export] public Godot.Collections.Array<AudioStream> BackgroundTracks;
 
-    public override void _EnterTree()
-    {
-        // Create the player
-        ConstructPlayer();
+	public override void _EnterTree()
+	{
+		// Create the player
+		ConstructPlayer();
 
-        // Load level HUD
-        if (HUD is null)
-        {
-            HUD = Game.Controller.LevelHudPackedScene.Instantiate<CanvasLayer>();
-            AddChild(HUD);
-        }
-    }
+		// Load level HUD
+		if (HUD is null)
+		{
+			HUD = Game.Controller.LevelHudPackedScene.Instantiate<CanvasLayer>();
+			AddChild(HUD);
+		}
 
-    //public override void _ExitTree()
-    //{
-    //    GD.Print("Level controller: _ExitTree");
+		Game.AudioController.TransitionUsing(BackgroundTracks);
+	}
 
-    //    Player?.QueueFree();
-    //    HUD?.QueueFree();
+	//public override void _ExitTree()
+	//{
+	//    GD.Print("Level controller: _ExitTree");
 
-    //    Player = null;
-    //    HUD = null;
+	//    Player?.QueueFree();
+	//    HUD?.QueueFree();
 
-    //    base._ExitTree();
-    //}
+	//    Player = null;
+	//    HUD = null;
 
-    private void ConstructPlayer()
-    {
-        if (Player is not null)
-            return;
+	//    base._ExitTree();
+	//}
 
-        if (PlayerSpawnPositionOverride is null)
-            Player = Player.CreateAt(this, PlayerSpawnPosition.Position);
-        else
-            Player = Player.CreateAt(this, (Vector2)PlayerSpawnPositionOverride);
-        
-        PlayerSpawnPositionOverride = null;
+	private void ConstructPlayer()
+	{
+		if (Player is not null)
+			return;
 
-        Player.OnHitEncounter += OnPlayerHitEncounter;
-        Camera.Target = Player;
-    }
+		if (PlayerSpawnPositionOverride is null)
+			Player = Player.CreateAt(this, PlayerSpawnPosition.Position);
+		else
+			Player = Player.CreateAt(this, (Vector2)PlayerSpawnPositionOverride);
+		
+		PlayerSpawnPositionOverride = null;
 
-    public void Enable()
-    {
-        // Toggle level node
-        ProcessMode = ProcessModeEnum.Inherit;
-        Show();
-        Camera.Enabled = true;
-    }
+		Player.OnHitEncounter += OnPlayerHitEncounter;
+		Camera.Target = Player;
+	}
 
-    public void Disable()
-    {
-        // Toggle level node
-        ProcessMode = ProcessModeEnum.Disabled;
-        Hide();
-        Camera.Enabled = false;
-    }
+	public void Enable()
+	{
+		// Toggle level node
+		ProcessMode = ProcessModeEnum.Inherit;
+		Show();
+		Camera.Enabled = true;
+	}
 
-    // Called when an Enemy hits a Player
-    public void OnPlayerHitEncounter(object o, EncounterBody encounterBody)
-    {
-        //GD.Print($"Hit Enemy: {encounterBody.Resource.Enemies}");
+	public void Disable()
+	{
+		// Toggle level node
+		ProcessMode = ProcessModeEnum.Disabled;
+		Hide();
+		Camera.Enabled = false;
+	}
 
-        // Battle should NOT start if the player is over X amount of levels over the enemy
-        // This should be togglable
+	// Called when an Enemy hits a Player
+	public void OnPlayerHitEncounter(object o, EncounterBody encounterBody)
+	{
+		//GD.Print($"Hit Enemy: {encounterBody.Resource.Enemies}");
 
-        // Tell the game controller to start the battle mode
-        Game.Controller.StartBattleWith(encounterBody);
-    }
+		// Battle should NOT start if the player is over X amount of levels over the enemy
+		// This should be togglable
 
-    /// <summary>
-    /// Set the player spawn position so that on next level load, the player's position is set.
-    /// </summary>
-    public void OverrideNextPlayerSpawnPosition(Vector2 position)
-    {
-        PlayerSpawnPositionOverride = position;
-    }
+		// Tell the game controller to start the battle mode
+		Game.Controller.StartBattleWith(encounterBody);
+	}
+
+	/// <summary>
+	/// Set the player spawn position so that on next level load, the player's position is set.
+	/// </summary>
+	public void OverrideNextPlayerSpawnPosition(Vector2 position)
+	{
+		PlayerSpawnPositionOverride = position;
+	}
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnytor1rctu56"
-path="res://.godot/imported/TileSheet Texture.png-e55f7bda48cd9c98864e1de4dd421050.ctex"
+uid="uid://vx38k4r53540"
+path="res://.godot/imported/Blahaj Blooper Texture.png-4b03af97b66b06729f7b04addd4900c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level/Enviroment/TileSheet Texture.png"
-dest_files=["res://.godot/imported/TileSheet Texture.png-e55f7bda48cd9c98864e1de4dd421050.ctex"]
+source_file="res://Level/Enviroment/Bedroom/Blahaj Blooper Texture.png"
+dest_files=["res://.godot/imported/Blahaj Blooper Texture.png-4b03af97b66b06729f7b04addd4900c7.ctex"]
 
 [params]
 

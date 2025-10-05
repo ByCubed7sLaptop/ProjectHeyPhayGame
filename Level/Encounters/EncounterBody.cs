@@ -1,9 +1,10 @@
 using Godot;
 using System;
+using System.Diagnostics.Metrics;
 
 public partial class EncounterBody : CharacterBody2D
 {
-	[Export] public EncounterResource Resource { get; set; }
+	[Export] private EncounterResource Resource { get; set; }
 	[Export] public float Speed = 30.0f;
 
 	private float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -27,4 +28,12 @@ public partial class EncounterBody : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+
+	/// <summary>
+	/// Get the resource the encounter has. Returns a duplicate so that changes aren't reflected for every battle.
+	/// </summary>
+	public EncounterResource GetResource()
+    {
+		return Resource.Duplicate(true) as EncounterResource;
+    }
 }

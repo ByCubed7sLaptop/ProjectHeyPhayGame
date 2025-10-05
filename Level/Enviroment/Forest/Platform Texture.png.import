@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtfe2n8qwskw7"
-path="res://.godot/imported/Bridge Texture.png-e6fdbd012d66e4408b78efcca8b8b371.ctex"
+uid="uid://c23dr4eiw1hvr"
+path="res://.godot/imported/Platform Texture.png-d15ddf37fd30a32f24bf40c99be2d6a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Level/Enviroment/Bridge Texture.png"
-dest_files=["res://.godot/imported/Bridge Texture.png-e6fdbd012d66e4408b78efcca8b8b371.ctex"]
+source_file="res://Level/Enviroment/Forest/Platform Texture.png"
+dest_files=["res://.godot/imported/Platform Texture.png-d15ddf37fd30a32f24bf40c99be2d6a0.ctex"]
 
 [params]
 

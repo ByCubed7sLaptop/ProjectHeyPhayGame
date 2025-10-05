@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://btgvgfdnp5yn4"]
+
+[node name="Label GroupSeperator" type="Label"]
+theme_override_font_sizes/font_size = 28
+text = "Display"
+horizontal_alignment = 1

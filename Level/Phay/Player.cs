@@ -6,18 +6,18 @@ using System.Linq;
 public partial class Player : CharacterBody2D
 {
 	[Export] public Area2D Hitbox;
-    [Export] public Area2D InteractableHitbox;
+	[Export] public Area2D InteractableHitbox;
 
-    [ExportCategory("Movement")]
+	[ExportCategory("Movement")]
 	[Export] public float Speed = 100.0f; // Max speed
 	[Export] public float Acceleration = 0.15f; // Time to max speed
 	[Export] public float JumpVelocity = 300.0f;
 
-    // TODO: Sloppy implementation add dedicated varibles
-    public double TimeSinceLastOnFloor { get { return CoyoteTime - coyoteTimeCounter; } }
+	// TODO: Sloppy implementation add dedicated varibles
+	public double TimeSinceLastOnFloor { get { return CoyoteTime - coyoteTimeCounter; } }
 
 
-    private Vector2 PlayerVelocity;
+	private Vector2 PlayerVelocity;
 
 	// Time since the last jump press to buffer
 	[Export] public const float JumpBufferTime = 0.1f;
@@ -36,201 +36,201 @@ public partial class Player : CharacterBody2D
 
 	private Vector2 RespawnPosition { get; set; }
 
-    private List<EntityInteractionHitbox> Interactables = new List<EntityInteractionHitbox>();
-    private Label InteractLabel { get; set; }
+	private List<EntityInteractionHitbox> Interactables = new List<EntityInteractionHitbox>();
+	private Label InteractLabel { get; set; }
 
-    public int CameraPanYOffset { get; set; } = 100;
+	public int CameraPanYOffset { get; set; } = 100;
 
-    [ExportCategory("AudioStreamPlayers")]
-    [Export] public AudioStreamPlayer2D JumpAudioStreamPlayer { get; set; }
-    [Export] public AudioStreamPlayer2D LandAudioStreamPlayer { get; set; }
-    [Export] public AudioStreamPlayer2D WalkAudioStreamPlayer { get; set; }
-    [Export] public AudioStreamPlayer2D HurtAudioStreamPlayer { get; set; }
-    [Export] public AudioStreamPlayer2D InteractAudioStreamPlayer { get; set; }
+	[ExportCategory("AudioStreamPlayers")]
+	[Export] public AudioStreamPlayer2D JumpAudioStreamPlayer { get; set; }
+	[Export] public AudioStreamPlayer2D LandAudioStreamPlayer { get; set; }
+	[Export] public AudioStreamPlayer2D WalkAudioStreamPlayer { get; set; }
+	[Export] public AudioStreamPlayer2D HurtAudioStreamPlayer { get; set; }
+	[Export] public AudioStreamPlayer2D InteractAudioStreamPlayer { get; set; }
 
 
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		// Disabling a CollisionObject node during a physics callback is not allowed and will cause undesired behavior.
 		// Disable with call_deferred() instead.
 		Hitbox.BodyEntered += (e) => CallDeferred(nameof(OnBodyEntered), e);
-        Hitbox.AreaEntered += (e) => CallDeferred(nameof(OnAreaEntered), e);
+		Hitbox.AreaEntered += (e) => CallDeferred(nameof(OnAreaEntered), e);
 
-        InteractableHitbox.AreaEntered += (e) => CallDeferred(nameof(InteractableHitboxAreaEntered), e.GetNode("InteractionHitbox") as EntityInteractionHitbox);
-        InteractableHitbox.AreaExited += (e) => CallDeferred(nameof(InteractableHitboxAreaExited), e.GetNode("InteractionHitbox") as EntityInteractionHitbox);
+		InteractableHitbox.AreaEntered += (e) => CallDeferred(nameof(InteractableHitboxAreaEntered), e.GetNode("InteractionHitbox") as EntityInteractionHitbox);
+		InteractableHitbox.AreaExited += (e) => CallDeferred(nameof(InteractableHitboxAreaExited), e.GetNode("InteractionHitbox") as EntityInteractionHitbox);
 
-        InteractLabel = GetNode($"Interaction Components/InteractLabel") as Label;
-        UpdateInteractions();
-    }
+		InteractLabel = GetNode($"Interaction Components/InteractLabel") as Label;
+		UpdateInteractions();
+	}
 
-    public override void _Process(double delta)
-    {
+	public override void _Process(double delta)
+	{
 		if (OS.IsDebugBuild())
 			DebugDrawer.DrawCircle(RespawnPosition, 3, Colors.Red);
-    }
+	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        ProcessWalkAudio();
-        ProcessMovementVelocity(delta);
-        MoveAndSlide();
-		ProcessRespawnPosition();
-        ProcessInteract();
-        ProcessCollsionMask();
-        ProcessPan();
-    }
-
-    private void ProcessMovementVelocity(double delta)
-    {
-        PlayerVelocity = Velocity;
-        ProcessMovementDirection();
-        ProcessJump(delta);
-        ProcessGravity(delta);
-
-        // Accelerate and Deaccelerate
-        PlayerVelocity.X = Mathf.Lerp(Velocity.X, PlayerVelocity.X, 0.15f);
-
-        // Clamp max speed
-        PlayerVelocity.X = Mathf.Clamp(PlayerVelocity.X, -Speed, Speed);
-        PlayerVelocity.Y = Mathf.Min(PlayerVelocity.Y, gravity);
-
-        Velocity = PlayerVelocity;
-    }
-
-    private void ProcessCollsionMask()
-    {
-        // If down pressed
-        if (IsDown)
-        {
-            // Remove mask and layer 2
-            CollisionMask &= ~2u;
-            CollisionLayer &= ~2u;
-        }
-        else
-        {
-            // Add mask and layer 2
-            CollisionMask |= 2;
-            CollisionLayer |= 2;
-        }
-    }
-
-    private void ProcessGravity(double delta)
-    {
-        if (!IsOnFloor()) PlayerVelocity.Y += gravity * (float)delta;
-    }
-
-
-    private float _walkDelta = 0;
-	private void ProcessWalkAudio()
-    {
-        if (IsOnFloor())
-            _walkDelta += Math.Abs(PlayerVelocity.X);
-
-        if (_walkDelta > 4000)
-        {
-            WalkAudioStreamPlayer.Play();
-            _walkDelta = 0;
-        }
-
-        if (InputDirection == Vector2.Zero)
-            _walkDelta = 1400; // Start higher to init first step
-    }
-    
- 
-    private void ProcessMovementDirection()
+	public override void _PhysicsProcess(double delta)
 	{
-        // Handle movement direction & speed
-        if (InputDirection != Vector2.Zero)
-            PlayerVelocity.X = InputDirection.X * Speed;
+		ProcessWalkAudio();
+		ProcessMovementVelocity(delta);
+		MoveAndSlide();
+		ProcessRespawnPosition();
+		ProcessInteract();
+		ProcessCollsionMask();
+		ProcessPan();
+	}
 
-        // Handle deceleration
-        else
-            PlayerVelocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-    }
+	private void ProcessMovementVelocity(double delta)
+	{
+		PlayerVelocity = Velocity;
+		ProcessMovementDirection();
+		ProcessJump(delta);
+		ProcessGravity(delta);
+
+		// Accelerate and Deaccelerate
+		PlayerVelocity.X = Mathf.Lerp(Velocity.X, PlayerVelocity.X, 0.15f);
+
+		// Clamp max speed
+		PlayerVelocity.X = Mathf.Clamp(PlayerVelocity.X, -Speed, Speed);
+		PlayerVelocity.Y = Mathf.Min(PlayerVelocity.Y, gravity);
+
+		Velocity = PlayerVelocity;
+	}
+
+	private void ProcessCollsionMask()
+	{
+		// If down pressed
+		if (IsDown)
+		{
+			// Remove mask and layer 2
+			CollisionMask &= ~2u;
+			CollisionLayer &= ~2u;
+		}
+		else
+		{
+			// Add mask and layer 2
+			CollisionMask |= 2;
+			CollisionLayer |= 2;
+		}
+	}
+
+	private void ProcessGravity(double delta)
+	{
+		if (!IsOnFloor()) PlayerVelocity.Y += gravity * (float)delta;
+	}
+
+
+	private float _walkDelta = 0;
+	private void ProcessWalkAudio()
+	{
+		if (IsOnFloor())
+			_walkDelta += Math.Abs(PlayerVelocity.X);
+
+		if (_walkDelta > 4000)
+		{
+			WalkAudioStreamPlayer.Play();
+			_walkDelta = 0;
+		}
+
+		if (InputDirection == Vector2.Zero)
+			_walkDelta = 1400; // Start higher to init first step
+	}
+	
+ 
+	private void ProcessMovementDirection()
+	{
+		// Handle movement direction & speed
+		if (InputDirection != Vector2.Zero)
+			PlayerVelocity.X = InputDirection.X * Speed;
+
+		// Handle deceleration
+		else
+			PlayerVelocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+	}
 
 	private void ProcessJump(double delta)
 	{
-        // Handle Jump
-        // Set jump buffer when jump is pressed
-        jumpBufferCounter -= delta;
-        if (Input.IsActionPressed("player_jump"))
-            jumpBufferCounter = JumpBufferTime;
+		// Handle Jump
+		// Set jump buffer when jump is pressed
+		jumpBufferCounter -= delta;
+		if (Input.IsActionPressed("player_jump"))
+			jumpBufferCounter = JumpBufferTime;
 
-        // Set coyote buffer
-        coyoteTimeCounter -= delta;
-        if (IsOnFloor())
-            coyoteTimeCounter = CoyoteTime;
+		// Set coyote buffer
+		coyoteTimeCounter -= delta;
+		if (IsOnFloor())
+			coyoteTimeCounter = CoyoteTime;
 
-        bool requestJump = jumpBufferCounter > 0;
-        bool canJump = IsOnFloor() || coyoteTimeCounter > 0;
+		bool requestJump = jumpBufferCounter > 0;
+		bool canJump = IsOnFloor() || coyoteTimeCounter > 0;
 
-        // Apply jump velocity
-        if (requestJump && canJump && !isJumping)
-        {
-            PlayerVelocity.Y = -JumpVelocity;
-            isJumping = true;
-            JumpAudioStreamPlayer.Play();
-        }
+		// Apply jump velocity
+		if (requestJump && canJump && !isJumping)
+		{
+			PlayerVelocity.Y = -JumpVelocity;
+			isJumping = true;
+			JumpAudioStreamPlayer.Play();
+		}
 
-        // If no longer requests to jump
-        if (!requestJump && isJumping && PlayerVelocity.Y < gravity)
-            PlayerVelocity.Y += gravity * (float)delta;
+		// If no longer requests to jump
+		if (!requestJump && isJumping && PlayerVelocity.Y < gravity)
+			PlayerVelocity.Y += gravity * (float)delta;
 
-        if (IsOnFloor() && isJumping)
-        {
-            if (PlayerVelocity.Y >= 0)
-                LandAudioStreamPlayer.Play();
+		if (IsOnFloor() && isJumping)
+		{
+			if (PlayerVelocity.Y >= 0)
+				LandAudioStreamPlayer.Play();
 
-            isJumping = false;
-        }
-    }
+			isJumping = false;
+		}
+	}
 
-    public void ProcessInteract()
-    {
-        if (Input.IsActionJustPressed("player_interact"))
-        {
-            OnInteract();
-        }
-    }
+	public void ProcessInteract()
+	{
+		if (Input.IsActionJustPressed("player_interact"))
+		{
+			OnInteract();
+		}
+	}
 
-    public void OnBodyEntered(Node2D body)
-    {
-        if (body is EncounterBody encounter) OnEnemyHitPlayer(encounter);
-    }
+	public void OnBodyEntered(Node2D body)
+	{
+		if (body is EncounterBody encounter) OnEnemyHitPlayer(encounter);
+	}
 
-    public void OnAreaEntered(Node2D area)
-    {
-        if (area is DeathPlane) OnTouchDeathPlane();
-        if (area is Spike) OnTouchStageHazard();
-    }
+	public void OnAreaEntered(Node2D area)
+	{
+		if (area is DeathPlane) OnTouchDeathPlane();
+		if (area is Spike) OnTouchStageHazard();
+	}
 
-    private void OnEnemyHitPlayer(EncounterBody encounter)
+	private void OnEnemyHitPlayer(EncounterBody encounter)
 	{
 		var handler = OnHitEncounter;
 		handler?.Invoke(this, encounter);
 	}
 
-    private void OnTouchDeathPlane()
-    {
-        Party.DamageAllMembers(1);
-        Position = RespawnPosition;
-        HurtAudioStreamPlayer.Play();
-    }
+	private void OnTouchDeathPlane()
+	{
+		Party.DamageAllMembers(1);
+		Position = RespawnPosition;
+		HurtAudioStreamPlayer.Play();
+	}
 
-    private void OnTouchStageHazard()
-    {
-        Party.DamageRandomMember(1);
-        Position = RespawnPosition;
-        HurtAudioStreamPlayer.Play();
-        //Get knocked back
-        //Become invulnerable for a while
-    }
+	private void OnTouchStageHazard()
+	{
+		Party.DamageRandomMember(1);
+		Position = RespawnPosition;
+		HurtAudioStreamPlayer.Play();
+		//Get knocked back
+		//Become invulnerable for a while
+	}
 
 	// Create the player and place at the given position
 	public static Player CreateAt(Node parent, Vector2 position)
-    {
-        // TODO: Should be Game.PackedScenes.Player?
+	{
+		// TODO: Should be Game.PackedScenes.Player?
 		var player = Game.Controller.PlayerPackedScene.Instantiate<Player>();
 		parent.AddChild(player);
 
@@ -241,123 +241,123 @@ public partial class Player : CharacterBody2D
 
 	private void ProcessRespawnPosition()
 	{
-        if (IsOnFloor() && IsValidRespawnLocation())
-        {
-            RespawnPosition = Position;
-        }
-    }
+		if (IsOnFloor() && IsValidRespawnLocation())
+		{
+			RespawnPosition = Position;
+		}
+	}
 
 	private bool IsValidRespawnLocation()
 	{
-        var spaceState = GetWorld2D().DirectSpaceState;
-        var query = PhysicsRayQueryParameters2D.Create(Position, new Vector2(Position.X, Position.Y + 50));
-        var result = spaceState.IntersectRay(query);
+		var spaceState = GetWorld2D().DirectSpaceState;
+		var query = PhysicsRayQueryParameters2D.Create(Position, new Vector2(Position.X, Position.Y + 50));
+		var result = spaceState.IntersectRay(query);
 
 		return result.Count > 0;
-    }
+	}
 
-    public void InteractableHitboxAreaEntered(EntityInteractionHitbox interactable)
-    {
-        Interactables.Insert(0, interactable);
-        UpdateInteractions();
-    }
+	public void InteractableHitboxAreaEntered(EntityInteractionHitbox interactable)
+	{
+		Interactables.Insert(0, interactable);
+		UpdateInteractions();
+	}
 
-    public void InteractableHitboxAreaExited(EntityInteractionHitbox interactable)
-    {
-        Interactables.Remove(interactable);
-        UpdateInteractions();
-    }
+	public void InteractableHitboxAreaExited(EntityInteractionHitbox interactable)
+	{
+		Interactables.Remove(interactable);
+		UpdateInteractions();
+	}
 
-    public void UpdateInteractions()
-    {
-        if (Interactables.Count > 0)
-        {
-            InteractLabel.Text = Interactables.First().InteractionLabelText;
-        } 
-        else
-        {
-            InteractLabel.Text = string.Empty;
-        }
-    }
+	public void UpdateInteractions()
+	{
+		if (Interactables.Count > 0)
+		{
+			InteractLabel.Text = Interactables.First().InteractionLabelText;
+		} 
+		else
+		{
+			InteractLabel.Text = string.Empty;
+		}
+	}
 
-    public void OnInteract()
-    {
-        if (Interactables.Count > 0)
-        {
-            Interactables.First().Interact();
-            InteractAudioStreamPlayer.Play();
-        }
-    }
+	public void OnInteract()
+	{
+		if (Interactables.Count > 0)
+		{
+			Interactables.First().Interact();
+			InteractAudioStreamPlayer.Play();
+		}
+	}
 
 
-    // Input states
+	// Input states
 
-    private Vector2 InputDirection { get; set; }
-    private Vector2 LastInputDirection { get; set; }
+	private Vector2 InputDirection { get; set; }
+	private Vector2 LastInputDirection { get; set; }
 
-    private double holdTime = 0.8;
-    private double upLastPressed = 0.0;
-    private double downLastPressed = 0.0;
+	private double holdTime = 0.8;
+	private double upLastPressed = 0.0;
+	private double downLastPressed = 0.0;
 
-    private bool IsDown { get => InputDirection.Y > 0; }
-    private bool IsDownHeld { get => IsDown && Time.GetUnixTimeFromSystem() - downLastPressed > holdTime; }
+	private bool IsDown { get => InputDirection.Y > 0; }
+	private bool IsDownHeld { get => IsDown && Time.GetUnixTimeFromSystem() - downLastPressed > holdTime; }
 
-    private bool IsUp { get => InputDirection.Y < 0; }
-    private bool IsUpHeld { get => IsUp && Time.GetUnixTimeFromSystem() - upLastPressed > holdTime; }
+	private bool IsUp { get => InputDirection.Y < 0; }
+	private bool IsUpHeld { get => IsUp && Time.GetUnixTimeFromSystem() - upLastPressed > holdTime; }
 
-    public override void _Input(InputEvent @event)
-    {
-        InputDirection = Input.GetVector("player_left", "player_right", "player_up", "player_down");
+	public override void _Input(InputEvent @event)
+	{
+		InputDirection = Input.GetVector("player_left", "player_right", "player_up", "player_down");
 
-        if (InputDirection != Vector2.Zero)
-            LastInputDirection = InputDirection;
+		if (InputDirection != Vector2.Zero)
+			LastInputDirection = InputDirection;
 
-        // Calculate holding the up down button
-        if (IsDown) downLastPressed = Time.GetUnixTimeFromSystem();
-        if (IsUp) upLastPressed = Time.GetUnixTimeFromSystem();
+		// Calculate holding the up down button
+		if (IsDown) downLastPressed = Time.GetUnixTimeFromSystem();
+		if (IsUp) upLastPressed = Time.GetUnixTimeFromSystem();
 
-        //GD.Print("downLastPressed ", downLastPressed);
-        //GD.Print("upLastPressed ", upLastPressed);
-        //GD.Print("IsDownHeld ", IsDownHeld);
-        //GD.Print("IsUpHeld ", IsUpHeld);
-        //GD.Print("down ", Time.GetUnixTimeFromSystem() - downLastPressed);
-        //GD.Print("up ", Time.GetUnixTimeFromSystem() - upLastPressed);
-        //GD.Print("--------");
-    }
+		//GD.Print("downLastPressed ", downLastPressed);
+		//GD.Print("upLastPressed ", upLastPressed);
+		//GD.Print("IsDownHeld ", IsDownHeld);
+		//GD.Print("IsUpHeld ", IsUpHeld);
+		//GD.Print("down ", Time.GetUnixTimeFromSystem() - downLastPressed);
+		//GD.Print("up ", Time.GetUnixTimeFromSystem() - upLastPressed);
+		//GD.Print("--------");
+	}
 
-    public void ProcessPan()
-    {
-        if (IsUpHeld)
-            PanUp();
-        else if (IsDownHeld)
-            PanDown();
-        else
-            PanReset();
-    }
+	public void ProcessPan()
+	{
+		if (IsUpHeld)
+			PanUp();
+		else if (IsDownHeld)
+			PanDown();
+		else
+			PanReset();
+	}
 
-    /// <summary>
-    /// Pan the camera downwards
-    /// </summary>
-    public void PanDown()
-    {
-        Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = CameraPanYOffset };
-    }
+	/// <summary>
+	/// Pan the camera downwards
+	/// </summary>
+	public void PanDown()
+	{
+		Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = CameraPanYOffset };
+	}
 
-    /// <summary>
-    /// Pan the camera upwards
-    /// </summary>
-    public void PanUp()
-    {
-        Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = -CameraPanYOffset };
-    }
+	/// <summary>
+	/// Pan the camera upwards
+	/// </summary>
+	public void PanUp()
+	{
+		Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = -CameraPanYOffset };
+	}
 
-    /// <summary>
-    /// Reset the camera pan offset
-    /// </summary>
-    public void PanReset()
-    {
-        Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = 0 };
-    }
+	/// <summary>
+	/// Reset the camera pan offset
+	/// </summary>
+	public void PanReset()
+	{
+		Game.Level.Camera.TargetOffset = Game.Level.Camera.TargetOffset with { Y = 0 };
+	}
 }
 
 

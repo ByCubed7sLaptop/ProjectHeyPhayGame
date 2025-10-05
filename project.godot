@@ -29,6 +29,10 @@ GameController="*res://Scenes/GameController.tscn"
 
 project/assembly_name="ThePhayGame"
 
+[gui]
+
+theme/custom="res://UI/Theme.tres"
+
 [input]
 
 player_jump={

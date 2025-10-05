@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b11x8rvewxq16"]
+[gd_scene load_steps=21 format=3 uid="uid://b11x8rvewxq16"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_53c0d"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="2_87usi"]
@@ -15,6 +15,7 @@
 [ext_resource type="Shader" path="res://Shaders/Blocky transistion.gdshader" id="12_n4f1e"]
 [ext_resource type="Shader" path="res://Shaders/Cut transistion.gdshader" id="13_hicqn"]
 [ext_resource type="Script" path="res://Scripts/AudioController.cs" id="14_8il8c"]
+[ext_resource type="Script" path="res://Scripts/InputRemapper.cs" id="16_0afdt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_runlf"]
 shader = ExtResource("11_rvlk6")
@@ -39,12 +40,13 @@ shader_parameter/aspect_ratio = Vector2(1, 1)
 [sub_resource type="Environment" id="Environment_m3gem"]
 background_mode = 3
 
-[node name="GameController" type="Node"]
+[node name="GameController" type="Node" node_paths=PackedStringArray("inputRemapper")]
 script = ExtResource("1_53c0d")
 LevelPackedScene = ExtResource("2_87usi")
 BattlePackedScene = ExtResource("3_wmyri")
 LevelHudPackedScene = ExtResource("4_jjs40")
 PlayerPackedScene = ExtResource("5_in20t")
+inputRemapper = NodePath("InputRemapper")
 MainMenuTracks = Array[AudioStream]([ExtResource("6_6akq3")])
 
 [node name="DebugDrawer" type="Node2D" parent="."]
@@ -81,3 +83,6 @@ process_mode = 3
 script = ExtResource("14_8il8c")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+
+[node name="InputRemapper" type="Node" parent="."]
+script = ExtResource("16_0afdt")

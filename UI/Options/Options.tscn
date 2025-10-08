@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://chhauuk3qikqf"]
+[gd_scene load_steps=7 format=3 uid="uid://chhauuk3qikqf"]
 
 [ext_resource type="Script" path="res://UI/Options/OptionsUIManager.cs" id="1_2yk1o"]
-[ext_resource type="PackedScene" uid="uid://60jdnesv2fcw" path="res://UI/Options/Slider.tscn" id="1_8elyj"]
+[ext_resource type="PackedScene" uid="uid://b4n5d5uayiml" path="res://UI/Options/Slider.tscn" id="1_8elyj"]
 [ext_resource type="Shader" path="res://Shaders/Outline.gdshader" id="1_nc8di"]
 [ext_resource type="PackedScene" uid="uid://btgvgfdnp5yn4" path="res://UI/Options/label_group_seperator.tscn" id="2_g4wtt"]
+[ext_resource type="PackedScene" uid="uid://60jdnesv2fcw" path="res://UI/Options/CheckBox.tscn" id="3_02g0j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xwhy6"]
 shader = ExtResource("1_nc8di")
@@ -23,160 +24,157 @@ grow_vertical = 2
 
 [node name="OptionManager" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("1_2yk1o")
-target = NodePath("../VBoxContainer")
+target = NodePath("../VBoxContainer2/VBoxContainer")
 GroupPackedScene = ExtResource("2_g4wtt")
-FloatPackedScene = ExtResource("2_g4wtt")
+FloatPackedScene = ExtResource("1_8elyj")
 VolumePackedScene = ExtResource("1_8elyj")
+BoolPackedScene = ExtResource("3_02g0j")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 1152.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
 material = SubResource("ShaderMaterial_xwhy6")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
-[node name="Label Game Play" type="Label" parent="VBoxContainer"]
+[node name="Label Game Play" type="Label" parent="VBoxContainer2/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Game Play"
 horizontal_alignment = 1
 
-[node name="Label Display" type="Label" parent="VBoxContainer"]
+[node name="Label Display" type="Label" parent="VBoxContainer2/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Display"
 horizontal_alignment = 1
 
-[node name="CheckButton2" type="CheckButton" parent="VBoxContainer"]
+[node name="CheckButton2" type="CheckButton" parent="VBoxContainer2/VBoxContainer"]
 visible = false
 layout_mode = 2
 text = "Camera shake"
 
-[node name="Label Voume" type="Label" parent="VBoxContainer"]
+[node name="Label Voume" type="Label" parent="VBoxContainer2/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="VBoxContainer Volume" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer Volume" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Volume" parent="VBoxContainer/VBoxContainer Volume" instance=ExtResource("1_8elyj")]
+[node name="Volume" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume" instance=ExtResource("3_02g0j")]
 layout_mode = 2
 
-[node name="HSlider" parent="VBoxContainer/VBoxContainer Volume/Volume" index="1"]
-size_flags_stretch_ratio = 14.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer Volume"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Volume" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer" instance=ExtResource("1_8elyj")]
+[node name="Volume" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer" instance=ExtResource("3_02g0j")]
 layout_mode = 2
 
-[node name="Label" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer/Volume" index="0"]
+[node name="Label" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer/Volume" index="0"]
 text = "Music"
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="Volume2" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer" instance=ExtResource("1_8elyj")]
+[node name="Volume2" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer" instance=ExtResource("3_02g0j")]
 layout_mode = 2
 
-[node name="Label" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer/Volume2" index="0"]
+[node name="Label" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer/Volume2" index="0"]
 text = "UI"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer Volume"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Volume" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer2" instance=ExtResource("1_8elyj")]
+[node name="Volume" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer2" instance=ExtResource("3_02g0j")]
 layout_mode = 2
 
-[node name="Label" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer2/Volume" index="0"]
+[node name="Label" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer2/Volume" index="0"]
 text = "Player"
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer2"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="Volume2" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer2" instance=ExtResource("1_8elyj")]
+[node name="Volume2" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer2" instance=ExtResource("3_02g0j")]
 layout_mode = 2
 
-[node name="Label" parent="VBoxContainer/VBoxContainer Volume/HBoxContainer2/Volume2" index="0"]
+[node name="Label" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer2/Volume2" index="0"]
 text = "Ambient"
 
-[node name="Label Video" type="Label" parent="VBoxContainer"]
+[node name="Label Video" type="Label" parent="VBoxContainer2/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Video"
 horizontal_alignment = 1
 
-[node name="VBoxContainer Volume2" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer Volume2" type="VBoxContainer" parent="VBoxContainer2/VBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="CheckButton" type="CheckButton" parent="VBoxContainer/VBoxContainer Volume2"]
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2"]
 layout_mode = 2
 text = "Fullscreen"
 
-[node name="Input" type="BoxContainer" parent="VBoxContainer/VBoxContainer Volume2"]
+[node name="Input" type="BoxContainer" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer Volume2/Input"]
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2/Input"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Jump"
 vertical_alignment = 1
 
-[node name="InputRemap" type="Button" parent="VBoxContainer/VBoxContainer Volume2/Input"]
+[node name="InputRemap" type="Button" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2/Input"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 6.0
 text = "Space (example)"
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer Volume2/Input"]
+[node name="Button" type="Button" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2/Input"]
 layout_mode = 2
 text = "Default"
 
-[node name="Setting" type="BoxContainer" parent="VBoxContainer/VBoxContainer Volume2"]
+[node name="Setting" type="BoxContainer" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer Volume2/Setting"]
+[node name="Label" type="Label" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2/Setting"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Jump"
 vertical_alignment = 1
 
-[node name="InputRemap" type="Button" parent="VBoxContainer/VBoxContainer Volume2/Setting"]
+[node name="InputRemap" type="Button" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2/Setting"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 6.0
 text = "Space (example)"
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer Volume2/Setting"]
+[node name="Button" type="Button" parent="VBoxContainer2/VBoxContainer/VBoxContainer Volume2/Setting"]
 layout_mode = 2
 text = "Default"
 
-[editable path="VBoxContainer/VBoxContainer Volume/Volume"]
-[editable path="VBoxContainer/VBoxContainer Volume/HBoxContainer/Volume"]
-[editable path="VBoxContainer/VBoxContainer Volume/HBoxContainer/Volume2"]
-[editable path="VBoxContainer/VBoxContainer Volume/HBoxContainer2/Volume"]
-[editable path="VBoxContainer/VBoxContainer Volume/HBoxContainer2/Volume2"]
+[editable path="VBoxContainer2/VBoxContainer/VBoxContainer Volume/Volume"]
+[editable path="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer/Volume"]
+[editable path="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer/Volume2"]
+[editable path="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer2/Volume"]
+[editable path="VBoxContainer2/VBoxContainer/VBoxContainer Volume/HBoxContainer2/Volume2"]

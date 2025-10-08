@@ -1,13 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4n5d5uayiml"]
+[gd_scene format=3 uid="uid://btwsccv7jxfax"]
 
-[ext_resource type="Script" path="res://UI/Options/SliderOption.cs" id="1_ym3d2"]
-
-[node name="Volume" type="BoxContainer" node_paths=PackedStringArray("label", "slider")]
+[node name="Volume" type="BoxContainer"]
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_ym3d2")
-label = NodePath("Label")
-slider = NodePath("Value")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

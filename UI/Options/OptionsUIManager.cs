@@ -27,6 +27,21 @@ class OptionSliderAttribute : Attribute
     public OptionSliderAttribute(float min = 0, float max = 100, float step = 1) { Min = min; Max = max; Step = step; }
 }
 
+public interface IOptionNode<T> {
+    T Value { get; set; }
+
+    // When the checkbutton gets pressed, slider gets slid, ect.
+    event EventHandler<OptionEventArgs<T>> ValueChanged;
+
+    void SetOptionName(string name);
+}
+
+public class OptionEventArgs<T> : EventArgs
+{
+    public T Value { get; set; }
+}
+
+
 public static class OptionsManager
 {
 	// Save and load file by the given path
@@ -39,16 +54,6 @@ public static class OptionsManager
 		using FileStream openStream = File.OpenRead(filepath);
 		return JsonSerializer.Deserialize<T>(openStream);
 	}
-
-    static public void SetValueOnNode<T, N>(N target, string property, T value) {
-        // Find node
-        // Iterate/walk down node tree to find the node type from the parent
-
-
-        // Set value
-        
-
-    }
 }
 
 public partial class OptionsUIManager : Node
@@ -58,6 +63,7 @@ public partial class OptionsUIManager : Node
 	[Export] public PackedScene GroupPackedScene;
 	[Export] public PackedScene FloatPackedScene;
 	[Export] public PackedScene VolumePackedScene;
+	[Export] public PackedScene BoolPackedScene;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -71,46 +77,55 @@ public partial class OptionsUIManager : Node
 	}
 
 	public void ShowOptions() {
-		Options options;// = GameController.Instance.options;
+		Options options = GameController.Instance.options;
 
-		options = OptionsManager.Load<Options>("C:\\Users\\ByCubed7\\Desktop\\File.json");
+		//options = OptionsManager.Load<Options>("C:\\Users\\ByCubed7\\Desktop\\File.json");
 
 		// For each option
 		foreach (var property in options.GetType().GetProperties()) {
-			//GD.Print(property.Name, " ", property.PropertyType, " ", property.GetValue(options, null));
 
-            // Get Attributes
             var sliderAttribute = property.GetCustomAttribute<OptionSliderAttribute>();
-
 
 			// If should be seperated into seperate group:
 			var groupName = property.GetCustomAttribute<OptionGroupAttribute>();
 		    if (groupName != null)
 		    {
-				GD.Print($"Property {property.Name} has: {groupName.Group}");
-				Label label = new();
+                Label label = GroupPackedScene.Instantiate<Label>();
 				label.Text = $"-- [ {groupName.Group} ] --";
 				target.AddChild(label);
 		    }
 
+            Control control;
+            if (property.PropertyType == typeof(double)) {
+                control = VolumePackedScene.Instantiate<Control>();
 
-            // FLOAT
-			if (property.PropertyType == typeof(float))
-			{
-    		    if (sliderAttribute != null)
-    		    {
-    				GD.Print($"Adding Slider");
-    				Control control = VolumePackedScene.Instantiate<Control>();
-    				//label.Text = $"-- [ {groupName.Group} ] --";
-    				target.AddChild(control);
-                    continue;
-    		    }
+                IOptionNode<double> optionNode = control as IOptionNode<double>;
+                optionNode.SetOptionName(property.Name);
+                optionNode.ValueChanged += (from, args) => {
 
+                    if (null != property && property.CanWrite)
+                        property.SetValue(options, args.Value, null);
 
-				Label label = new();
-				label.Text = $"{property.Name}  [float]  {property.GetValue(options, null)}";
-				target.AddChild(label);
-			}
+                     GD.Print(args.Value);
+                 };
+            }
+
+            else if (property.PropertyType == typeof(bool)) {
+                control = BoolPackedScene.Instantiate<Control>();
+
+                IOptionNode<bool> optionNode = control as IOptionNode<bool>;
+                optionNode.SetOptionName(property.Name);
+                optionNode.ValueChanged += (from, args) => {
+
+                    if (null != property && property.CanWrite)
+                        property.SetValue(options, args.Value, null);
+
+                     GD.Print(args.Value);
+                 };
+            }
+            else continue;
+
+            target.AddChild(control);
 
 		}
 

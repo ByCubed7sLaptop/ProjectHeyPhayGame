@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://60jdnesv2fcw"]
+
+[ext_resource type="Script" path="res://UI/Options/CheckBoxOption.cs" id="1_lrohl"]
+
+[node name="Checkbox" type="BoxContainer" node_paths=PackedStringArray("label", "checkbox")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_lrohl")
+label = NodePath("Label")
+checkbox = NodePath("Value")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Master"
+
+[node name="Value" type="CheckBox" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0

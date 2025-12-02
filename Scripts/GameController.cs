@@ -21,6 +21,7 @@ public partial class GameController : Node
 	[Export] public AudioController audioController;
 	[Export] public InputRemapper inputRemapper;
 	[Export] public Godot.Collections.Array<AudioStream> MainMenuTracks;
+	[Export] public Godot.Collections.Array<AudioStream> DefaultBattleTracks;
 
 	public Options options = new();
 
@@ -74,10 +75,14 @@ public partial class GameController : Node
 		}
 
 		GetTree().Paused = true;
+		Game.AudioController.FadeOutAll();
 
 		// TODO: Assumes we're on the level scene
 		screenFade.UseBlocky();
 		screenFade.TransitionThen(() => {
+
+			Game.AudioController.TransitionInstantlyUsing(DefaultBattleTracks);
+
 			GetTree().Root.RemoveChild(level);
 			GetTree().Root.AddChild(battle);
 			GetTree().Paused = false;

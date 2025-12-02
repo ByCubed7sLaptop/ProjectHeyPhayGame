@@ -57,7 +57,7 @@ public partial class BattleController : Node2D
 		// Check enemy wellbeing
 		List<BattlerResource> enemiesToRemove = new ();
 		foreach (var enemy in currentEncounter.Enemies)
-		{ 
+		{
 			if (enemy.IsDead())
 			{
 				enemiesToRemove.Add(enemy);
@@ -143,14 +143,14 @@ public partial class BattleController : Node2D
 	/// </summary>
 	private void PlaceParty()
 	{
-		for (int i = 0; i < Party.Count; i++)
+		for (int i = Party.Count-1; i >= 0; i--)
 		{
 			var partyMember = Party.Get(i);
 			Sprite2D sprite = partyMember.GenerateBattler() as Sprite2D;
 			sprite.Position = phayGeneralPosition.Position + Vector2.Left * 100 + Vector2.Left * 20 * i;
 
 			AddChild(sprite);
-			PartySprites.Add(sprite);
+			PartySprites.Insert(0, sprite);
 			AllSprites[partyMember] = sprite;
 		}
 	}
@@ -170,7 +170,6 @@ public partial class BattleController : Node2D
             AddChild(sprite);
             EnemySprites.Add(sprite);
 			AllSprites[enemyResource] = sprite;
-
 		}
 	}
 
@@ -297,7 +296,7 @@ public partial class BattleController : Node2D
     {
 		if (Turn.IsPartysTurn())
 			return currentEncounter.GetRandom(random);
-		
+
 		// Is enemies turn, return member
 		return Party.RandomMember(random);
     }
@@ -332,7 +331,7 @@ public partial class BattleController : Node2D
 		float radius = amount;
 
         Vector2 vector = new Vector2(
-            MathF.Cos(angle), 
+            MathF.Cos(angle),
             MathF.Sin(angle)
         );
         return vector * radius * distance;
@@ -345,7 +344,7 @@ public partial class BattleController : Node2D
 		//angle -= i / max / 2;
 
 		Vector2 vector = new Vector2(
-			MathF.Cos(angle), 
+			MathF.Cos(angle),
 			MathF.Sin(angle)
 		);
 

@@ -123,6 +123,10 @@ public partial class OptionsUIManager : Node
                      GD.Print(args.Value);
                  };
             }
+
+            // TODO: If enum create drop down menu
+
+
             else continue;
 
             target.AddChild(control);
@@ -130,6 +134,9 @@ public partial class OptionsUIManager : Node
 		}
 
 		OptionsManager.Save("C:\\Users\\ByCubed7\\Desktop\\File.json", options);
+
+
+        // TODO: Add controls
 
 	}
 }

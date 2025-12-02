@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b11x8rvewxq16"]
+[gd_scene load_steps=22 format=3 uid="uid://b11x8rvewxq16"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_53c0d"]
 [ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Level/Level Test.tscn" id="2_87usi"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dk06usw83mpy3" path="res://Level/Phay/PhayPlayer.tscn" id="5_in20t"]
 [ext_resource type="AudioStream" uid="uid://6xd3ofaybsad" path="res://Audio/Soundtracks/Etirwer (Looped).ogg" id="6_6akq3"]
 [ext_resource type="Script" path="res://Scripts/PartyController.cs" id="6_7sow6"]
+[ext_resource type="AudioStream" uid="uid://c2wmg4efrrkxy" path="res://Audio/Soundtracks/Battletracks/2_starting_over.wav" id="7_1wple"]
 [ext_resource type="Resource" uid="uid://s14247na6fm8" path="res://Battle/Party/Gremdolyn/Gremdolyn Party Member.tres" id="9_5f1gf"]
 [ext_resource type="Script" path="res://UI/ScreenFade/ScreenFade.cs" id="9_ksqvr"]
 [ext_resource type="Shader" path="res://Shaders/Diamond transistion.gdshader" id="11_rvlk6"]
@@ -48,6 +49,7 @@ LevelHudPackedScene = ExtResource("4_jjs40")
 PlayerPackedScene = ExtResource("5_in20t")
 inputRemapper = NodePath("InputRemapper")
 MainMenuTracks = Array[AudioStream]([ExtResource("6_6akq3")])
+DefaultBattleTracks = Array[AudioStream]([ExtResource("7_1wple")])
 
 [node name="DebugDrawer" type="Node2D" parent="."]
 script = ExtResource("4_7e2ig")

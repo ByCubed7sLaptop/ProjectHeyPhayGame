@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqsejobjamhkt"]
+
+[ext_resource type="Script" uid="uid://bjctkc8w4j7af" path="res://Objects/HUD/PlayerHealthbar/PlayerHealthbar.cs" id="1_taeaw"]
+[ext_resource type="Texture2D" uid="uid://2j7loagco7la" path="res://Objects/HUD/PlayerHealthbar/phay_ui_healthbar.png" id="2_r83cs"]
+
+[node name="PlayerHealthbar" type="Control" node_paths=PackedStringArray("HpDisplay")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 161.0
+offset_top = 67.0
+offset_right = 161.0
+offset_bottom = 67.0
+scale = Vector2(0.33, 0.33)
+script = ExtResource("1_taeaw")
+HpDisplay = NodePath("Label")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+texture_filter = 2
+offset_left = -433.333
+offset_top = -151.515
+offset_right = 441.667
+offset_bottom = 146.485
+texture = ExtResource("2_r83cs")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -174.0
+offset_top = -29.0
+offset_right = 264.0
+offset_bottom = 78.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 76
+text = "c.Hp / m.Hp"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

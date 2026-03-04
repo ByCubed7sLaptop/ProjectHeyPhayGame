@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=10 format=3 uid="uid://lw8hu80csg1"]
+
+[ext_resource type="Resource" uid="uid://cfa77mftbffyu" path="res://Objects/Battle/Party/Phay Base Stats.tres" id="1_uk21n"]
+[ext_resource type="Resource" uid="uid://cl2m5kjravd7s" path="res://Objects/Battle/Actions/BattleAction_Attack.tres" id="1_wklvv"]
+[ext_resource type="Resource" uid="uid://birah3y2i8tcl" path="res://Objects/Battle/Actions/BattleAction_Guard.tres" id="2_2cqbf"]
+[ext_resource type="Texture2D" uid="uid://qquja25ple77" path="res://Objects/Phay/Phay.png" id="2_8bw8j"]
+[ext_resource type="Script" uid="uid://cmlp8r0hamrjd" path="res://Objects/Battle/Party/PartyMemberResource.cs" id="3_0rh3e"]
+[ext_resource type="Resource" uid="uid://c6q82ugcv6b8h" path="res://Objects/Battle/Actions/BattleAction_Item.tres" id="3_l7eh1"]
+[ext_resource type="Resource" uid="uid://rtoceocws6nn" path="res://Objects/Battle/Actions/BattleAction_Run.tres" id="4_r50n3"]
+[ext_resource type="Resource" uid="uid://c3xfoe3q0yojr" path="res://Objects/Battle/Actions/BattleAction_Special.tres" id="5_xm8a7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv3rm"]
+atlas = ExtResource("2_8bw8j")
+region = Rect2(0, 40, 26, 42)
+
+[resource]
+script = ExtResource("3_0rh3e")
+DisplayName = "Phay"
+Stats = ExtResource("1_uk21n")
+Texture = SubResource("AtlasTexture_rv3rm")
+Actions = Array[Resource]([ExtResource("1_wklvv"), ExtResource("2_2cqbf"), ExtResource("3_l7eh1"), ExtResource("4_r50n3"), ExtResource("5_xm8a7")])

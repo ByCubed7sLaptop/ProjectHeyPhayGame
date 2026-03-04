@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://cjbxhh50hqbk"]
+
+[ext_resource type="Resource" uid="uid://cl2m5kjravd7s" path="res://Objects/Battle/Actions/BattleAction_Attack.tres" id="1_bxnlf"]
+[ext_resource type="Script" uid="uid://chq43vkge0ys8" path="res://Objects/Battle/BattlerResource.cs" id="1_gxcs4"]
+[ext_resource type="Texture2D" uid="uid://dbd1k0tdpfsqn" path="res://Objects/Battle/Temp/Temp Texture.png" id="1_sudrg"]
+[ext_resource type="Resource" uid="uid://by2cekpw8bmus" path="res://Objects/Battle/Temp/Temp Stats.tres" id="1_xqe65"]
+
+[resource]
+script = ExtResource("1_gxcs4")
+DisplayName = "Temp"
+Stats = ExtResource("1_xqe65")
+Texture = ExtResource("1_sudrg")
+Actions = Array[Resource]([ExtResource("1_bxnlf")])

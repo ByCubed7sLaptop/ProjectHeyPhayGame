@@ -1,0 +1,164 @@
+[gd_scene load_steps=16 format=3 uid="uid://cvs8nqo7v0vgm"]
+
+[ext_resource type="Shader" uid="uid://ssy0ct6rc7je" path="res://Shaders/Clouds.gdshader" id="1_h4uxi"]
+[ext_resource type="Texture2D" uid="uid://dl4avsfjigdxy" path="res://Shaders/bubbles.png" id="2_j2hxt"]
+[ext_resource type="Texture2D" uid="uid://bi6j1qp8f05w7" path="res://Objects/MainMenu/Background/The Legend of Phay.png" id="3_q0ggk"]
+[ext_resource type="Shader" uid="uid://calgr1re6w5sb" path="res://Shaders/Bounce.gdshader" id="4_2poc2"]
+[ext_resource type="Texture2D" uid="uid://ck8dh4ltbheif" path="res://Objects/MainMenu/Background/The Legend of Phay Title.png" id="5_wpisx"]
+[ext_resource type="Script" uid="uid://bxl8ucm43cnlo" path="res://Objects/MainMenu/ButtonNewGame.cs" id="6_k0g7a"]
+[ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Objects/Level/Level Test.tscn" id="7_psqxl"]
+[ext_resource type="Shader" uid="uid://g7dl3xq5r5rp" path="res://Shaders/Diamond transistion.gdshader" id="8_ddoik"]
+[ext_resource type="PackedScene" uid="uid://chhauuk3qikqf" path="res://Objects/Options/Options.tscn" id="9_rt68u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tc714"]
+shader = ExtResource("1_h4uxi")
+shader_parameter/bottom_color = Color(0.286275, 0.501961, 1, 1)
+shader_parameter/top_color = Color(0.768627, 0.847059, 1, 1)
+shader_parameter/tex = ExtResource("2_j2hxt")
+shader_parameter/layer_count = 6
+shader_parameter/time_scale = 0.034
+shader_parameter/base_intensity = 0.691
+shader_parameter/size = 0.70401
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6ti1"]
+shader = ExtResource("4_2poc2")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(0, 30)
+shader_parameter/sine_speed = Vector2(1, 0.6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgt02"]
+shader = ExtResource("8_ddoik")
+shader_parameter/diamond_color = Color(0, 0, 0, 1)
+shader_parameter/aspect_ratio = 1.61
+shader_parameter/diamonds_count = 10.0
+shader_parameter/delta = 0.0
+
+[sub_resource type="Animation" id="Animation_g22rn"]
+resource_name = "Options"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.707107, 0.554785),
+"update": 0,
+"values": [Vector2(1183, 83), Vector2(102, 83)]
+}
+
+[sub_resource type="Animation" id="Animation_3fp6s"]
+resource_name = "Options Pan Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.554785, 0.707107),
+"update": 0,
+"values": [Vector2(102, 83), Vector2(1183, 83)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h847m"]
+_data = {
+&"Options Pan In": SubResource("Animation_g22rn"),
+&"Options Pan Out": SubResource("Animation_3fp6s")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tc714")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TheLegendOfPhay" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 1162.0
+offset_bottom = 658.0
+texture = ExtResource("3_q0ggk")
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -319.5
+offset_top = -251.0
+offset_right = 319.5
+offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+material = SubResource("ShaderMaterial_k6ti1")
+layout_mode = 2
+texture = ExtResource("5_wpisx")
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 28.3)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Button New Game" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+script = ExtResource("6_k0g7a")
+targetScene = ExtResource("7_psqxl")
+transistion = SubResource("ShaderMaterial_cgt02")
+
+[node name="Button Continue" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Button Options" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Button Quit" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="TransitionRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_cgt02")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="Options" parent="." instance=ExtResource("9_rt68u")]
+layout_mode = 1
+offset_left = 1183.0
+offset_top = 83.0
+offset_right = 977.0
+offset_bottom = -158.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Options"]
+libraries = {
+&"": SubResource("AnimationLibrary_h847m")
+}

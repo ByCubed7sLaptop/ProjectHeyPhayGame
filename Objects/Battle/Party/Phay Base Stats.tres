@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cfa77mftbffyu"]
+
+[ext_resource type="Script" uid="uid://dkd1wh5y06hk2" path="res://Objects/Battle/StatsResource.cs" id="1_pf5ia"]
+
+[resource]
+script = ExtResource("1_pf5ia")
+Health = 120
+HealthMax = 120
+Cutie = 10
+CutieMax = 10
+Power = 2
+Defence = 3
+Speed = 1
+Luck = 2
+Exp = 0

@@ -1,0 +1,146 @@
+[gd_scene load_steps=21 format=4 uid="uid://bob2spgcbowqy"]
+
+[ext_resource type="PackedScene" uid="uid://b5he6b8gh5ik1" path="res://Objects/Level/Level Base.tscn" id="1_48r12"]
+[ext_resource type="Texture2D" uid="uid://vl6uqsdoym2e" path="res://Objects/Level/Enviroment/Forest/Tree Texture.png" id="2_kl5wn"]
+[ext_resource type="AudioStream" uid="uid://mdsavg13cfya" path="res://Audio/Soundtracks/Zane Little Music/apple_cider.ogg" id="2_yctup"]
+[ext_resource type="Texture2D" uid="uid://wdej4uy2udlq" path="res://Objects/Level/Enviroment/Forest/Lantern Texture.png" id="3_ibrxk"]
+[ext_resource type="AudioStream" uid="uid://c7xabestmmijq" path="res://Audio/Soundtracks/Forest Ambience.mp3" id="3_qvec0"]
+[ext_resource type="TileSet" uid="uid://1qb03bhp7n5r" path="res://Objects/Level/Enviroment/TileSet.tres" id="4_2iemu"]
+[ext_resource type="Texture2D" uid="uid://dtfe2n8qwskw7" path="res://Objects/Level/Enviroment/Forest/Bridge Texture.png" id="4_l571h"]
+[ext_resource type="Shader" uid="uid://dyswup8yx230t" path="res://Shaders/Sway.gdshader" id="5_2iemu"]
+[ext_resource type="Texture2D" uid="uid://4x307ig7wv0" path="res://Objects/Level/Enviroment/Forest/Bush Flower Texture.png" id="5_mhnhs"]
+[ext_resource type="Texture2D" uid="uid://cdeowyeoqspk8" path="res://Objects/Level/Enviroment/Forest/Bush Texture.png" id="6_17wt3"]
+[ext_resource type="PackedScene" uid="uid://dkrq31wkwcacj" path="res://Objects/Level/Encounters/Encounter Temp.tscn" id="7_tryuo"]
+[ext_resource type="PackedScene" uid="uid://cv1hl3dsw3hl4" path="res://Objects/Level/DeathPlane/DeathPlane.tscn" id="8_jaidf"]
+[ext_resource type="PackedScene" uid="uid://bk2mtq55tjfsm" path="res://Objects/Level/Spike/Spike.tscn" id="9_vfbor"]
+[ext_resource type="PackedScene" uid="uid://dxf8ybafr23ox" path="res://Objects/Level/Interactables/Lever/Lever.tscn" id="10_hvrrj"]
+[ext_resource type="PackedScene" uid="uid://dqubsh2fba1vr" path="res://Objects/Level/Interactables/Sign/Sign.tscn" id="11_32ah1"]
+[ext_resource type="Script" uid="uid://bmgty6ef60yav" path="res://Objects/Level/LevelTransition/TransitionArea.cs" id="12_xto3q"]
+[ext_resource type="Texture2D" uid="uid://457cdtwunn5h" path="res://Objects/Level/Spike/spike.png" id="13_kwku5"]
+[ext_resource type="Script" uid="uid://b6ul2tgj54wos" path="res://Tools/Tool_TileMapAutoFoliage.cs" id="14_tdy7e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cf1hn"]
+shader = ExtResource("5_2iemu")
+shader_parameter/speed = 1.0
+shader_parameter/amount = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyveu"]
+size = Vector2(100, 100)
+
+[node name="Level" instance=ExtResource("1_48r12")]
+BackgroundTracks = Array[AudioStream]([ExtResource("2_yctup"), ExtResource("3_qvec0")])
+
+[node name="Start Location" parent="." index="2"]
+position = Vector2(-158, -153)
+
+[node name="Blocks" type="TileMapLayer" parent="Enviroment" index="0"]
+texture_repeat = 1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD1////AwAAAAAAAAD1/wAAAwAAAAAAAAD2////AwAAAAAAAAD2/wAAAwABAAAAAAD3////AwABAAAAAAD3/wAAAwAAAAAAAADz/wAAAwAAAAAAAADz/wEAAwAAAAEAAAD0/wAAAwABAAAAAAD0/wEAAwABAAEAAAD1/wEAAwAAAAEAAAD2/wEAAwABAAEAAAD3/wEAAwAAAAEAAAD4/wAAAwABAAAAAAD4/wEAAwABAAEAAAD5/wAAAwAAAAAAAAD5/wEAAwAAAAEAAAD6/wAAAwABAAAAAAD6/wEAAwABAAEAAAD7/wAAAwAAAAAAAAD7/wEAAwAAAAEAAAD8/wAAAwABAAAAAAD8/wEAAwABAAEAAAD9/wAAAwAAAAAAAAD9/wEAAwAAAAEAAAD+/wAAAwABAAAAAAD+/wEAAwABAAEAAAD//wAAAwAAAAAAAAD//wEAAwAAAAEAAAAAAAAAAwABAAAAAAAAAAEAAwABAAEAAAD//wIAAwAAAAAAAAD//wMAAwAAAAEAAAAAAAIAAwABAAAAAAAAAAMAAwABAAEAAAD9/wIAAwAAAAAAAAD9/wMAAwAAAAEAAAD+/wIAAwABAAAAAAD+/wMAAwABAAEAAAD7/wIAAwAAAAAAAAD7/wMAAwAAAAEAAAD8/wIAAwABAAAAAAD8/wMAAwABAAEAAAD5/wIAAwAAAAAAAAD5/wMAAwAAAAEAAAD6/wIAAwABAAAAAAD6/wMAAwABAAEAAAD3/wIAAwAAAAAAAAD3/wMAAwABAAAAAAD4/wIAAwABAAAAAAD4/wMAAwABAAEAAAD1/wIAAwAAAAAAAAD1/wMAAwAAAAEAAAD2/wIAAwABAAAAAAD2/wMAAwAAAAAAAADz/wIAAwAAAAAAAADz/wMAAwAAAAEAAAD0/wIAAwABAAAAAAD0/wMAAwABAAEAAADx/wAAAwAAAAAAAADx/wEAAwAAAAAAAADy/wAAAwABAAAAAADy/wEAAwABAAAAAADx/wIAAwAAAAEAAADy/wIAAwABAAEAAAD2/wQAAwAAAAEAAAD3/wQAAwAAAAAAAAD3/wUAAwAAAAEAAAD4/wQAAwABAAAAAAD4/wUAAwABAAEAAAD5/wQAAwAAAAAAAAD5/wUAAwAAAAEAAAD6/wQAAwABAAAAAAD6/wUAAwABAAEAAAD7/wQAAwAAAAAAAAD7/wUAAwAAAAEAAAD8/wQAAwABAAAAAAD8/wUAAwABAAEAAAD9/wQAAwAAAAAAAAD9/wUAAwAAAAEAAAD+/wQAAwABAAAAAAD+/wUAAwABAAEAAAAGAAAAAwAAAAAAAAAGAAEAAwAAAAEAAAAHAAAAAwABAAAAAAAHAAEAAwABAAEAAAAHAAIAAwABAAAAAAAHAAMAAwABAAEAAAAIAAAAAwABAAAAAAAIAAEAAwABAAEAAAAIAAIAAwABAAAAAAAIAAMAAwABAAEAAAAIAAQAAwAAAAAAAAAIAAUAAwAAAAEAAAAJAAAAAwABAAAAAAAJAAEAAwABAAEAAAAJAAIAAwABAAAAAAAJAAMAAwABAAEAAAAJAAQAAwABAAAAAAAJAAUAAwABAAEAAAAKAAAAAwAAAAAAAAAKAAEAAwAAAAEAAAAKAAIAAwAAAAAAAAAKAAMAAwAAAAEAAAAKAAQAAwAAAAAAAAAKAAUAAwAAAAEAAAALAAEAAwABAAEAAAALAAIAAwABAAAAAAALAAMAAwABAAEAAAALAAQAAwABAAAAAAALAAUAAwAAAAAAAAALAAYAAwAAAAEAAAAMAAEAAwAAAAEAAAAMAAIAAwAAAAAAAAAMAAMAAwAAAAEAAAAMAAQAAwAAAAAAAAAMAAUAAwABAAAAAAAMAAYAAwABAAEAAAANAAEAAwABAAEAAAANAAIAAwABAAAAAAANAAMAAwABAAEAAAANAAQAAwABAAAAAAANAAUAAwAAAAAAAAANAAYAAwAAAAEAAAAOAAEAAwAAAAEAAAAOAAIAAwAAAAAAAAAOAAMAAwAAAAEAAAAOAAQAAwAAAAAAAAAOAAUAAwABAAAAAAAOAAYAAwABAAEAAAAPAAEAAwAAAAAAAAAPAAIAAwAAAAEAAAAPAAMAAwABAAEAAAAPAAQAAwABAAAAAAAPAAUAAwAAAAAAAAAPAAYAAwAAAAEAAAAQAAEAAwABAAAAAAAQAAIAAwABAAEAAAAQAAMAAwAAAAEAAAAQAAQAAwAAAAAAAAAQAAUAAwABAAAAAAAQAAYAAwABAAEAAAARAAEAAwABAAAAAAARAAIAAwABAAEAAAARAAMAAwABAAEAAAARAAQAAwABAAAAAAARAAUAAwABAAEAAAASAAEAAwAAAAEAAAASAAIAAwAAAAAAAAASAAMAAwAAAAEAAAASAAQAAwAAAAAAAAASAAUAAwAAAAEAAAATAAEAAwAAAAEAAAATAAIAAwAAAAAAAAATAAMAAwAAAAEAAAATAAQAAwABAAAAAAATAAUAAwABAAEAAAAUAAEAAwABAAEAAAAUAAIAAwABAAAAAAAUAAMAAwAAAAAAAAAUAAQAAwAAAAEAAAAVAAEAAwAAAAEAAAAVAAIAAwAAAAEAAAAVAAMAAwABAAAAAAAVAAQAAwABAAEAAAAWAAAAAwABAAAAAAAWAAEAAwABAAEAAAAWAAIAAwABAAEAAAAWAAMAAwABAAEAAAAXAAAAAwAAAAAAAAAXAAEAAwAAAAEAAAAXAAIAAwAAAAAAAAAXAAMAAwAAAAEAAAAYAAAAAwABAAAAAAAYAAEAAwABAAEAAAAYAAIAAwABAAAAAAAYAAMAAwABAAEAAAAZAAEAAwAAAAAAAAAZAAIAAwAAAAEAAAAZAAMAAwAAAAEAAAAaAAEAAwABAAAAAAAaAAIAAwABAAEAAAAaAAMAAwABAAEAAAAAAAQAAwABAAAAAAAAAAUAAwABAAEAAAAAAAYAAwABAAAAAAAAAAcAAwABAAEAAAAAAAgAAwABAAAAAAAAAAkAAwABAAEAAAAAAAoAAwABAAAAAAABAAoAAwAAAAAAAAACAAoAAwABAAAAAAADAAoAAwAAAAAAAAAEAAoAAwABAAAAAAAFAAoAAwAAAAAAAAAGAAoAAwAAAAAAAAAGAAkAAwAAAAEAAAAGAAgAAwAAAAAAAAAGAAcAAwAAAAEAAAAGAAYAAwAAAAAAAAAGAAUAAwAAAAEAAAAGAAQAAwAAAAAAAAAGAAMAAwAAAAEAAAAGAAIAAwAAAAAAAAD//wQAAwAAAAAAAAD//wUAAwAAAAEAAAD//wYAAwAAAAAAAAD//wcAAwAAAAEAAAD//wgAAwAAAAAAAAD//wkAAwAAAAEAAAD//woAAwAAAAAAAAD//wsAAwAAAAEAAAAAAAsAAwABAAEAAAABAAsAAwAAAAEAAAACAAsAAwABAAEAAAADAAsAAwAAAAEAAAAEAAsAAwABAAEAAAAFAAsAAwAAAAEAAAAGAAsAAwAAAAEAAAAHAAoAAwABAAAAAAAHAAsAAwABAAEAAAAHAAgAAwABAAAAAAAHAAkAAwABAAEAAAAHAAYAAwABAAAAAAAHAAcAAwABAAEAAAAHAAQAAwABAAAAAAAHAAUAAwABAAEAAAAfAAAAAwAAAAAAAAAgAAAAAwAAAAAAAAAhAAAAAwABAAEAAAAiAAAAAwAAAAEAAAAjAAAAAwABAAEAAAAkAAAAAwABAAEAAAAlAAAAAwAAAAEAAAAmAAAAAwAAAAAAAAAgAAEAAwAAAAAAAAAhAAEAAwAAAAAAAAAiAAEAAwABAAAAAAAjAAEAAwAAAAAAAAAkAAEAAwABAAAAAAAlAAEAAwAAAAAAAAAmAAEAAwABAAAAAAAhAAIAAwAAAAEAAAAiAAIAAwABAAEAAAAjAAIAAwABAAAAAAAkAAIAAwABAAEAAAAlAAIAAwAAAAEAAAAmAAIAAwABAAEAAAAhAAMAAwAAAAAAAAAhAAQAAwAAAAEAAAAhAAUAAwAAAAAAAAAhAAYAAwABAAAAAAAiAAYAAwABAAEAAAAiAAUAAwABAAAAAAAiAAQAAwABAAEAAAAiAAMAAwAAAAEAAAAjAAMAAwAAAAAAAAAjAAQAAwABAAAAAAAjAAUAAwAAAAAAAAAjAAYAAwAAAAEAAAAkAAYAAwABAAEAAAAkAAUAAwABAAAAAAAkAAQAAwABAAEAAAAkAAMAAwAAAAAAAAAlAAMAAwAAAAAAAAAlAAQAAwAAAAEAAAAlAAUAAwAAAAAAAAAlAAYAAwAAAAEAAAAmAAYAAwABAAEAAAAmAAUAAwABAAAAAAAmAAQAAwABAAEAAAAmAAMAAwABAAAAAADs/wAABgAAAAAAAADu/wAABgACAAAAAADv/wAABgADAAAAAADy//j/BgAAAAAAAAD0//j/BgACAAAAAAD1//j/BgADAAAAAADs//3/BgAAAAAAAADu//3/BgACAAAAAADv//3/BgADAAAAAADs//r/BgAAAAAAAADu//r/BgACAAAAAADv//r/BgADAAAAAAA=")
+tile_set = ExtResource("4_2iemu")
+
+[node name="Under Layer" type="TileMapLayer" parent="Enviroment" index="1"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AADx/wIAAwAIAAQAAADz/wMAAwAIAAQAAAD2/wQAAwAIAAQAAAD3/wUAAwAIAAQAAAD+/wUAAwAKAAQAAAAAAAMAAwAKAAQAAAD9/wUAAwAJAAQAAAD8/wUAAwAJAAQAAAD7/wUAAwAJAAQAAAD6/wUAAwAJAAQAAAD5/wUAAwAJAAQAAAD4/wUAAwAJAAQAAAD1/wMAAwAJAAQAAAD0/wMAAwAJAAQAAADy/wIAAwAJAAQAAAD//wMAAwAJAAQAAAD+/wQAAwALAAUAAAAAAAIAAwALAAUAAAAAAAEAAwALAAcAAADx/wEAAwALAAYAAAD+/wMAAwAMAAMAAAD3/wQAAwALAAMAAAD2/wMAAwALAAMAAADz/wIAAwALAAMAAAA=")
+tile_set = ExtResource("4_2iemu")
+
+[node name="Grass" type="TileMapLayer" parent="Enviroment" index="2"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD1////AwACAAEAAADy/wAAAwADAAEAAADz/wAAAwADAAEAAAD0/wAAAwADAAEAAAD2////AwADAAEAAAD4/wAAAwADAAEAAAD5/wAAAwADAAEAAAD6/wAAAwADAAEAAAD7/wAAAwADAAEAAAD8/wAAAwADAAEAAAD9/wAAAwADAAEAAAD+/wAAAwADAAEAAAD//wAAAwADAAEAAAAAAAAAAwAEAAEAAAD3////AwAEAAEAAAD3/wAAAwAGAAIAAAD1/wAAAwAFAAIAAADx/wAAAwACAAEAAAAGAAoAAwAEAAEAAAAAAAoAAwACAAEAAAAYAAEAAwAGAAIAAAAWAAEAAwAFAAIAAAAKAAEAAwAGAAIAAAAmAAAAAwAEAAEAAAAlAAAAAwADAAEAAAAkAAAAAwADAAEAAAAjAAAAAwADAAEAAAAiAAAAAwADAAEAAAAhAAAAAwADAAEAAAAgAAAAAwADAAEAAAAfAAAAAwACAAEAAAAFAAoAAwADAAEAAAAEAAoAAwADAAEAAAADAAoAAwADAAEAAAACAAoAAwADAAEAAAABAAoAAwADAAEAAAAaAAEAAwAEAAEAAAAZAAEAAwADAAEAAAAYAAAAAwAEAAEAAAAXAAAAAwADAAEAAAAWAAAAAwACAAEAAAAVAAEAAwADAAEAAAAUAAEAAwADAAEAAAATAAEAAwADAAEAAAASAAEAAwADAAEAAAARAAEAAwADAAEAAAAQAAEAAwADAAEAAAAPAAEAAwADAAEAAAAOAAEAAwADAAEAAAANAAEAAwADAAEAAAAMAAEAAwADAAEAAAALAAEAAwADAAEAAAAKAAAAAwAEAAEAAAAJAAAAAwADAAEAAAAIAAAAAwADAAEAAAAHAAAAAwADAAEAAAAGAAAAAwACAAEAAAAmAAYAAwAKAAQAAAAlAAYAAwAJAAQAAAAkAAYAAwAJAAQAAAAjAAYAAwAJAAQAAAAiAAYAAwAJAAQAAAAhAAYAAwAIAAQAAAAhAAEAAwAKAAQAAAAHAAsAAwAKAAQAAAAGAAsAAwAJAAQAAAAFAAsAAwAJAAQAAAAEAAsAAwAJAAQAAAADAAsAAwAJAAQAAAACAAsAAwAJAAQAAAABAAsAAwAJAAQAAAAAAAsAAwAJAAQAAAD//wsAAwAIAAQAAAAaAAMAAwAKAAQAAAAZAAMAAwAJAAQAAAAYAAMAAwAJAAQAAAAVAAMAAwAMAAMAAAAXAAMAAwAJAAQAAAAWAAMAAwAJAAQAAAATAAQAAwAMAAMAAAAVAAQAAwAKAAQAAAAUAAQAAwAJAAQAAAATAAUAAwAKAAQAAAAQAAUAAwAMAAMAAAASAAUAAwAJAAQAAAARAAUAAwAJAAQAAAAQAAYAAwAKAAQAAAAPAAYAAwAJAAQAAAAOAAYAAwAJAAQAAAANAAYAAwAJAAQAAAAMAAYAAwAJAAQAAAALAAYAAwAIAAQAAAALAAUAAwALAAMAAAAKAAUAAwAJAAQAAAAHAAUAAwAIAAQAAAAJAAUAAwAJAAQAAAAIAAUAAwAJAAQAAAD//wUAAwAKAAQAAAD+/wUAAwAJAAQAAAD9/wUAAwAJAAQAAAD8/wUAAwAJAAQAAAD7/wUAAwAJAAQAAAD6/wUAAwAJAAQAAAD5/wUAAwAJAAQAAAD4/wUAAwAJAAQAAAD3/wUAAwAIAAQAAAD3/wQAAwALAAMAAADz/wIAAwALAAMAAADy/wIAAwAJAAQAAADx/wIAAwAIAAQAAADz/wMAAwAIAAQAAAD2/wQAAwAIAAQAAAD0/wMAAwAJAAQAAAD2/wMAAwALAAMAAAD1/wMAAwAJAAQAAAA=")
+tile_set = ExtResource("4_2iemu")
+
+[node name="Grass 2" type="TileMapLayer" parent="Enviroment" index="3"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD8////BQAAAAAAAADz////BQAAAAAAAAD4////BQAEAAAAAAD2//7/BQAGAAAAAAAIAP//BQAGAAAAAAALAAAABQAEAAAAAAAOAAAABQAAAAAAAAATAAAABQAAAAAAAAAZAAAABQAEAAAAAAAgAP//BQAEAAAAAAAhAP//BQAEAAAAAAAiAP//BQAEAAAAAAAkAP//BQAGAAAAAAA=")
+tile_set = ExtResource("4_2iemu")
+
+[node name="Flowers" type="TileMapLayer" parent="Enviroment" index="4"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD1//7/BQACAAIAAADy////BQAFAAIAAAD0////BQAGAAIAAAD3//7/BQADAAIAAAD8////BQAAAAIAAAD9////BQABAAIAAAD4////BQAEAAIAAAD/////BQACAAIAAAA=")
+tile_set = ExtResource("4_2iemu")
+
+[node name="BridgeTexture" type="Sprite2D" parent="Enviroment" index="6"]
+modulate = Color(0.662745, 0.662745, 0.662745, 1)
+use_parent_material = true
+position = Vector2(36, 18)
+texture = ExtResource("4_l571h")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enviroment" index="7"]
+material = SubResource("ShaderMaterial_cf1hn")
+
+[node name="TreeTexture" type="Sprite2D" parent="Enviroment/Sprite2D" index="0"]
+modulate = Color(0.662745, 0.662745, 0.662745, 1)
+use_parent_material = true
+position = Vector2(-83, -64)
+texture = ExtResource("2_kl5wn")
+
+[node name="LanternTexture" type="Sprite2D" parent="Enviroment/Sprite2D" index="1"]
+modulate = Color(0.662745, 0.662745, 0.662745, 1)
+use_parent_material = true
+position = Vector2(59, 29)
+texture = ExtResource("3_ibrxk")
+
+[node name="BushFlowerTexture" type="Sprite2D" parent="Enviroment/Sprite2D" index="2"]
+modulate = Color(0.662745, 0.662745, 0.662745, 1)
+use_parent_material = true
+position = Vector2(-14, -11)
+texture = ExtResource("5_mhnhs")
+
+[node name="BushTexture" type="Sprite2D" parent="Enviroment/Sprite2D" index="3"]
+modulate = Color(0.662745, 0.662745, 0.662745, 1)
+use_parent_material = true
+position = Vector2(-186, -10)
+texture = ExtResource("6_17wt3")
+
+[node name="Transition Area2D" type="Area2D" parent="." index="4"]
+position = Vector2(649, -51)
+script = ExtResource("12_xto3q")
+targetScenePath = "uid://cdcbfvtcajuqg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transition Area2D" index="0"]
+shape = SubResource("RectangleShape2D_hyveu")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Spike" type="Sprite2D" parent="." index="5"]
+position = Vector2(341, -87)
+texture = ExtResource("13_kwku5")
+
+[node name="EnemyTemp" parent="Entities" index="0" instance=ExtResource("7_tryuo")]
+position = Vector2(213, 3)
+
+[node name="DeathPlane" parent="Entities" index="1" instance=ExtResource("8_jaidf")]
+position = Vector2(-317, 57)
+scale = Vector2(10.97, 1)
+
+[node name="DeathPlane2" parent="Entities" index="2" instance=ExtResource("8_jaidf")]
+position = Vector2(483, 73)
+scale = Vector2(14.565, 1)
+
+[node name="Spike" parent="Entities" index="3" instance=ExtResource("9_vfbor")]
+position = Vector2(81, 144)
+scale = Vector2(0.5, 0.5)
+
+[node name="Spike2" parent="Entities" index="4" instance=ExtResource("9_vfbor")]
+position = Vector2(32, 144)
+scale = Vector2(0.5, 0.5)
+
+[node name="Spike3" parent="Entities" index="5" instance=ExtResource("9_vfbor")]
+position = Vector2(57, 144)
+scale = Vector2(0.5, 0.5)
+
+[node name="Lever" parent="Entities" index="6" instance=ExtResource("10_hvrrj")]
+position = Vector2(124, -8)
+scale = Vector2(0.25, 0.25)
+
+[node name="Sign" parent="Entities" index="7" instance=ExtResource("11_32ah1")]
+position = Vector2(1, -8)
+scale = Vector2(0.25, 0.25)
+
+[node name="Tool_TileMapAutoFoliage" type="Node" parent="." index="7" node_paths=PackedStringArray("TileMap")]
+script = ExtResource("14_tdy7e")
+TileMap = NodePath("../Enviroment/TileMap")
+TargetLayerID = 0
+FoliageLayerID = 2
+TerrianSet = 0
+TerrianID = 0

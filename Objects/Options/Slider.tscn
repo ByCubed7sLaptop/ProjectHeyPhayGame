@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4n5d5uayiml"]
+
+[ext_resource type="Script" uid="uid://bjgaatp1xxxsf" path="res://Objects/Options/SliderOption.cs" id="1_ym3d2"]
+
+[node name="Volume" type="BoxContainer" node_paths=PackedStringArray("label", "slider")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ym3d2")
+label = NodePath("Label")
+slider = NodePath("Value")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Master"
+
+[node name="Value" type="HSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 6.0

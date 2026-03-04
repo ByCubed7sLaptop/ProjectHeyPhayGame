@@ -1,0 +1,259 @@
+[gd_scene load_steps=29 format=3 uid="uid://cip0yjic4nwo6"]
+
+[ext_resource type="Script" uid="uid://bopum3pij0l2d" path="res://Objects/MainMenu/ParallaxContainer.cs" id="1_730q2"]
+[ext_resource type="Texture2D" uid="uid://idw2q52lvwp3" path="res://Objects/MainMenu/Background/0 Sky.png" id="2_iycu1"]
+[ext_resource type="Texture2D" uid="uid://bj0dxwgfrrey5" path="res://Objects/MainMenu/Background/1 Hill.png" id="3_scd5h"]
+[ext_resource type="Shader" uid="uid://guf7n7affbw2" path="res://Shaders/Clouds Gen.gdshader" id="4_3dmor"]
+[ext_resource type="Texture2D" uid="uid://0g1oix7h8ksf" path="res://Objects/MainMenu/Background/2 Clouds.png" id="4_7twlv"]
+[ext_resource type="Shader" uid="uid://calgr1re6w5sb" path="res://Shaders/Bounce.gdshader" id="4_b1y1t"]
+[ext_resource type="Texture2D" uid="uid://ck8dh4ltbheif" path="res://Objects/MainMenu/Background/The Legend of Phay Title.png" id="5_jcnah"]
+[ext_resource type="Texture2D" uid="uid://eh2s2k0dckpn" path="res://Objects/MainMenu/Background/3 Hill.png" id="5_t88ux"]
+[ext_resource type="Script" uid="uid://bxl8ucm43cnlo" path="res://Objects/MainMenu/ButtonNewGame.cs" id="6_730q2"]
+[ext_resource type="Texture2D" uid="uid://cgw7t2kq2ochr" path="res://Objects/MainMenu/Background/4 Clouds.png" id="6_i3gbg"]
+[ext_resource type="PackedScene" uid="uid://bob2spgcbowqy" path="res://Objects/Level/Level Test.tscn" id="7_iycu1"]
+[ext_resource type="Texture2D" uid="uid://btqmshv442n2o" path="res://Objects/MainMenu/Background/5 Hill.png" id="7_rd8o4"]
+[ext_resource type="Shader" uid="uid://g7dl3xq5r5rp" path="res://Shaders/Diamond transistion.gdshader" id="8_scd5h"]
+[ext_resource type="Texture2D" uid="uid://c4sy4ml7hfqlc" path="res://Objects/MainMenu/Background/6 Hill.png" id="8_y106d"]
+[ext_resource type="Script" uid="uid://dxaijp38i7w00" path="res://Objects/MainMenu/AnimatedTextureRect.cs" id="9_iycu1"]
+[ext_resource type="Shader" uid="uid://c45ooxhti01x8" path="res://Shaders/Angel ray.gdshader" id="10_fo7xf"]
+[ext_resource type="Texture2D" uid="uid://biqyxpwxo1bu" path="res://Objects/MainMenu/Phay Animated/Layer_12.png" id="10_t88ux"]
+[ext_resource type="Texture2D" uid="uid://c75b5djjlxlco" path="res://Objects/MainMenu/Phay Animated/Layer_12_Copy.png" id="11_i3gbg"]
+[ext_resource type="Texture2D" uid="uid://b7wgvxtaifjl6" path="res://Objects/MainMenu/Phay Animated/Layer_12_Copy_2.png" id="12_rd8o4"]
+[ext_resource type="Texture2D" uid="uid://7e7repwvtld2" path="res://Objects/MainMenu/Icons/discord.png" id="18_xf226"]
+[ext_resource type="Texture2D" uid="uid://c3ey02hd4nwen" path="res://Objects/MainMenu/Icons/twitter.png" id="19_3dmor"]
+[ext_resource type="Texture2D" uid="uid://stat8ubog65g" path="res://Objects/MainMenu/Icons/itchio.png" id="20_fo7xf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fo7xf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ndl0y"]
+noise = SubResource("FastNoiseLite_fo7xf")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0a3v1"]
+shader = ExtResource("4_3dmor")
+shader_parameter/cloud_texture_1 = SubResource("NoiseTexture2D_ndl0y")
+shader_parameter/cloud_moving_speed_1 = Vector2(0.01, 0)
+shader_parameter/cloud_texture_2 = SubResource("NoiseTexture2D_ndl0y")
+shader_parameter/cloud_moving_speed_2 = Vector2(-0.02, -0.01)
+shader_parameter/sky_color = Color(0.5294118, 0.8117647, 0.98039216, 0.047058824)
+shader_parameter/mix_ratio = 0.258000012255
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndl0y"]
+shader = ExtResource("10_fo7xf")
+shader_parameter/pixelation = Vector2(1000, 1000)
+shader_parameter/gradient_steps = 64.0
+shader_parameter/spread = 0.33500001521398004
+shader_parameter/size = 0.9100000907250001
+shader_parameter/speed = 0.1
+shader_parameter/ray1_density = 8.29200039387
+shader_parameter/ray2_density = 8.5
+shader_parameter/ray2_intensity = 0.5
+shader_parameter/core_intensity = -1.0
+shader_parameter/hdr = false
+shader_parameter/seed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6ti1"]
+shader = ExtResource("4_b1y1t")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(0, 30)
+shader_parameter/sine_speed = Vector2(1, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgt02"]
+shader = ExtResource("8_scd5h")
+shader_parameter/diamond_color = Color(0, 0, 0, 1)
+shader_parameter/aspect_ratio = 1.61
+shader_parameter/diamonds_count = 10.0
+shader_parameter/delta = 0.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Container" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = -52.0
+offset_right = 165.0
+offset_bottom = 40.8125
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_730q2")
+multiplication = Vector2(-0.5, -0.5)
+offset = Vector2(740.99695, 370.40472)
+
+[node name="TextureRect2" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("2_iycu1")
+stretch_mode = 6
+
+[node name="TextureRect3" type="TextureRect" parent="Container"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+texture = ExtResource("3_scd5h")
+stretch_mode = 6
+
+[node name="Clouds" type="ColorRect" parent="Container"]
+material = SubResource("ShaderMaterial_0a3v1")
+layout_mode = 2
+
+[node name="TextureRect8" type="TextureRect" parent="Container"]
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+texture = ExtResource("4_7twlv")
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="Container"]
+layout_mode = 2
+size_flags_stretch_ratio = 4.0
+texture = ExtResource("5_t88ux")
+stretch_mode = 6
+
+[node name="TextureRect5" type="TextureRect" parent="Container"]
+layout_mode = 2
+size_flags_stretch_ratio = 5.0
+texture = ExtResource("6_i3gbg")
+stretch_mode = 6
+
+[node name="TextureRect6" type="TextureRect" parent="Container"]
+layout_mode = 2
+size_flags_stretch_ratio = 6.0
+texture = ExtResource("7_rd8o4")
+stretch_mode = 6
+
+[node name="TextureRect7" type="TextureRect" parent="Container"]
+layout_mode = 2
+size_flags_stretch_ratio = 7.0
+texture = ExtResource("8_y106d")
+stretch_mode = 6
+
+[node name="Clouds2" type="ColorRect" parent="Container"]
+material = SubResource("ShaderMaterial_ndl0y")
+layout_mode = 2
+
+[node name="TextureRect9" type="TextureRect" parent="Container"]
+layout_mode = 2
+size_flags_stretch_ratio = 7.0
+texture = ExtResource("12_rd8o4")
+stretch_mode = 6
+script = ExtResource("9_iycu1")
+textures = Array[Texture2D]([ExtResource("10_t88ux"), ExtResource("11_i3gbg"), ExtResource("12_rd8o4")])
+animationSpeed = 1.0
+
+[node name="Control" type="Control" parent="Container"]
+layout_mode = 2
+size_flags_stretch_ratio = 3.0
+
+[node name="TextureRect" type="TextureRect" parent="Container/Control"]
+material = SubResource("ShaderMaterial_k6ti1")
+layout_mode = 0
+offset_left = 119.99992
+offset_top = 136.99997
+offset_right = 758.99994
+offset_bottom = 397.99997
+texture = ExtResource("5_jcnah")
+stretch_mode = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(283.645, 0)
+layout_mode = 0
+offset_left = 60.0
+offset_top = 448.0
+offset_right = 343.645
+offset_bottom = 584.0
+size_flags_horizontal = 0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Button New Game" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "New Game"
+script = ExtResource("6_730q2")
+targetScene = ExtResource("7_iycu1")
+transistion = SubResource("ShaderMaterial_cgt02")
+
+[node name="Button Continue" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Button Options" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Options"
+
+[node name="Button Quit" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Quit"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -183.0
+offset_bottom = 75.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 30
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://discord.gg/SMxZTA9Pdb"
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/HBoxContainer/LinkButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_xf226")
+expand_mode = 3
+
+[node name="LinkButton2" type="LinkButton" parent="MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://twitter.com/ByCubed7"
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/HBoxContainer/LinkButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_3dmor")
+expand_mode = 3
+
+[node name="LinkButton3" type="LinkButton" parent="MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://bycubed7.itch.io/"
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/HBoxContainer/LinkButton3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_fo7xf")
+expand_mode = 3

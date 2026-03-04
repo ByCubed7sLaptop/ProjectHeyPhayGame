@@ -40,6 +40,8 @@ uniform bool hdr = false;
 /** Ray noise seed. */
 uniform float seed = 1.0;
 
+uniform vec2 offset = vec2(0.0);
+
 float random(vec2 uv) {
     return fract(sin(dot(uv.xy, vec2(12.9898, 78.233))) * 43758.5453123);
 }
@@ -56,7 +58,7 @@ float noise(in vec2 uv) {
 }
 
 void fragment() {
-	vec2 pixelated_uv = floor(UV * pixelation) / pixelation;
+	vec2 pixelated_uv = floor((UV + offset) * pixelation) / pixelation;
 	
     vec2 centered_uv = (pixelated_uv - 0.5) * (1.0 - size);
     float radius = length(centered_uv);

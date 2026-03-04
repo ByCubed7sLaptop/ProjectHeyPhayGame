@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cip0yjic4nwo6"]
+[gd_scene load_steps=38 format=3 uid="uid://cip0yjic4nwo6"]
 
 [ext_resource type="Script" uid="uid://bopum3pij0l2d" path="res://Objects/MainMenu/ParallaxContainer.cs" id="1_730q2"]
 [ext_resource type="Texture2D" uid="uid://idw2q52lvwp3" path="res://Objects/MainMenu/Background/0 Sky.png" id="2_iycu1"]
@@ -17,11 +17,15 @@
 [ext_resource type="Shader" uid="uid://c45ooxhti01x8" path="res://Shaders/Angel ray.gdshader" id="10_fo7xf"]
 [ext_resource type="Texture2D" uid="uid://biqyxpwxo1bu" path="res://Objects/MainMenu/Phay Animated/Layer_12.png" id="10_t88ux"]
 [ext_resource type="Texture2D" uid="uid://c75b5djjlxlco" path="res://Objects/MainMenu/Phay Animated/Layer_12_Copy.png" id="11_i3gbg"]
+[ext_resource type="Shader" uid="uid://bfggwh8pufukt" path="res://Shaders/ScreenSpace.gdshader" id="11_q85w7"]
 [ext_resource type="Texture2D" uid="uid://b7wgvxtaifjl6" path="res://Objects/MainMenu/Phay Animated/Layer_12_Copy_2.png" id="12_rd8o4"]
 [ext_resource type="Texture2D" uid="uid://dyb1fsdmh0ebp" path="res://Objects/MainMenu/Background/The Legend of Phay Title 2.png" id="16_fo7xf"]
+[ext_resource type="Shader" uid="uid://druy28du87qxv" path="res://Shaders/MainMenuIconShader.gdshader" id="16_q85w7"]
 [ext_resource type="Texture2D" uid="uid://7e7repwvtld2" path="res://Objects/MainMenu/Icons/discord.png" id="18_xf226"]
 [ext_resource type="Texture2D" uid="uid://c3ey02hd4nwen" path="res://Objects/MainMenu/Icons/twitter.png" id="19_3dmor"]
+[ext_resource type="Texture2D" uid="uid://c2d87bkrwrjxd" path="res://Objects/MainMenu/Background/Button Background 1.png" id="20_0a3v1"]
 [ext_resource type="Texture2D" uid="uid://stat8ubog65g" path="res://Objects/MainMenu/Icons/itchio.png" id="20_fo7xf"]
+[ext_resource type="Texture2D" uid="uid://dqi47nxlwdgwj" path="res://Objects/MainMenu/Background/Button Background 2.png" id="21_q85w7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fo7xf"]
 
@@ -42,23 +46,40 @@ shader_parameter/mix_ratio = 0.258000012255
 shader = ExtResource("10_fo7xf")
 shader_parameter/pixelation = Vector2(1000, 1000)
 shader_parameter/gradient_steps = 64.0
-shader_parameter/spread = 0.33500001521398004
-shader_parameter/size = 0.910000090725
-shader_parameter/speed = 0.1
+shader_parameter/spread = 0.40000000596046
+shader_parameter/size = 0.7930000851674999
+shader_parameter/speed = 0.2
 shader_parameter/ray1_density = 8.29200039387
 shader_parameter/ray2_density = 8.5
-shader_parameter/ray2_intensity = 0.5
+shader_parameter/ray2_intensity = -0.16999991307499984
 shader_parameter/core_intensity = -1.0
 shader_parameter/hdr = false
 shader_parameter/seed = 1.0
+shader_parameter/offset = Vector2(-0.17, 0.04)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fiu8a"]
+shader = ExtResource("11_q85w7")
+shader_parameter/brightness = 1.1
+shader_parameter/contrast = 1.335
+shader_parameter/hue_shift = 0.010000047974999982
+shader_parameter/saturation = 1.390000066025
+shader_parameter/lightness = 4.7499999933364734e-08
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k6ti1"]
+shader = ExtResource("16_q85w7")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 0.0
+shader_parameter/sine_amplitude = Vector2(0, 30)
+shader_parameter/sine_speed = Vector2(1, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f1t8d"]
 shader = ExtResource("4_b1y1t")
 shader_parameter/do_abs = false
 shader_parameter/do_quantize = false
 shader_parameter/quantize_to = 1.0
-shader_parameter/sine_amplitude = Vector2(0, 30)
-shader_parameter/sine_speed = Vector2(1, 0.3)
+shader_parameter/sine_amplitude = Vector2(0, 15)
+shader_parameter/sine_speed = Vector2(1, 0.35)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cgt02"]
 shader = ExtResource("8_scd5h")
@@ -66,6 +87,30 @@ shader_parameter/diamond_color = Color(0, 0, 0, 1)
 shader_parameter/aspect_ratio = 1.61
 shader_parameter/diamonds_count = 10.0
 shader_parameter/delta = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y5t5x"]
+shader = ExtResource("4_b1y1t")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(0, 15)
+shader_parameter/sine_speed = Vector2(1, 0.33)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_niccw"]
+shader = ExtResource("4_b1y1t")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(0, 15)
+shader_parameter/sine_speed = Vector2(1, 0.27)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7ic1"]
+shader = ExtResource("4_b1y1t")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(0, 15)
+shader_parameter/sine_speed = Vector2(1, 0.4)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -136,29 +181,34 @@ texture = ExtResource("8_y106d")
 stretch_mode = 6
 
 [node name="TextureRect10 Grass" type="TextureRect" parent="Container"]
+visible = false
 layout_mode = 2
 size_flags_stretch_ratio = 7.0
 texture = ExtResource("8_y106d")
 stretch_mode = 6
 
-[node name="Clouds2" type="ColorRect" parent="Container"]
+[node name="Clouds lines" type="ColorRect" parent="Container"]
 material = SubResource("ShaderMaterial_ndl0y")
 layout_mode = 2
 
-[node name="TextureRect9" type="TextureRect" parent="Container"]
+[node name="Color Correction" type="ColorRect" parent="Container"]
+material = SubResource("ShaderMaterial_fiu8a")
+layout_mode = 2
+
+[node name="TextureRect Phay" type="TextureRect" parent="Container"]
 layout_mode = 2
 size_flags_stretch_ratio = 7.0
-texture = ExtResource("12_rd8o4")
+texture = ExtResource("11_i3gbg")
 stretch_mode = 6
 script = ExtResource("9_iycu1")
 textures = Array[Texture2D]([ExtResource("10_t88ux"), ExtResource("11_i3gbg"), ExtResource("12_rd8o4")])
 animationSpeed = 1.0
 
-[node name="Control" type="Control" parent="Container"]
+[node name="Control TITLE" type="Control" parent="Container"]
 layout_mode = 2
 size_flags_stretch_ratio = 3.0
 
-[node name="TextureRect" type="TextureRect" parent="Container/Control"]
+[node name="TextureRect" type="TextureRect" parent="Container/Control TITLE"]
 material = SubResource("ShaderMaterial_k6ti1")
 layout_mode = 0
 offset_left = 164.99977
@@ -169,35 +219,131 @@ texture = ExtResource("16_fo7xf")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(283.645, 0)
 layout_mode = 0
-offset_left = 60.0
-offset_top = 448.0
-offset_right = 343.645
-offset_bottom = 584.0
+offset_left = 31.0
+offset_top = 520.0
+offset_right = 831.0
+offset_bottom = 634.0
 size_flags_horizontal = 0
+theme_override_constants/separation = 5
 alignment = 1
 metadata/_edit_group_ = true
 
 [node name="Button New Game" type="Button" parent="VBoxContainer2"]
+material = SubResource("ShaderMaterial_f1t8d")
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 16
+theme_override_constants/icon_max_width = 167
+theme_override_font_sizes/font_size = 32
 text = "New Game"
+flat = true
+icon_alignment = 1
 script = ExtResource("6_730q2")
 targetScene = ExtResource("7_iycu1")
 transistion = SubResource("ShaderMaterial_cgt02")
 
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/Button New Game"]
+show_behind_parent = true
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_0a3v1")
+expand_mode = 2
+
 [node name="Button Continue" type="Button" parent="VBoxContainer2"]
+material = SubResource("ShaderMaterial_y5t5x")
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 16
+theme_override_constants/icon_max_width = 160
+theme_override_font_sizes/font_size = 32
 text = "Continue"
+flat = true
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/Button Continue"]
+show_behind_parent = true
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_q85w7")
+expand_mode = 2
 
 [node name="Button Options" type="Button" parent="VBoxContainer2"]
+material = SubResource("ShaderMaterial_niccw")
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 16
+theme_override_constants/icon_max_width = 160
+theme_override_font_sizes/font_size = 32
 text = "Options"
+flat = true
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/Button Options"]
+show_behind_parent = true
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 6.0
+offset_right = -3.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_0a3v1")
+expand_mode = 2
+flip_h = true
+flip_v = true
 
 [node name="Button Quit" type="Button" parent="VBoxContainer2"]
+material = SubResource("ShaderMaterial_w7ic1")
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 16
+theme_override_constants/icon_max_width = 160
+theme_override_font_sizes/font_size = 32
 text = "Quit"
+flat = true
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/Button Quit"]
+show_behind_parent = true
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_q85w7")
+expand_mode = 2
+flip_h = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1

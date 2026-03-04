@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d132u462006e"]
 
-[ext_resource type="Texture2D" uid="uid://t5bhie4bb3h" path="res://Objects/Dialogue/PhayDialogueTemp.png" id="1_4prm8"]
+[ext_resource type="Texture2D" uid="uid://t5bhie4bb3h" path="res://Objects/Dialogue/PhayDialogueTemp.png" id="1_qq4me"]
 [ext_resource type="Texture2D" uid="uid://d36xic41lnyy8" path="res://Objects/Dialogue/OtherDialogueTemp.png" id="2_0hhtv"]
 [ext_resource type="Texture2D" uid="uid://cgwlpxnbw6o6j" path="res://Objects/Dialogue/textbox2.png" id="3_obrtg"]
 [ext_resource type="Texture2D" uid="uid://c35h1ys3spe4i" path="res://Objects/Dialogue/textbox.png" id="4_7q0vq"]
@@ -28,7 +28,7 @@ offset_right = 66.0
 offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("1_4prm8")
+texture = ExtResource("1_qq4me")
 expand_mode = 2
 stretch_mode = 5
 
@@ -148,3 +148,17 @@ bbcode_enabled = true
 text = "Aba aba aba aba aba aba aba aba aba aba aba aba aba aba aba"
 fit_content = true
 scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="LabelNext" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer2"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 29
+text = "➬"
+horizontal_alignment = 2
+vertical_alignment = 2

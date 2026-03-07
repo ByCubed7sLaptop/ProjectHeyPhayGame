@@ -1,0 +1,729 @@
+[gd_scene load_steps=24 format=3 uid="uid://w1qgj65s1qgy"]
+
+[ext_resource type="Texture2D" uid="uid://cs5ij8m5olemm" path="res://Objects/Placeholder/500.png" id="1_gkldj"]
+[ext_resource type="Texture2D" uid="uid://b3v1y5th4gmcv" path="res://Objects/Placeholder/BackgroundPlaceholder.png" id="1_iysdu"]
+[ext_resource type="Shader" uid="uid://cu08oba2qjj86" path="res://Shaders/Frosted glass.gdshader" id="1_p47n2"]
+[ext_resource type="Shader" uid="uid://bgiqty8062y8s" path="res://Shaders/ProfilePic.gdshader" id="2_528ex"]
+[ext_resource type="Shader" uid="uid://c5n758c4fneqo" path="res://Shaders/SimpleBlur.gdshader" id="2_duu7q"]
+[ext_resource type="FontFile" uid="uid://cvi578awtsn2n" path="res://Objects/Font/Borea___.ttf" id="6_5yq27"]
+[ext_resource type="Texture2D" uid="uid://dkiow674kikgx" path="res://Objects/MainMenu/Icons/bsky.png" id="8_duu7q"]
+[ext_resource type="Texture2D" uid="uid://ci22mxo6f4w0f" path="res://Objects/MainMenu/Icons/youtube.png" id="9_ub1wt"]
+[ext_resource type="Texture2D" uid="uid://cpbhl7gj856h" path="res://Objects/Credits/Pfps/cubed_the_fag_pfp by Aether.webp" id="11_ub1wt"]
+[ext_resource type="Texture2D" uid="uid://dq1q7je4vum0o" path="res://Objects/Credits/Pfps/Aether_the_sleepy.png" id="13_e77lo"]
+[ext_resource type="Texture2D" uid="uid://di81gh64hbj7v" path="res://Objects/MainMenu/Icons/vgen.png" id="14_mey4o"]
+[ext_resource type="Shader" uid="uid://digy4l1c1un7x" path="res://Shaders/Outline.gdshader" id="24_0jxt2"]
+[ext_resource type="Texture2D" uid="uid://7e7repwvtld2" path="res://Objects/MainMenu/Icons/discord.png" id="25_mrxst"]
+[ext_resource type="Texture2D" uid="uid://stat8ubog65g" path="res://Objects/MainMenu/Icons/itchio.png" id="26_7crsm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ub1wt"]
+shader = ExtResource("2_duu7q")
+shader_parameter/blur_amount = 3.3850001607875
+shader_parameter/blur_samples = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jrjxu"]
+shader = ExtResource("1_p47n2")
+shader_parameter/shape_type = 1
+shader_parameter/rect_size = Vector2(400, 200)
+shader_parameter/corner_radius_top_left = 20.0
+shader_parameter/corner_radius_top_right = 20.0
+shader_parameter/corner_radius_bottom_left = 20.0
+shader_parameter/corner_radius_bottom_right = 20.0
+shader_parameter/circle_radius = 100.0
+shader_parameter/outline_enabled = true
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(1, 1, 1, 0.8)
+shader_parameter/shadow_enabled = true
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_blur = 14.81
+shader_parameter/edge_softness = 0.0
+shader_parameter/shape_color = Color(0.94292295, 0, 0.44684768, 1)
+shader_parameter/color_gradient_y = 1.1200000532
+shader_parameter/color_gradient_x = -0.8
+shader_parameter/color_multiplier = 0.65300002775762
+shader_parameter/enable_screen_blur = true
+shader_parameter/blur_amount = 10.0
+shader_parameter/blur_samples = 4
+shader_parameter/glass_opacity = 0.2
+shader_parameter/node_size = Vector2(420, 210)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mey4o"]
+shader = ExtResource("2_528ex")
+shader_parameter/radius = 0.455
+shader_parameter/edge = 0.0
+shader_parameter/halfShade_pivot = Vector2(0.725, 0.7)
+shader_parameter/halfShade_rotation = -0.58
+shader_parameter/outline_color = Color(0.48509616, 0.5092989, 0.48917097, 1)
+shader_parameter/outline_color2 = Color(0.6392157, 0.6627451, 0.6431373, 1)
+shader_parameter/outline_offset = 8.215
+shader_parameter/outline_circle = 0.035
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p47n2"]
+shader = ExtResource("24_0jxt2")
+shader_parameter/color = Color(0.7411765, 0.42352942, 0.65882355, 1)
+shader_parameter/width = 10.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yr5w0"]
+shader = ExtResource("2_528ex")
+shader_parameter/radius = 0.455
+shader_parameter/edge = 0.0
+shader_parameter/halfShade_pivot = Vector2(0.275, 0.7)
+shader_parameter/halfShade_rotation = 0.58
+shader_parameter/outline_color = Color(0.48509616, 0.5092989, 0.48917097, 1)
+shader_parameter/outline_color2 = Color(0.6392157, 0.6627451, 0.6431373, 1)
+shader_parameter/outline_offset = 8.215
+shader_parameter/outline_circle = 0.035
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yc13v"]
+shader = ExtResource("1_p47n2")
+shader_parameter/shape_type = 1
+shader_parameter/rect_size = Vector2(400, 200)
+shader_parameter/corner_radius_top_left = 20.0
+shader_parameter/corner_radius_top_right = 20.0
+shader_parameter/corner_radius_bottom_left = 20.0
+shader_parameter/corner_radius_bottom_right = 20.0
+shader_parameter/circle_radius = 100.0
+shader_parameter/outline_enabled = true
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(1, 1, 1, 0.8)
+shader_parameter/shadow_enabled = true
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_blur = 14.81
+shader_parameter/edge_softness = 0.0
+shader_parameter/shape_color = Color(0.81496435, 0.0010817867, 0.89693606, 1)
+shader_parameter/color_gradient_y = 1.1200000532
+shader_parameter/color_gradient_x = -0.8
+shader_parameter/color_multiplier = 0.65300002775762
+shader_parameter/enable_screen_blur = true
+shader_parameter/blur_amount = 10.0
+shader_parameter/blur_samples = 4
+shader_parameter/glass_opacity = 0.2000000095
+shader_parameter/node_size = Vector2(420, 210)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yq27"]
+shader = ExtResource("2_528ex")
+shader_parameter/radius = 0.455
+shader_parameter/edge = 0.0
+shader_parameter/halfShade_pivot = Vector2(0.725, 0.7)
+shader_parameter/halfShade_rotation = -0.58
+shader_parameter/outline_color = Color(0.48509616, 0.5092989, 0.48917097, 1)
+shader_parameter/outline_color2 = Color(0.6392157, 0.6627451, 0.6431373, 1)
+shader_parameter/outline_offset = 8.215
+shader_parameter/outline_circle = 0.035
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e77lo"]
+shader = ExtResource("1_p47n2")
+shader_parameter/shape_type = 1
+shader_parameter/rect_size = Vector2(400, 200)
+shader_parameter/corner_radius_top_left = 20.0
+shader_parameter/corner_radius_top_right = 20.0
+shader_parameter/corner_radius_bottom_left = 20.0
+shader_parameter/corner_radius_bottom_right = 20.0
+shader_parameter/circle_radius = 100.0
+shader_parameter/outline_enabled = true
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(1, 1, 1, 0.8)
+shader_parameter/shadow_enabled = true
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_blur = 14.81
+shader_parameter/edge_softness = 0.0
+shader_parameter/shape_color = Color(5.0055983e-06, 0.5687913, 0.7489821, 1)
+shader_parameter/color_gradient_y = 1.1200000532
+shader_parameter/color_gradient_x = -0.8
+shader_parameter/color_multiplier = 0.65300002775762
+shader_parameter/enable_screen_blur = true
+shader_parameter/blur_amount = 10.0
+shader_parameter/blur_samples = 4
+shader_parameter/glass_opacity = 0.2
+shader_parameter/node_size = Vector2(420, 210)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ijp5n"]
+shader = ExtResource("2_528ex")
+shader_parameter/radius = 0.455
+shader_parameter/edge = 0.0
+shader_parameter/halfShade_pivot = Vector2(0.75, 0.63)
+shader_parameter/halfShade_rotation = 0.97
+shader_parameter/outline_color = Color(0.48509616, 0.5092989, 0.48917097, 1)
+shader_parameter/outline_color2 = Color(0.6392157, 0.6627451, 0.6431373, 1)
+shader_parameter/outline_offset = 8.215
+shader_parameter/outline_circle = 0.035
+
+[node name="Credits Page" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -5.0
+offset_right = -1.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iysdu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ub1wt")
+layout_mode = 0
+offset_left = -31.0
+offset_top = -76.0
+offset_right = 1184.0
+offset_bottom = 724.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 29.0
+offset_right = 730.0
+offset_bottom = 313.0
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control"]
+material = SubResource("ShaderMaterial_jrjxu")
+layout_mode = 0
+offset_left = 73.0
+offset_right = 699.0
+offset_bottom = 267.0
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PFP" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+material = SubResource("ShaderMaterial_mey4o")
+layout_mode = 2
+texture = ExtResource("1_gkldj")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.49
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 0.6650009
+offset_top = -28.455
+offset_right = 411.665
+offset_bottom = 66.545
+rotation = 0.15882497
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.62
+theme_override_colors/default_color = Color(0.48, 0.48, 0.48, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 15
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("6_5yq27")
+theme_override_font_sizes/normal_font_size = 73
+text = "NAME"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Example credits
+What they did and make
+Something cool about them
+Then add socials below"
+fit_content = true
+scroll_active = false
+
+[node name="Socials" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://discord.gg/SMxZTA9Pdb"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Socials/LinkButton"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("25_mrxst")
+expand_mode = 3
+
+[node name="LinkButton3" type="LinkButton" parent="MarginContainer/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://bycubed7.itch.io/legend-of-phay"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Socials/LinkButton3"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("26_7crsm")
+expand_mode = 3
+
+[node name="LinkButton2" type="LinkButton" parent="MarginContainer/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://discord.gg/SMxZTA9Pdb"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Socials/LinkButton2"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("8_duu7q")
+expand_mode = 3
+
+[node name="LinkButton4" type="LinkButton" parent="MarginContainer/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://discord.gg/SMxZTA9Pdb"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Socials/LinkButton4"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("9_ub1wt")
+expand_mode = 3
+
+[node name="MarginContainer Alt" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 28.0
+offset_right = 1467.0
+offset_bottom = 312.0
+
+[node name="Control" type="Control" parent="MarginContainer Alt"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer Alt/Control"]
+material = SubResource("ShaderMaterial_jrjxu")
+layout_mode = 0
+offset_right = 626.0
+offset_bottom = 267.0
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer Alt"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer Alt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer Alt/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.49
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = -16.999977
+offset_top = 1.0
+offset_right = 394.00003
+offset_bottom = 96.0
+rotation = -0.17453292
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.62
+theme_override_colors/default_color = Color(0.48, 0.48, 0.48, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 15
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("6_5yq27")
+theme_override_font_sizes/normal_font_size = 73
+text = "NAME"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer Alt/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Example credits
+What they did and make
+Something cool about them
+Then add socials below"
+fit_content = true
+scroll_active = false
+
+[node name="Socials" type="HBoxContainer" parent="MarginContainer Alt/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://discord.gg/SMxZTA9Pdb"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Socials/LinkButton"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("25_mrxst")
+expand_mode = 3
+
+[node name="LinkButton3" type="LinkButton" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://bycubed7.itch.io/legend-of-phay"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Socials/LinkButton3"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("26_7crsm")
+expand_mode = 3
+
+[node name="LinkButton2" type="LinkButton" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://discord.gg/SMxZTA9Pdb"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Socials/LinkButton2"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("8_duu7q")
+expand_mode = 3
+
+[node name="LinkButton4" type="LinkButton" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://discord.gg/SMxZTA9Pdb"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer Alt/HBoxContainer/VBoxContainer/Socials/LinkButton4"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("9_ub1wt")
+expand_mode = 3
+
+[node name="PFP" type="TextureRect" parent="MarginContainer Alt/HBoxContainer"]
+material = SubResource("ShaderMaterial_yr5w0")
+layout_mode = 2
+texture = ExtResource("1_gkldj")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="MarginContainer ByCubed7" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 330.0
+offset_right = 730.0
+offset_bottom = 614.0
+
+[node name="Control" type="Control" parent="MarginContainer ByCubed7"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer ByCubed7/Control"]
+material = SubResource("ShaderMaterial_yc13v")
+layout_mode = 0
+offset_left = 73.0
+offset_right = 699.0
+offset_bottom = 267.0
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer ByCubed7"]
+layout_mode = 2
+
+[node name="PFP" type="TextureRect" parent="MarginContainer ByCubed7/HBoxContainer"]
+material = SubResource("ShaderMaterial_5yq27")
+layout_mode = 2
+texture = ExtResource("11_ub1wt")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer ByCubed7/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.49
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 0.6650009
+offset_top = -28.455
+offset_right = 411.665
+offset_bottom = 66.545
+rotation = 0.15882497
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.62
+theme_override_colors/default_color = Color(0.5411765, 0, 0.9098039, 1)
+theme_override_colors/font_outline_color = Color(1, 0.9372549, 0.6431373, 1)
+theme_override_colors/font_shadow_color = Color(0.17644235, 0.00038336142, 0.3328442, 1)
+theme_override_constants/shadow_outline_size = 15
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("6_5yq27")
+theme_override_font_sizes/normal_font_size = 73
+text = "ByCubed7"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0.3137255, 0.5529412, 0.6039216, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/normal_font_size = 17
+text = "Oh hey that's me!
+Spritework, animation & project managment.
+Procrastenated far too much with making this."
+fit_content = true
+scroll_active = false
+
+[node name="Socials" type="HBoxContainer" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "discord.gg/mGny7Ez9UZ "
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer/Socials/LinkButton"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("25_mrxst")
+expand_mode = 3
+
+[node name="LinkButton3" type="LinkButton" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://bycubed7.itch.io/"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer/Socials/LinkButton3"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("26_7crsm")
+expand_mode = 3
+
+[node name="LinkButton2" type="LinkButton" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://bsky.app/profile/bycubed7.itch.io"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer ByCubed7/HBoxContainer/VBoxContainer/Socials/LinkButton2"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("8_duu7q")
+expand_mode = 3
+
+[node name="MarginContainer Aether" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 648.0
+offset_right = 730.0
+offset_bottom = 932.0
+
+[node name="Control" type="Control" parent="MarginContainer Aether"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer Aether/Control"]
+material = SubResource("ShaderMaterial_e77lo")
+layout_mode = 0
+offset_left = 73.0
+offset_right = 699.0
+offset_bottom = 267.0
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer Aether"]
+layout_mode = 2
+
+[node name="PFP" type="TextureRect" parent="MarginContainer Aether/HBoxContainer"]
+material = SubResource("ShaderMaterial_ijp5n")
+layout_mode = 2
+texture = ExtResource("13_e77lo")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer Aether/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer Aether/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.49
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer Aether/HBoxContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 0.6650009
+offset_top = -28.455
+offset_right = 411.665
+offset_bottom = 66.545
+rotation = 0.15882497
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.62
+theme_override_colors/default_color = Color(0.69411767, 0.8980392, 0.92941177, 1)
+theme_override_colors/font_outline_color = Color(0.41568628, 0.41568628, 0.5686275, 1)
+theme_override_colors/font_shadow_color = Color(0.21176471, 0.15686275, 0.23137255, 1)
+theme_override_constants/shadow_outline_size = 15
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("6_5yq27")
+theme_override_font_sizes/normal_font_size = 73
+text = "Aether"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer Aether/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer Aether/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0.3137255, 0.5529412, 0.6039216, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/normal_font_size = 17
+text = "Very cool artist
+Backgrounds and spritework
+Should probably be working on commissions...
+so go commission them 🔫"
+fit_content = true
+scroll_active = false
+
+[node name="Socials" type="HBoxContainer" parent="MarginContainer Aether/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LinkButton2" type="LinkButton" parent="MarginContainer Aether/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://bsky.app/profile/kipdoqq.bsky.social"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer Aether/HBoxContainer/VBoxContainer/Socials/LinkButton2"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("8_duu7q")
+expand_mode = 3
+
+[node name="LinkButton4" type="LinkButton" parent="MarginContainer Aether/HBoxContainer/VBoxContainer/Socials"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+uri = "https://vgen.co/kipdoqq"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer Aether/HBoxContainer/VBoxContainer/Socials/LinkButton4"]
+material = SubResource("ShaderMaterial_p47n2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.31764993
+texture = ExtResource("14_mey4o")
+expand_mode = 3

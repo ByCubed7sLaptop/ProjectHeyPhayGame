@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cip0yjic4nwo6"]
+[gd_scene load_steps=39 format=3 uid="uid://cip0yjic4nwo6"]
 
 [ext_resource type="Script" uid="uid://bopum3pij0l2d" path="res://Objects/MainMenu/ParallaxContainer.cs" id="1_730q2"]
 [ext_resource type="Texture2D" uid="uid://idw2q52lvwp3" path="res://Objects/MainMenu/Background/0 Sky.png" id="2_iycu1"]
@@ -22,10 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://dyb1fsdmh0ebp" path="res://Objects/MainMenu/Background/The Legend of Phay Title 2.png" id="16_fo7xf"]
 [ext_resource type="Shader" uid="uid://druy28du87qxv" path="res://Shaders/MainMenuIconShader.gdshader" id="16_q85w7"]
 [ext_resource type="Texture2D" uid="uid://7e7repwvtld2" path="res://Objects/MainMenu/Icons/discord.png" id="18_xf226"]
-[ext_resource type="Texture2D" uid="uid://c3ey02hd4nwen" path="res://Objects/MainMenu/Icons/twitter.png" id="19_3dmor"]
 [ext_resource type="Texture2D" uid="uid://c2d87bkrwrjxd" path="res://Objects/MainMenu/Background/Button Background 1.png" id="20_0a3v1"]
 [ext_resource type="Texture2D" uid="uid://stat8ubog65g" path="res://Objects/MainMenu/Icons/itchio.png" id="20_fo7xf"]
 [ext_resource type="Texture2D" uid="uid://dqi47nxlwdgwj" path="res://Objects/MainMenu/Background/Button Background 2.png" id="21_q85w7"]
+[ext_resource type="Shader" uid="uid://digy4l1c1un7x" path="res://Shaders/Outline.gdshader" id="24_fiu8a"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fo7xf"]
 
@@ -61,7 +61,7 @@ shader_parameter/offset = Vector2(-0.17, 0.04)
 shader = ExtResource("11_q85w7")
 shader_parameter/brightness = 1.1
 shader_parameter/contrast = 1.335
-shader_parameter/hue_shift = 0.010000047974999982
+shader_parameter/hue_shift = 0.01000004797499998
 shader_parameter/saturation = 1.390000066025
 shader_parameter/lightness = 4.7499999933364734e-08
 
@@ -111,6 +111,14 @@ shader_parameter/do_quantize = false
 shader_parameter/quantize_to = 1.0
 shader_parameter/sine_amplitude = Vector2(0, 15)
 shader_parameter/sine_speed = Vector2(1, 0.4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mjod"]
+shader = ExtResource("24_fiu8a")
+shader_parameter/color = Color(0.7411765, 0.42352942, 0.65882355, 1)
+shader_parameter/width = 10.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -210,22 +218,33 @@ size_flags_stretch_ratio = 3.0
 
 [node name="TextureRect" type="TextureRect" parent="Container/Control TITLE"]
 material = SubResource("ShaderMaterial_k6ti1")
-layout_mode = 0
-offset_left = 164.99977
-offset_top = 81.999886
-offset_right = 789.99976
-offset_bottom = 446.99988
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027
+anchor_top = 0.11100001
+anchor_right = 0.573
+anchor_bottom = 0.69100004
+offset_left = 154.98575
+offset_top = 31.769676
+offset_right = -29.186401
+offset_bottom = -32.901672
 texture = ExtResource("16_fo7xf")
 expand_mode = 2
 stretch_mode = 5
 
 [node name="VBoxContainer2" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(283.645, 0)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.768
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 31.0
-offset_top = 520.0
-offset_right = 831.0
-offset_bottom = 634.0
+offset_top = 15.335999
+offset_right = -386.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 5
 alignment = 1
@@ -236,6 +255,9 @@ material = SubResource("ShaderMaterial_f1t8d")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.07450981, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0, 0.05882353, 0.25882354, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_constants/icon_max_width = 167
@@ -258,12 +280,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("20_0a3v1")
 expand_mode = 2
+stretch_mode = 5
 
 [node name="Button Continue" type="Button" parent="VBoxContainer2"]
 material = SubResource("ShaderMaterial_y5t5x")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.07450981, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0, 0.05882353, 0.25882354, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_constants/icon_max_width = 160
@@ -285,12 +311,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("21_q85w7")
 expand_mode = 2
+stretch_mode = 5
 
 [node name="Button Options" type="Button" parent="VBoxContainer2"]
 material = SubResource("ShaderMaterial_niccw")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.07450981, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0, 0.05882353, 0.25882354, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_constants/icon_max_width = 160
@@ -314,6 +344,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("20_0a3v1")
 expand_mode = 2
+stretch_mode = 5
 flip_h = true
 flip_v = true
 
@@ -322,6 +353,9 @@ material = SubResource("ShaderMaterial_w7ic1")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.07450981, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0, 0.05882353, 0.25882354, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 16
 theme_override_constants/icon_max_width = 160
@@ -343,6 +377,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("21_q85w7")
 expand_mode = 2
+stretch_mode = 5
 flip_h = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
@@ -370,6 +405,7 @@ uri = "https://discord.gg/SMxZTA9Pdb"
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer2/HBoxContainer/LinkButton"]
+material = SubResource("ShaderMaterial_5mjod")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -379,29 +415,14 @@ grow_vertical = 2
 texture = ExtResource("18_xf226")
 expand_mode = 3
 
-[node name="LinkButton2" type="LinkButton" parent="MarginContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-uri = "https://twitter.com/ByCubed7"
-metadata/_edit_lock_ = true
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer2/HBoxContainer/LinkButton2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("19_3dmor")
-expand_mode = 3
-
 [node name="LinkButton3" type="LinkButton" parent="MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-uri = "https://bycubed7.itch.io/"
+uri = "https://bycubed7.itch.io/legend-of-phay"
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer2/HBoxContainer/LinkButton3"]
+material = SubResource("ShaderMaterial_5mjod")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

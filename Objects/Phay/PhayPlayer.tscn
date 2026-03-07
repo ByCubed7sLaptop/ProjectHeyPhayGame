@@ -63,7 +63,6 @@ texture = ExtResource("2_5pgif")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
 material = SubResource("ShaderMaterial_02f0k")
 sprite_frames = ExtResource("3_dxvbo")
-animation = &"walk"
 autoplay = "idle"
 script = ExtResource("4_50cue")
 player = NodePath("..")

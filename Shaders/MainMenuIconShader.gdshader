@@ -7,7 +7,9 @@ uniform float quantize_to : hint_range(0, 2, 0.1) = 1;
 uniform vec2 sine_amplitude = vec2(1.0, 0.0);
 uniform vec2 sine_speed = vec2(1.0, 0.0);
 
-vec4 effect(sampler2D tex, vec2 texture_coords, float speed, highp vec2 offset) {
+varying vec2 sinHeightOffset;
+
+vec4 effect(sampler2D tex, vec2 texture_coords, float speed, vec2 offset) {
 	vec4 texel = texture(tex, texture_coords);
 	vec2 uv = texture_coords;
 
@@ -39,7 +41,7 @@ vec4 effect(sampler2D tex, vec2 texture_coords, float speed, highp vec2 offset) 
 
 void fragment() {
 	vec2 s = sin(TIME * sine_speed);
-	COLOR *= effect(TEXTURE, UV.xy, 0.06f, s * sine_amplitude * 0.002);
+	COLOR *= effect(TEXTURE, UV.xy, 0.06f, sinHeightOffset * 0.002);
 }
 
 void vertex() {
@@ -47,7 +49,8 @@ void vertex() {
 	if (do_abs) {
 		s = abs(s);
 	}
-	VERTEX += s * sine_amplitude;
+	sinHeightOffset = s * sine_amplitude;
+	VERTEX += sinHeightOffset;
 	if (do_quantize) {
 		VERTEX = round(VERTEX / quantize_to);
 		VERTEX *= quantize_to;

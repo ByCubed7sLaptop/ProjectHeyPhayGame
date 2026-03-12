@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://chtn2e8cpt6xx"]
+[gd_scene format=3 uid="uid://chtn2e8cpt6xx"]
 
 [ext_resource type="Script" uid="uid://471hwifu66x0" path="res://Objects/SplashScreen/SplashScreen.cs" id="1_7blyy"]
 [ext_resource type="PackedScene" uid="uid://cip0yjic4nwo6" path="res://Objects/MainMenu/MainMenu2.tscn" id="2_ej4vk"]
 [ext_resource type="Texture2D" uid="uid://cxpckr2qo34oq" path="res://Objects/SplashScreen/SplashScreen Texture.png" id="3_m718c"]
 
-[node name="SplashScreen" type="Control" node_paths=PackedStringArray("splashTexture")]
+[node name="SplashScreen" type="Control" unique_id=944789864 node_paths=PackedStringArray("splashTexture")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,13 +15,13 @@ script = ExtResource("1_7blyy")
 scene = ExtResource("2_ej4vk")
 splashTexture = NodePath("TextureRect")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=65819201]
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1581103241]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

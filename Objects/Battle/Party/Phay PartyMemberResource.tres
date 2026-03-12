@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=10 format=3 uid="uid://lw8hu80csg1"]
+[gd_resource type="Resource" format=3 uid="uid://lw8hu80csg1"]
 
 [ext_resource type="Resource" uid="uid://cfa77mftbffyu" path="res://Objects/Battle/Party/Phay Base Stats.tres" id="1_uk21n"]
 [ext_resource type="Resource" uid="uid://cl2m5kjravd7s" path="res://Objects/Battle/Actions/BattleAction_Attack.tres" id="1_wklvv"]

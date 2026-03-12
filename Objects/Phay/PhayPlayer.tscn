@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dk06usw83mpy3"]
+[gd_scene format=3 uid="uid://dk06usw83mpy3"]
 
 [ext_resource type="Script" uid="uid://ched1uhjattfn" path="res://Objects/Phay/Player.cs" id="1_0nt4j"]
 [ext_resource type="Texture2D" uid="uid://qquja25ple77" path="res://Objects/Phay/Phay.png" id="2_5pgif"]
@@ -36,7 +36,7 @@ random_pitch = 3.21
 streams_count = 1
 stream_0/stream = ExtResource("6_mw537")
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Hitbox", "InteractableHitbox", "JumpAudioStreamPlayer", "LandAudioStreamPlayer", "WalkAudioStreamPlayer", "HurtAudioStreamPlayer", "InteractAudioStreamPlayer")]
+[node name="Player" type="CharacterBody2D" unique_id=1296029031 node_paths=PackedStringArray("Hitbox", "InteractableHitbox", "JumpAudioStreamPlayer", "LandAudioStreamPlayer", "WalkAudioStreamPlayer", "HurtAudioStreamPlayer", "InteractAudioStreamPlayer")]
 disable_mode = 2
 collision_layer = 3
 collision_mask = 3
@@ -50,17 +50,17 @@ WalkAudioStreamPlayer = NodePath("Walk AudioStreamPlayer2D")
 HurtAudioStreamPlayer = NodePath("Hurt AudioStreamPlayer2D")
 InteractAudioStreamPlayer = NodePath("Interact AudioStreamPlayer2D")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1047469761]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=259716640]
 visible = false
 shape = SubResource("CapsuleShape2D_m00ep")
 
-[node name="Phay" type="Sprite2D" parent="."]
+[node name="Phay" type="Sprite2D" parent="." unique_id=1955433848]
 visible = false
 texture = ExtResource("2_5pgif")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1809699976 node_paths=PackedStringArray("player")]
 material = SubResource("ShaderMaterial_02f0k")
 sprite_frames = ExtResource("3_dxvbo")
 autoplay = "idle"
@@ -68,22 +68,22 @@ script = ExtResource("4_50cue")
 player = NodePath("..")
 walkThreshold = 100.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=688002385]
 visible = false
 shape = SubResource("CapsuleShape2D_xs8o3")
 
-[node name="Interaction Components" type="Node2D" parent="."]
+[node name="Interaction Components" type="Node2D" parent="." unique_id=2058826862]
 
-[node name="InteractionArea" type="Area2D" parent="Interaction Components"]
+[node name="InteractionArea" type="Area2D" parent="Interaction Components" unique_id=1565972564]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction Components/InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction Components/InteractionArea" unique_id=2134337108]
 visible = false
 shape = SubResource("CapsuleShape2D_m00ep")
 
-[node name="InteractLabel" type="Label" parent="Interaction Components"]
+[node name="InteractLabel" type="Label" parent="Interaction Components" unique_id=894217136]
 offset_left = -61.0
 offset_top = -49.0
 offset_right = 61.0
@@ -94,26 +94,26 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Jump AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Jump AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1642087710]
 stream = SubResource("AudioStreamRandomizer_225nx")
 volume_db = -8.707
 pitch_scale = 0.66
 bus = &"Player"
 
-[node name="Land AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Land AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=374196194]
 stream = ExtResource("4_88x7n")
 volume_db = -7.059
 pitch_scale = 0.53
 bus = &"Player"
 
-[node name="Walk AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Walk AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=137410761]
 stream = ExtResource("5_62fqb")
 volume_db = -14.588
 pitch_scale = 0.56
 
-[node name="Hurt AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Hurt AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=464544841]
 stream = SubResource("AudioStreamRandomizer_4ibtc")
 
-[node name="Interact AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Interact AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1044703149]
 stream = ExtResource("7_nh1jc")
 volume_db = -20.235

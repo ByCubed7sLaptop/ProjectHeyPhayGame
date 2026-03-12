@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://1qb03bhp7n5r"]
+[gd_resource type="TileSet" format=3 uid="uid://1qb03bhp7n5r"]
 
 [ext_resource type="Texture2D" uid="uid://ccbjrokwli34y" path="res://Objects/Level/Enviroment/Bedroom/Floor Texture.png" id="1_vfrg6"]
 [ext_resource type="Texture2D" uid="uid://bnytor1rctu56" path="res://Objects/Level/Enviroment/Forest/TileSheet Forst Texture.png" id="2_umscg"]

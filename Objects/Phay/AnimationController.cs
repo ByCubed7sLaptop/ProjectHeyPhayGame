@@ -39,11 +39,13 @@ public partial class AnimationController : AnimatedSprite2D
         else
             SpeedScale = 1;
 
+        Scale = Vector2.One + (player.Velocity / 800.0f).Abs() - (new Vector2(player.Velocity.Y, player.Velocity.X) / 3200.0f).Abs();
 
         if (targetState == currentState) return;
         currentState = targetState;
 
         Animation = currentState;
+
     }
 
     public string GetTargetState()

@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://d132u462006e"]
+[gd_scene format=3 uid="uid://d132u462006e"]
 
 [ext_resource type="Texture2D" uid="uid://t5bhie4bb3h" path="res://Objects/Dialogue/PhayDialogueTemp.png" id="1_qq4me"]
 [ext_resource type="Texture2D" uid="uid://d36xic41lnyy8" path="res://Objects/Dialogue/OtherDialogueTemp.png" id="2_0hhtv"]
 [ext_resource type="Texture2D" uid="uid://cgwlpxnbw6o6j" path="res://Objects/Dialogue/textbox2.png" id="3_obrtg"]
 [ext_resource type="Texture2D" uid="uid://c35h1ys3spe4i" path="res://Objects/Dialogue/textbox.png" id="4_7q0vq"]
 
-[node name="Dialogue" type="CanvasLayer"]
+[node name="Dialogue" type="CanvasLayer" unique_id=1965252069]
 
-[node name="Dialgue" type="Control" parent="."]
+[node name="Dialgue" type="Control" parent="." unique_id=1795263757]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PhayDialogueTemp" type="TextureRect" parent="Dialgue"]
+[node name="PhayDialogueTemp" type="TextureRect" parent="Dialgue" unique_id=1633753559]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -32,7 +32,7 @@ texture = ExtResource("1_qq4me")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="PhayDialogueTemp2" type="TextureRect" parent="Dialgue"]
+[node name="PhayDialogueTemp2" type="TextureRect" parent="Dialgue" unique_id=180714283]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -50,7 +50,7 @@ expand_mode = 2
 stretch_mode = 5
 flip_h = true
 
-[node name="Textbox Positioner" type="HBoxContainer" parent="Dialgue"]
+[node name="Textbox Positioner" type="HBoxContainer" parent="Dialgue" unique_id=1198658163]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,7 +60,7 @@ grow_vertical = 2
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Textbox" type="MarginContainer" parent="Dialgue/Textbox Positioner"]
+[node name="Textbox" type="MarginContainer" parent="Dialgue/Textbox Positioner" unique_id=918710582]
 custom_minimum_size = Vector2(700, 200)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -70,16 +70,16 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Speaker Container" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox"]
+[node name="Speaker Container" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox" unique_id=1866610833]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="ColorRect" type="ColorRect" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container"]
+[node name="ColorRect" type="ColorRect" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container" unique_id=1639211350]
 layout_mode = 2
 color = Color(0.231373, 0.231373, 0.231373, 0.784314)
 
-[node name="ColorRect2" type="TextureRect" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container"]
+[node name="ColorRect2" type="TextureRect" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container" unique_id=611614337]
 z_index = 1
 clip_contents = true
 layout_mode = 2
@@ -87,14 +87,14 @@ texture = ExtResource("3_obrtg")
 expand_mode = 1
 stretch_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container"]
+[node name="MarginContainer" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container" unique_id=1810534912]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="Speaker" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container/MarginContainer"]
+[node name="Speaker" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Speaker Container/MarginContainer" unique_id=1853812793]
 z_index = 1
 clip_contents = false
 layout_mode = 2
@@ -106,7 +106,7 @@ text = "[b]Phayzini[/b]"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Textbox Container" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox"]
+[node name="Textbox Container" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox" unique_id=1773373799]
 custom_minimum_size = Vector2(700, 200)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -115,27 +115,27 @@ theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 50
 
-[node name="ColorRect" type="ColorRect" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+[node name="ColorRect" type="ColorRect" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container" unique_id=1282636500]
 visible = false
 layout_mode = 2
 color = Color(0.231373, 0.231373, 0.231373, 0.784314)
 
-[node name="ColorRect2" type="TextureRect" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+[node name="ColorRect2" type="TextureRect" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container" unique_id=797194693]
 layout_mode = 2
 texture = ExtResource("4_7q0vq")
 
-[node name="MarginContainer" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+[node name="MarginContainer" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container" unique_id=1622311188]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="Text Container" type="Control" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer"]
+[node name="Text Container" type="Control" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer" unique_id=1813717529]
 custom_minimum_size = Vector2(700, 180)
 layout_mode = 2
 
-[node name="Text" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer/Text Container"]
+[node name="Text" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer/Text Container" unique_id=1800316635]
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -149,14 +149,14 @@ text = "Aba aba aba aba aba aba aba aba aba aba aba aba aba aba aba"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer2" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container"]
+[node name="MarginContainer2" type="MarginContainer" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container" unique_id=1673309800]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="LabelNext" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer2"]
+[node name="LabelNext" type="RichTextLabel" parent="Dialgue/Textbox Positioner/Textbox/Textbox Container/MarginContainer2" unique_id=2098175171]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 29
 text = "➬"

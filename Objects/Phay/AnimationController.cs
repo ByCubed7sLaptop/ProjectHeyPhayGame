@@ -39,7 +39,9 @@ public partial class AnimationController : AnimatedSprite2D
         else
             SpeedScale = 1;
 
-        Scale = Vector2.One + (player.Velocity / 800.0f).Abs() - (new Vector2(player.Velocity.Y, player.Velocity.X) / 3200.0f).Abs();
+        Vector2 targetScale = Vector2.One + (player.Velocity / 1600.0f).Abs() - (new Vector2(player.Velocity.Y, player.Velocity.X) / 6400.0f).Abs();
+        Scale = Scale.CubicInterpolate(targetScale, Vector2.One, Vector2.One, 0.7f);
+
 
         if (targetState == currentState) return;
         currentState = targetState;

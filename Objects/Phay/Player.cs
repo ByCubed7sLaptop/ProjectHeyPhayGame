@@ -9,6 +9,8 @@ public partial class Player : CharacterBody2D
 	[Export] public Area2D InteractableHitbox;
 
 	[ExportCategory("Movement")]
+	[Export] public int ExtraJumpsMax = 1;
+	public int ExtraJumpsCurrent = 0;
 	[Export] public float Speed = 100.0f; // Max speed
 	[Export] public float Acceleration = 0.15f; // Time to max speed
 	[Export] public float JumpVelocity = 300.0f;
@@ -28,8 +30,6 @@ public partial class Player : CharacterBody2D
 
 	// Coyote time buffer
 	private double coyoteTimeCounter = 0f;
-
-	private bool isJumping = false;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -123,20 +123,20 @@ public partial class Player : CharacterBody2D
 	}
 
 
-	private float _walkDelta = 0;
+	private float _audioWalkDelta = 0;
 	private void ProcessWalkAudio()
 	{
 		if (IsOnFloor())
-			_walkDelta += Math.Abs(PlayerVelocity.X);
+			_audioWalkDelta += Math.Abs(PlayerVelocity.X);
 
-		if (_walkDelta > 4000)
+		if (_audioWalkDelta > 4000)
 		{
 			WalkAudioStreamPlayer.Play();
-			_walkDelta = 0;
+			_audioWalkDelta = 0;
 		}
 
 		if (InputDirection == Vector2.Zero)
-			_walkDelta = 1400; // Start higher to init first step
+			_audioWalkDelta = 1400; // Start higher to init first step
 	}
 	
  
@@ -151,6 +151,11 @@ public partial class Player : CharacterBody2D
 			PlayerVelocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 	}
 
+
+	private enum JumpState {
+		FLOOR, JUMPING, FALLING
+	}
+	private JumpState jumpState = JumpState.FLOOR;
 	private void ProcessJump(double delta)
 	{
 		// Handle Jump
@@ -158,33 +163,59 @@ public partial class Player : CharacterBody2D
 		jumpBufferCounter -= delta;
 		if (Input.IsActionPressed("player_jump"))
 			jumpBufferCounter = JumpBufferTime;
-
-		// Set coyote buffer
-		coyoteTimeCounter -= delta;
-		if (IsOnFloor())
-			coyoteTimeCounter = CoyoteTime;
-
 		bool requestJump = jumpBufferCounter > 0;
-		bool canJump = IsOnFloor() || coyoteTimeCounter > 0;
 
-		// Apply jump velocity
-		if (requestJump && canJump && !isJumping)
+		bool isFalling = PlayerVelocity.Y >= 0;
+
+		// Jumping & coyote time
+		if (jumpState == JumpState.FLOOR)
 		{
-			PlayerVelocity.Y = -JumpVelocity;
-			isJumping = true;
-			JumpAudioStreamPlayer.Play();
+			// Set coyote buffer
+			coyoteTimeCounter -= delta;
+			if (IsOnFloor())
+				coyoteTimeCounter = CoyoteTime;
+			
+			if (coyoteTimeCounter < 0)
+			{
+				jumpState = JumpState.FALLING;
+				return;			
+			}
+			
+			ExtraJumpsCurrent = 0;
+			if (requestJump)
+			{
+				PlayerVelocity.Y = -JumpVelocity;
+				JumpAudioStreamPlayer.Play();
+				jumpState = JumpState.JUMPING;
+			}
 		}
 
-		// If no longer requests to jump
-		if (!requestJump && isJumping && PlayerVelocity.Y < gravity)
-			PlayerVelocity.Y += gravity * (float)delta;
-
-		if (IsOnFloor() && isJumping)
+		// Jumping
+		else if (jumpState == JumpState.JUMPING)
 		{
-			if (PlayerVelocity.Y >= 0)
-				LandAudioStreamPlayer.Play();
+			if (isFalling)
+				jumpState = JumpState.FALLING;
+		}
 
-			isJumping = false;
+
+		else if (jumpState == JumpState.FALLING)
+		{
+			if (IsOnFloor())
+			{
+				LandAudioStreamPlayer.Play();
+				jumpState = JumpState.FLOOR;
+				return;
+			}
+
+			bool canJump = ExtraJumpsCurrent < ExtraJumpsMax;
+
+			if (requestJump && canJump)
+			{
+				PlayerVelocity.Y = -JumpVelocity;
+				ExtraJumpsCurrent++;
+				JumpAudioStreamPlayer.Play();
+				jumpState = JumpState.JUMPING;
+			}
 		}
 	}
 
